@@ -1,3 +1,7 @@
+README.md
+Dockerfile
+.dockerignore
+
 # Empêche d'ajouter les fichiers de version
 .git
 .gitignore
@@ -10,6 +14,7 @@
 __pycache__/
 *.py[cod]
 *.pyo
+.pytest_cache
 
 # Fichiers/dossiers de dépendances locales
 .venv/
@@ -23,7 +28,5 @@ venv/
 /staticfiles/
 media/
 
-# Secrets / config locales
-.env
 
 
