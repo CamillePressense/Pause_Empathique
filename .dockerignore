@@ -1,0 +1,29 @@
+# Empêche d'ajouter les fichiers de version
+.git
+.gitignore
+
+# Empêche d'ajouter les fichiers de config IDE
+.vscode/
+.idea/
+
+# Empêche les caches Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Fichiers/dossiers de dépendances locales
+.venv/
+env/
+venv/
+
+# Fichiers de log
+*.log
+
+# Contenu statique collecté
+/staticfiles/
+media/
+
+# Secrets / config locales
+.env
+
+
