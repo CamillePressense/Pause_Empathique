@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+
+<section>
+    <h1>Connexion</h1>
+
+<!--     {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <p>{{ error }}</p>
+        {% endfor %}
+    {% endif %} -->
+
+    {% if form.email.errors %}
+    {{ form.email.errors }}
+    {% endif %}
+
+    {% if form.password.errors %}
+    {{ form.password.errors }}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.email.label}} {{ form.email }}
+        {{ form.password.label }} {{ form.password }}
+        <input type="submit" value="Se Connecter" />
+    </form>
+
+    <p>Pas encore de compte ? <a href=>S'inscrire</a></p>    
+</section>
+
+ {% endblock content %}
