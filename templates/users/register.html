@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <h1>Inscription</h1>  
+    <form method="post" novalidate>        
+        {% csrf_token %}
+
+        {% include 'partials/non_field_errors.html' %}
+        
+        <label for="{{ form.firstname.id_for_label }}">{{ form.firstname.label }}</label>
+        {{ form.firstname }}
+        {% include 'partials/field_errors.html' with field=form.firstname %}
+
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+        {{ form.email }}
+        {% include 'partials/field_errors.html' with field=form.email %}
+
+        <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
+        {{ form.gender }}
+        {% include 'partials/field_errors.html' with field=form.gender %}
+
+        <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+        {{ form.password1 }}
+        {% include 'partials/field_errors.html' with field=form.password1 %}
+
+        <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+        {{ form.password2 }}
+        {% include 'partials/field_errors.html' with field=form.password2 %}
+
+        <button type="submit">S'inscrire</button>
+    </form>
+    <p>Déjà inscrit.e? <a href="{% url 'login' %}">Se Connecter</a></p>
+</section>
+
+{% endblock content %}
+ 

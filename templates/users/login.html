@@ -9,31 +9,20 @@
     <form method="POST">
         {% csrf_token %}
 
-        {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-                <p>{{ error }}</p>
-            {% endfor %}
-        {% endif %}
+        {% include 'partials/non_field_errors.html' %}       
         
-        
-        {% if form.email.errors %}
-        {{ form.email.errors }}
-        {% endif %}
-        
+        {% include 'partials/field_errors.html' with field=form.email %}        
         <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
         {{ form.email }}
         
-        {% if form.password.errors %}
-        {{ form.password.errors }}
-        {% endif %}
-        
+        {% include 'partials/field_errors.html' with field=form.password %} 
         <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
         {{ form.password }}
 
         <button type="submit">Se Connecter</button>
     </form>
 
-    <p>Pas encore de compte ? <a href=>S'inscrire</a></p>    
+    <p>Pas encore de compte ? <a href="{% url 'register' %}">S'inscrire</a></p>    
 </section>
 
  {% endblock content %}

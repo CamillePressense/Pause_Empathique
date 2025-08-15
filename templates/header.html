@@ -3,7 +3,7 @@
     <h1>Observer, Ressentir, Comprendre, Agir</h1>
     <nav>
         <ul>
-          <li><a href="/" alt="Accueil">Accueil</a></li>
+          <li><a href="/">Accueil</a></li>
           {% if user.is_authenticated %}
             <li><a href=>Mon Compte</a></li>
             <li><a href=>Mon Journal</a></li>
@@ -15,7 +15,7 @@
             </li>
           {% else %}
             <li><a href="{% url 'login' %}">Connexion</a></li>
-            <li><a href=>Inscription</a></li>
+            <li><a href="{% url 'register' %}">Inscription</a></li>
           {% endif %}
         </ul>
     </nav>

@@ -8,7 +8,7 @@
 
 {% if user.is_anonymous %}
     <a href="{% url 'login' %}">Se connecter</a>
-    <a href>S'inscrire</a>
+    <a href="{% url 'register' %}">S'inscrire</a>
 {% endif %}
 
 {% endblock content %}
