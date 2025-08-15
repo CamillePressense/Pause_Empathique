@@ -21,26 +21,18 @@ class CustomAuthenticationForm(forms.Form):
         self.request = request
         self.user_cache = None
     
-
     def clean(self):
+
         cleaned_data = super().clean()
         email = cleaned_data.get('email')
         password = cleaned_data.get('password')
 
         if email:
-            email = email.strip().lower() 
+            email = email.strip().lower()
 
         if email and password:
-            try:
-                self.user_cache = authenticate(self.request, email=email, password=password)
-                
-            except Exception as e:
-                logger.error(f"[AUTH ERROR] {e}")
-                raise ValidationError(
-                    "Une erreur interne est survenue. Réessayez plus tard.",
-                    code='internal_error'
-                )
-                
+            self.user_cache = authenticate(self.request, email=email, password=password)
+
             if self.user_cache is None:
                 raise ValidationError(
                     "Identifiants invalides. Vérifiez votre email et mot de passe.",
@@ -52,9 +44,8 @@ class CustomAuthenticationForm(forms.Form):
                     "Ce compte est désactivé. Contactez l’administrateur.",
                     code='inactive'
                 )
-
-
         return cleaned_data
+
 
     def get_user(self):
         return self.user_cache
