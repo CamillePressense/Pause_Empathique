@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+
+<section>
+    <h1>Connexion</h1>
+
+    
+    <form method="POST">
+        {% csrf_token %}
+
+        {% include 'partials/non_field_errors.html' %}       
+        
+        {% include 'partials/field_errors.html' with field=form.email %}        
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+        {{ form.email }}
+        
+        {% include 'partials/field_errors.html' with field=form.password %} 
+        <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+        {{ form.password }}
+
+        <button type="submit">Se Connecter</button>
+    </form>
+
+    <p>Pas encore de compte ? <a href="{% url 'register' %}">S'inscrire</a></p>    
+</section>
+
+ {% endblock content %}
