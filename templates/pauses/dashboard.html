@@ -4,9 +4,10 @@
 
 <main>
     <h1>Bienvenue dans ton jardin d'auto-empathie {{ user.firstname }}</h1>
-    <!-- Ajouter une condition s'il n'y a pas encore de pauses faites -->
-    <a href="">Mon Journal</a>
-    <a href="">Pratiquer</a>
+    <a href="{% url 'observation' %}">Pratiquer</a>
+    {% if user.pauses.exists %}
+        <a href="{% url 'diary' %}">Mon Journal</a>
+    {% endif %}
 </main>
 
 

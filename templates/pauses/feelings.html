@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Je me sens...</h2>
+
+<form method="post">
+  {% csrf_token %}
+
+    {% if error_message %}
+      <p style="color:red;">{{ error_message }}</p>
+    {% endif %}
+
+    {% for family_name, feelings in grouped_feelings.items %}
+        <h3>{{ family_name }}</h3>
+        {% for feeling in feelings %}
+            <label>
+                <input type="checkbox" name="feelings" value="{{ feeling.id }}">
+                {{ feeling.label }}
+            </label><br>
+        {% endfor %}
+    {% endfor %}
+
+  <button type="submit">Valider</button>
+</form>
+
+
+{% endblock content %}

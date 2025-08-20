@@ -5,13 +5,16 @@ class Pause(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="pauses"
+        related_name='pauses'
     )
 
     created_at = models.DateTimeField('Créée le', auto_now_add=True)
     updated_at = models.DateTimeField('Modifiée le', auto_now=True)
     empty_your_bag = models.TextField('Vide ton sac', blank=True, default="")
     observation = models.TextField('Observation')
+
+    feelings = models.ManyToManyField('Feeling', related_name='pauses', blank=True)
+    needs = models.ManyToManyField('Need', related_name='pauses', blank=True)
 
     def __str__(self):
         return f"Pause de {self.user} - {self.created_at.strftime('%d/%m/%Y')}"
@@ -32,14 +35,14 @@ class Feeling(models.Model):
         SIDERATION = 'SI', 'Sidération'
         TENSION = 'TE', 'Tension'
 
-    feminine_name = models.CharField(max_length=100)
-    masculine_name = models.CharField(max_length=100)
     feeling_family =  models.CharField(
         max_length=4,
         choices=FeelingFamily.choices,
         verbose_name='Famille d\'émotions',
         help_text='Famille d\'émotions'    
     )
+    feminine_name = models.CharField('Au féminin', max_length=100)
+    masculine_name = models.CharField('Au masculin', max_length=100)
 
     def __str__(self):
         return self.feminine_name
@@ -61,13 +64,13 @@ class Need(models.Model):
         COOPERATION = 'CO', 'Coopération'
         CELEBRATION = 'CE', 'Célébration'
 
-    name = models.CharField(max_length=100)
     need_family = models.CharField(
         max_length=4,
         choices=NeedFamily.choices,
         verbose_name='Famille de besoins',
         help_text='Famille de besoins'
     )
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name

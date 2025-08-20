@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>J'ai besoin de...</h2>
+
+<form method="post">
+  {% csrf_token %}
+
+    {% if error_message %}
+        <p style="color:red;">{{ error_message }}</p>
+    {% endif %}
+
+    {% for family_name, needs in grouped_needs.items %}
+        <h3>{{ family_name }}</h3>
+        {% for need in needs %}
+            <label>
+                <input type="checkbox" name="needs" value="{{ need.id }}">
+                {{ need.name }}
+            </label><br>
+        {% endfor %}
+    {% endfor %}
+
+  <button type="submit">Etape suivante</button>
+</form>
+
+
+{% endblock content %}

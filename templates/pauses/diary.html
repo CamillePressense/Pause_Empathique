@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<main>
+<ul>
+{% for pause in pauses %}
+    <h3>Pause du {{ pause.created_at|date:"d/m/Y H:i" }}</h3>
+    <li>Observation :</li>
+        <ul>
+            <li>"{{ pause.observation }}"</li>
+        </ul>
+    <li>Sentiments :</li>
+        <ul>
+            {% for feeling in pause.feelings_with_labels %}
+                <li>{{ feeling }}</li>
+            {% endfor %}
+        </ul>
+    <li>Besoins :</li>
+        <ul>
+          {% for need in pause.needs.all %}
+            <li>{{ need.name }}</li>
+          {% empty %}
+            <li>Aucun</li>
+          {% endfor %}
+        </ul>
+{% endfor %}
+</ul>
+
+</main>
+
+{% endblock content %}

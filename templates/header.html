@@ -5,8 +5,9 @@
         <ul>
           <li><a href="/">Accueil</a></li>
           {% if user.is_authenticated %}
-            <li><a href=>Mon Compte</a></li>
-            <li><a href=>Mon Journal</a></li>
+            <li><a href="{% url 'observation' %}">Pratiquer</a></li>
+            <li><a href="{% url 'dashboard' %}">Chez moi</a></li>
+            <li><a href="{% url 'diary' %}">Mon Journal</a></li>
             <li>
                 <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
