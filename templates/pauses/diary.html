@@ -18,17 +18,27 @@
         {% for pause in pauses %}
         <tr>
             <td headers="Date de création de la pause">{{ pause.created_at|date:"d/m/Y H:i" }}</td>
-            <td headers="Contenu étape vide ton sac">{{ pause.empty_your_bag }}</td>
-            <td headers="Contenu étape Observation">"{{ pause.observation }}"</td>
+            <td headers="Contenu étape vide ton sac">{{ pause.empty_your_bag|truncatewords:10 }}</td>
+            <td headers="Contenu étape Observation">"{{ pause.observation|truncatewords:10 }}"</td>
             <td headers="Contenu étape Sentiments">
-                {% for feeling in pause.feelings_with_labels %}
-                    {{ feeling }}
-                {% endfor %}
+                <ul>
+                    {% for feeling in pause.feelings_with_labels|slice:":3" %}
+                        <li>{{ feeling }}</li>
+                    {% endfor %}
+                    {% if pause.feelings_with_labels|length > 3 %}
+                    ...
+                    {% endif %}
+                </ul>
             </td>
             <td headers="Contenu étape Besoins">
-                {% for need in pause.needs.all %}
-                    {{ need.name }}
-                {% endfor %}
+                <ul>
+                    {% for need in pause.needs.all|slice:":3" %}
+                        <li>{{ need.name }}</li>
+                    {% endfor %}
+                    {% if pause.needs.all|length > 3 %}
+                    ...
+                    {% endif %}
+                </ul>
             </td>
             <td headers="Modifier la pause">✏️</td>
             <td headers="Supprimer la pause">❌</td>
