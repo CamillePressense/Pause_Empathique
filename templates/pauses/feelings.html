@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -7,22 +8,28 @@
 <form method="post">
   {% csrf_token %}
 
-    {% if error_message %}
-      <p style="color:red;">{{ error_message }}</p>
-    {% endif %}
+  {% if error_message %}
+    <p style="color:red;">{{ error_message }}</p>
+  {% endif %}
 
-    {% for family_name, feelings in grouped_feelings.items %}
-        <h3>{{ family_name }}</h3>
-        {% for feeling in feelings %}
-            <label>
-                <input type="checkbox" name="feelings" value="{{ feeling.id }}">
-                {{ feeling.label }}
-            </label><br>
-        {% endfor %}
-    {% endfor %}
+  {% for family_name, feelings in grouped_feelings.items %}
+    <details>
+          <summary>{{ family_name }}</summary>
+            {% for feeling in feelings %}
+              <label>
+                  <input type="checkbox" name="feelings" value="{{ feeling.id }}">
+                  {{ feeling.label }}
+              </label>
+            {% endfor %}
+    </details>
+  {% endfor %}
 
-  <button type="submit">Valider</button>
+  <button type="submit">Etape suivante</button>
+
 </form>
-
-
 {% endblock content %}
+
+
+{% block js %}
+<script src="{% static 'js/keep-toggle-open.js' %}"></script>
+{% endblock js %}
