@@ -1,29 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
 <main>
-<ul>
-{% for pause in pauses %}
-    <h3>Pause du {{ pause.created_at|date:"d/m/Y H:i" }}</h3>
-    <li>Observation :</li>
-        <ul>
-            <li>"{{ pause.observation }}"</li>
-        </ul>
-    <li>Sentiments :</li>
-        <ul>
-            {% for feeling in pause.feelings_with_labels %}
-                <li>{{ feeling }}</li>
-            {% endfor %}
-        </ul>
-    <li>Besoins :</li>
-        <ul>
-          {% for need in pause.needs.all %}
-            <li>{{ need.name }}</li>
-          {% empty %}
-            <li>Aucun</li>
-          {% endfor %}
-        </ul>
-{% endfor %}
-</ul>
+    <h1>Mon journal d'auto-empathie 📒</h1>
+<table style="border: 1px solid black">
+    <thead>
+        <tr>
+            <th id="Date de création de la pause">Date de création</th>
+            <th id="Contenu étape vide ton sac">Vide ton sac</th>
+            <th id="Contenu étape Observation">Observation</th>
+            <th id="Contenu étape Sentiments">Sentiments</th>
+            <th id="Contenu étape Besoins">Besoins</th>
+            <th id="Modifier la pause">Modifier</th>
+            <th id="Supprimer la pause">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pause in pauses %}
+        <tr>
+            <td headers="Date de création de la pause">{{ pause.created_at|date:"d/m/Y H:i" }}</td>
+            <td headers="Contenu étape vide ton sac">{{ pause.empty_your_bag }}</td>
+            <td headers="Contenu étape Observation">"{{ pause.observation }}"</td>
+            <td headers="Contenu étape Sentiments">
+                {% for feeling in pause.feelings_with_labels %}
+                    {{ feeling }}
+                {% endfor %}
+            </td>
+            <td headers="Contenu étape Besoins">
+                {% for need in pause.needs.all %}
+                    {{ need.name }}
+                {% endfor %}
+            </td>
+            <td headers="Modifier la pause">✏️</td>
+            <td headers="Supprimer la pause">❌</td>
+        </tr>
+        {% endfor %}
+    </tbody>       
+</table>
 
 <div class="pagination">
     <span class="step-links">
