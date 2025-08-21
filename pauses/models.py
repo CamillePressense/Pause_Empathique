@@ -16,6 +16,11 @@ class Pause(models.Model):
     feelings = models.ManyToManyField('Feeling', related_name='pauses', blank=True)
     needs = models.ManyToManyField('Need', related_name='pauses', blank=True)
 
+    class Meta:
+        verbose_name = 'Pause empathique'
+        verbose_name_plural = 'Pauses empathiques'
+        ordering = ['-created_at']
+        
     def __str__(self):
         return f"Pause de {self.user} - {self.created_at.strftime('%d/%m/%Y')}"
 
