@@ -22,6 +22,7 @@ class PauseListView(LoginRequiredMixin, ListView):
     template_name = 'pauses/diary.html'
     model = Pause
     context_object_name = 'pauses'
+    paginate_by = 5
 
     def get_queryset(self):
         return Pause.objects.filter(user=self.request.user)
