@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy, reverse
+from django.core.paginator import Paginator
 from django.http import HttpResponseForbidden
 from pauses.models import Pause, Feeling, Need
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -20,7 +21,15 @@ def dashboard(request):
 
 @login_required
 def delete_pause(request, pause_id):
-    page = request.GET.get("page")
+    page_str = request.GET.get("page", 1)
+    page = int(page_str)
+
+    try:
+        page = int(page_str)
+        if page < 1:
+            page = 1
+    except ValueError:
+        page = 1
 
     if request.method == "POST":
         try:
@@ -29,17 +38,20 @@ def delete_pause(request, pause_id):
             if pause.user != request.user:
                 messages.error(request, 'Vous ne pouvez pas supprimer cette pause ❌')
             else:
-                pause.delete()
+                pause.delete() 
                 messages.success(request, 'Pause supprimée avec succès ✅')
-
+        
+            user_pauses = Pause.objects.filter(user=request.user).order_by("-created_at")
+            paginator = Paginator(user_pauses, 5)
+            total_pages = paginator.num_pages
+            if page > total_pages:
+                page = total_pages if total_pages > 0 else 1
+            return redirect(reverse('diary') + f"?page={page}")
+    
         except Exception as e:
             messages.error(request, f"Erreur lors de la suppression : {e}")
-
-        url = reverse('diary')
-        if page:
-            url += f"?page={page}"
-        return redirect(url)
-    
+            return redirect(reverse("diary") + f"?page={page}")
+        
     return HttpResponseForbidden("Suppression impossible via GET ❌")
 
 class PauseListView(LoginRequiredMixin, ListView):
