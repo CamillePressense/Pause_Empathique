@@ -2,68 +2,84 @@
 {% block content %}
 <main>
     <h1>Mon journal d'auto-empathie 📒</h1>
-<table style="border: 1px solid black">
-    <thead>
-        <tr>
-            <th id="Date de création de la pause">Date de création</th>
-            <th id="Contenu étape vide ton sac">Vide ton sac</th>
-            <th id="Contenu étape Observation">Observation</th>
-            <th id="Contenu étape Sentiments">Sentiments</th>
-            <th id="Contenu étape Besoins">Besoins</th>
-            <th id="Modifier la pause">Modifier</th>
-            <th id="Supprimer la pause">Supprimer</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for pause in pauses %}
-        <tr>
-            <td headers="Date de création de la pause">{{ pause.created_at|date:"d/m/Y H:i" }}</td>
-            <td headers="Contenu étape vide ton sac">{{ pause.empty_your_bag|truncatewords:10 }}</td>
-            <td headers="Contenu étape Observation">"{{ pause.observation|truncatewords:10 }}"</td>
-            <td headers="Contenu étape Sentiments">
-                <ul>
-                    {% for feeling in pause.feelings_with_labels|slice:":3" %}
-                        <li>{{ feeling }}</li>
-                    {% endfor %}
-                    {% if pause.feelings_with_labels|length > 3 %}
-                    ...
-                    {% endif %}
-                </ul>
-            </td>
-            <td headers="Contenu étape Besoins">
-                <ul>
-                    {% for need in pause.needs.all|slice:":3" %}
-                        <li>{{ need.name }}</li>
-                    {% endfor %}
-                    {% if pause.needs.all|length > 3 %}
-                    ...
-                    {% endif %}
-                </ul>
-            </td>
-            <td headers="Modifier la pause">✏️</td>
-            <td headers="Supprimer la pause">❌</td>
-        </tr>
+
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
         {% endfor %}
-    </tbody>       
-</table>
+        </ul>
+    {% endif %}
 
-<div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; Début</a>
-            <a href="?page={{ page_obj.previous_page_number }}">Préc.</a>
-        {% endif %}
+    <table style="border: 1px solid black">
+        <thead>
+            <tr>
+                <th id="Date de création de la pause">Date de création</th>
+                <th id="Contenu étape vide ton sac">Vide ton sac</th>
+                <th id="Contenu étape Observation">Observation</th>
+                <th id="Contenu étape Sentiments">Sentiments</th>
+                <th id="Contenu étape Besoins">Besoins</th>
+                <th id="Modifier la pause">Modifier</th>
+                <th id="Supprimer la pause">Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pause in pauses %}
+            <tr>
+                <td headers="Date de création de la pause">{{ pause.created_at|date:"d/m/Y H:i" }}</td>
+                <td headers="Contenu étape vide ton sac">{{ pause.empty_your_bag|truncatewords:10 }}</td>
+                <td headers="Contenu étape Observation">"{{ pause.observation|truncatewords:10 }}"</td>
+                <td headers="Contenu étape Sentiments">
+                    <ul>
+                        {% for feeling in pause.feelings_with_labels|slice:":3" %}
+                            <li>{{ feeling }}</li>
+                        {% endfor %}
+                        {% if pause.feelings_with_labels|length > 3 %}
+                        ...
+                        {% endif %}
+                    </ul>
+                </td>
+                <td headers="Contenu étape Besoins">
+                    <ul>
+                        {% for need in pause.needs.all|slice:":3" %}
+                            <li>{{ need.name }}</li>
+                        {% endfor %}
+                        {% if pause.needs.all|length > 3 %}
+                        ...
+                        {% endif %}
+                    </ul>
+                </td>
+                <td headers="Modifier la pause">✏️</td>
+                <td headers="Supprimer la pause">
+                    <form 
+                    action="{% url 'delete_pause' pause.id %}?page={{ page_obj.number }}" 
+                    method="post" 
+                    onsubmit="return confirm('Es-tu sûr.e de vouloir supprimer cette pause? C\'est irréversible.')">                   
+                    {% csrf_token %}
+                    <button type="submit">❌</button>
+                    </form></td>
+            </tr>
+            {% endfor %}
+        </tbody>       
+    </table>
 
-        <span class="current">
-            Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; Début</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Préc.</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Suivante</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Fin &raquo;</a>
+            {% endif %}
         </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">Suivante</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">Fin &raquo;</a>
-        {% endif %}
-    </span>
-</div>
+    </div>
 
 </main>
 

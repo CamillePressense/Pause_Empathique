@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseForbidden
 from pauses.models import Pause, Feeling, Need
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.views import View
 from django.views.generic import (
     CreateView,
     ListView,
-    DeleteView
 )
 
 def home(request):
@@ -17,6 +18,29 @@ def home(request):
 def dashboard(request):
     return render(request, 'pauses/dashboard.html', {'user': request.user} )
 
+@login_required
+def delete_pause(request, pause_id):
+    page = request.GET.get("page")
+
+    if request.method == "POST":
+        try:
+            pause = get_object_or_404(Pause, pk=pause_id)
+
+            if pause.user != request.user:
+                messages.error(request, 'Vous ne pouvez pas supprimer cette pause ❌')
+            else:
+                pause.delete()
+                messages.success(request, 'Pause supprimée avec succès ✅')
+
+        except Exception as e:
+            messages.error(request, f"Erreur lors de la suppression : {e}")
+
+        url = reverse('diary')
+        if page:
+            url += f"?page={page}"
+        return redirect(url)
+    
+    return HttpResponseForbidden("Suppression impossible via GET ❌")
 
 class PauseListView(LoginRequiredMixin, ListView):
     template_name = 'pauses/diary.html'
@@ -46,9 +70,6 @@ class PauseCreateView(LoginRequiredMixin, CreateView):
     
     def get_success_url(self):
         return reverse('feelings', kwargs={'pause_id': self.object.pk})
-
-class PauseDeleteView(LoginRequiredMixin, DeleteView):
-    model = Pause
     
 class PauseFeelingUpdateView(LoginRequiredMixin, View):
     template_name = "pauses/feelings.html"
