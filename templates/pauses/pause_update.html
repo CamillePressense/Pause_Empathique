@@ -1,7 +1,5 @@
-{% extends 'base.html' %} 
-
+{% extends 'base.html' %}
 {% block content %}
-
 <main>
     <form method="POST">
         {% csrf_token %} 
@@ -19,8 +17,7 @@
             {{ form.observation }}
         </div>
     
-        <input type="submit" value="Etape suivante"/>
+        <input type="submit" value="Modifier"/>
     </form>
 </main>
-
 {% endblock content %}

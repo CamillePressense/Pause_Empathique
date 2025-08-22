@@ -49,7 +49,9 @@
                         {% endif %}
                     </ul>
                 </td>
-                <td headers="Modifier la pause">✏️</td>
+                <td headers="Modifier la pause">
+                    <a href="{% url 'update_pause' pause.id %}">✏️</a>
+                </td>
                 <td headers="Supprimer la pause">
                     <form 
                     action="{% url 'delete_pause' pause.id %}?page={{ page_obj.number }}" 

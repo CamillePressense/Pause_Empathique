@@ -10,6 +10,7 @@ from django.views import View
 from django.views.generic import (
     CreateView,
     ListView,
+    UpdateView
 )
 
 def home(request):
@@ -79,6 +80,18 @@ class PauseCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)  
+    
+    def get_success_url(self):
+        return reverse('feelings', kwargs={'pause_id': self.object.pk})
+    
+class PauseUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'pause_update.html'
+    model = Pause
+    fields = ['empty_your_bag', 'observation', 'feelings', 'needs']
+   
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
     
     def get_success_url(self):
         return reverse('feelings', kwargs={'pause_id': self.object.pk})
