@@ -38,7 +38,7 @@ class PauseListView(LoginRequiredMixin, ListView):
 class PauseCreateView(LoginRequiredMixin, CreateView):
     template_name = 'pauses/observation.html' 
     model = Pause
-    fields = ['empty_your_bag', 'observation', 'feelings']
+    fields = ['empty_your_bag', 'observation']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
