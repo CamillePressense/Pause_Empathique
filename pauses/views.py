@@ -156,9 +156,9 @@ class PauseFeelingUpdateView(LoginRequiredMixin, UpdateView):
                 "error_message": "Sélectionne au moins un sentiment."
             })
         pause.feelings.set(selected_ids)  
-        return redirect(reverse_lazy('needs', kwargs={'pause_id': pause.id}))    
+        return redirect(reverse_lazy('update_needs', kwargs={'pause_id': pause.id}))    
 
-class PauseNeedSetView(LoginRequiredMixin, View):
+class PauseNeedCreateView(LoginRequiredMixin, View):
     template_name = "pauses/needs.html"
 
     def get_grouped_needs(self):
@@ -173,6 +173,38 @@ class PauseNeedSetView(LoginRequiredMixin, View):
         return render(request, self.template_name, {
             "pause": pause,
             "grouped_needs": self.get_grouped_needs(),
+        })    
+
+    def post(self, request, pause_id):
+        pause = get_object_or_404(Pause, id=pause_id, user=request.user)
+        selected_ids = request.POST.getlist('needs')
+        print (selected_ids)
+        if not selected_ids:  
+            return render(request, self.template_name, {
+                "pause": pause,
+                "grouped_needs": self.get_grouped_needs(),
+                "error_message": "Sélectionne au moins un besoin."
+            })
+        pause.needs.set(selected_ids)  
+        return redirect('diary')
+    
+class PauseNeedUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "pauses/needs.html"
+
+    def get_grouped_needs(self):
+        grouped_needs = {}
+        for family_code, family_name in Need.NeedFamily.choices:
+            needs = Need.objects.filter(need_family=family_code).order_by("id")
+            grouped_needs[family_name] = needs
+        return grouped_needs
+
+    def get(self, request, pause_id):
+        pause = get_object_or_404(Pause, id=pause_id, user=request.user)
+        selected_needs_ids = list(pause.needs.values_list('id', flat=True))
+        return render(request, self.template_name, {
+            "pause": pause,
+            "grouped_needs": self.get_grouped_needs(),
+            "selected_needs": selected_needs_ids,
         })    
 
     def post(self, request, pause_id):

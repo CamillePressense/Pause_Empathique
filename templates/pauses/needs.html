@@ -17,7 +17,11 @@
       <summary>{{ family_name }}</summary>
         {% for need in needs %}
           <label>
-            <input type="checkbox" name="needs" value="{{ need.id }}">
+            <input 
+            type="checkbox" 
+            name="needs" 
+            value="{{ need.id }}"
+            {% if need.id in selected_needs %}checked{% endif %}>
             {{ need.name }}
           </label>
         {% endfor %}
