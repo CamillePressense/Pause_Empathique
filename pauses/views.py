@@ -85,18 +85,18 @@ class PauseCreateView(LoginRequiredMixin, CreateView):
         return reverse('feelings', kwargs={'pause_id': self.object.pk})
     
 class PauseUpdateView(LoginRequiredMixin, UpdateView):
-    template_name = 'pause_update.html'
+    template_name = 'pauses/pause_update.html'
     model = Pause
-    fields = ['empty_your_bag', 'observation', 'feelings', 'needs']
+    fields = ['empty_your_bag', 'observation']
    
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
     
     def get_success_url(self):
-        return reverse('feelings', kwargs={'pause_id': self.object.pk})
+        return reverse('update_feelings', kwargs={'pause_id': self.object.pk})
     
-class PauseFeelingUpdateView(LoginRequiredMixin, View):
+class PauseFeelingCreateView(LoginRequiredMixin, View):
     template_name = "pauses/feelings.html"
     def get_grouped_feelings(self, user):
         grouped_feelings = {}
@@ -108,11 +108,11 @@ class PauseFeelingUpdateView(LoginRequiredMixin, View):
         return grouped_feelings
     
     def get(self, request, pause_id):
-        pause = get_object_or_404(Pause, id=pause_id, user=request.user)
+        pause = get_object_or_404(Pause, id=pause_id, user=request.user)    
         return render(request, self.template_name, {
             "pause": pause,
             "grouped_feelings": self.get_grouped_feelings(request.user),
-        })    
+        })
 
     def post(self, request, pause_id):
         pause = get_object_or_404(Pause, id=pause_id, user=request.user)
@@ -126,7 +126,39 @@ class PauseFeelingUpdateView(LoginRequiredMixin, View):
         pause.feelings.set(selected_ids)  
         return redirect(reverse_lazy('needs', kwargs={'pause_id': pause.id}))
     
-class PauseNeedUpdateView(LoginRequiredMixin, View):
+class PauseFeelingUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "pauses/feelings.html"
+    def get_grouped_feelings(self, user):
+        grouped_feelings = {}
+        for family_code, family_name in Feeling.FeelingFamily.choices:
+            feelings = Feeling.objects.filter(feeling_family=family_code).order_by("id")
+            for f in feelings:
+                f.label = f.get_label(user)
+            grouped_feelings[family_name] = feelings
+        return grouped_feelings
+
+    def get(self, request, pause_id):
+        pause = get_object_or_404(Pause, id=pause_id, user=request.user)
+        selected_feelings_ids = list(pause.feelings.values_list('id', flat=True))
+        return render(request, self.template_name, {
+            "pause": pause,
+            "grouped_feelings": self.get_grouped_feelings(request.user),
+            "selected_feelings": selected_feelings_ids,
+        })    
+
+    def post(self, request, pause_id):
+        pause = get_object_or_404(Pause, id=pause_id, user=request.user)
+        selected_ids = request.POST.getlist('feelings')
+        if not selected_ids:  
+            return render(request, self.template_name, {
+                "pause": pause,
+                "grouped_feelings": self.get_grouped_feelings(request.user),
+                "error_message": "Sélectionne au moins un sentiment."
+            })
+        pause.feelings.set(selected_ids)  
+        return redirect(reverse_lazy('needs', kwargs={'pause_id': pause.id}))    
+
+class PauseNeedSetView(LoginRequiredMixin, View):
     template_name = "pauses/needs.html"
 
     def get_grouped_needs(self):
