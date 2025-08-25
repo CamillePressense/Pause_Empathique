@@ -10,7 +10,8 @@ from django.views import View
 from django.views.generic import (
     CreateView,
     ListView,
-    UpdateView
+    UpdateView,
+    DetailView
 )
 
 def home(request):
@@ -71,11 +72,23 @@ class PauseListView(LoginRequiredMixin, ListView):
                 f.get_label(self.request.user) for f in pause.feelings.all()
             ]
         return context
+    
+class PauseDetailView(LoginRequiredMixin, DetailView):
+    model = Pause
+    template_name = 'pauses/pause_detail.html'
+    context_object_name = 'pause'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pause'].feelings_with_labels = [
+            feeling.get_label(self.request.user) for feeling in context['pause'].feelings.all()
+        ]
+        return context
 
 class PauseCreateView(LoginRequiredMixin, CreateView):
     template_name = 'pauses/observation.html' 
     model = Pause
-    fields = ['empty_your_bag', 'observation']
+    fields = ['title', 'empty_your_bag', 'observation']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -87,7 +100,7 @@ class PauseCreateView(LoginRequiredMixin, CreateView):
 class PauseUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'pauses/pause_update.html'
     model = Pause
-    fields = ['empty_your_bag', 'observation']
+    fields = ['title', 'empty_your_bag', 'observation']
    
     def form_valid(self, form):
         form.instance.user = self.request.user

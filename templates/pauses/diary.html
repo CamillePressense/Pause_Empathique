@@ -14,7 +14,8 @@
     <table style="border: 1px solid black">
         <thead>
             <tr>
-                <th id="Date de création de la pause">Date de création</th>
+                <th id="Titre de la pause">Titre</th> 
+                <th id="Date de la dernière modification">Date de création/modification</th>
                 <th id="Contenu étape vide ton sac">Vide ton sac</th>
                 <th id="Contenu étape Observation">Observation</th>
                 <th id="Contenu étape Sentiments">Sentiments</th>
@@ -26,6 +27,7 @@
         <tbody>
             {% for pause in pauses %}
             <tr>
+                <td headers="Titre de la pause"><a href="{% url 'pause_details' pause.id %}">{{ pause.title }}</td>
                 <td headers="Date de création de la pause">{{ pause.updated_at|date:"d/m/Y H:i" }}</td>
                 <td headers="Contenu étape vide ton sac">{{ pause.empty_your_bag|truncatewords:10 }}</td>
                 <td headers="Contenu étape Observation">"{{ pause.observation|truncatewords:10 }}"</td>

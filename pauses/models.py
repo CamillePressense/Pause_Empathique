@@ -1,5 +1,15 @@
 from django.db import models
+from django.utils import timezone
 from django.conf import settings
+
+def default_pause_title():
+    months_in_french = {
+        1: 'Janvier', 2: 'Février', 3: 'Mars', 4: 'Avril',
+        5: 'Mai', 6: 'Juin', 7: 'Juillet', 8: 'Août',
+        9: 'Septembre', 10: 'Octobre', 11: 'Novembre', 12: 'Décembre'
+    }
+    now = timezone.now()
+    return f"Pause du {now.day} {months_in_french[now.month]} {now.year}"
 
 class Pause(models.Model):
     user = models.ForeignKey(
@@ -7,7 +17,7 @@ class Pause(models.Model):
         on_delete=models.CASCADE,
         related_name='pauses'
     )
-
+    title = models.CharField('Titre', max_length=200, default=default_pause_title)
     created_at = models.DateTimeField('Créée le', auto_now_add=True)
     updated_at = models.DateTimeField('Modifiée le', auto_now=True)
     empty_your_bag = models.TextField('Vide ton sac', blank=True, default="")
@@ -19,7 +29,7 @@ class Pause(models.Model):
     class Meta:
         verbose_name = 'Pause empathique'
         verbose_name_plural = 'Pauses empathiques'
-        ordering = ['-created_at']
+        ordering = ['-updated_at']
         
     def __str__(self):
         return f"Pause de {self.user} - {self.created_at.strftime('%d/%m/%Y')}"
