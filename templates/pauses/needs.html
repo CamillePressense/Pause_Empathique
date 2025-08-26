@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h2>J'ai besoin de...</h2>
+
+<form method="post">
+  {% csrf_token %}
+
+  {% if error_message %}
+    <p style="color:red;">{{ error_message }}</p>
+  {% endif %}
+
+  {% for family_name, needs in grouped_needs.items %}
+    <details>
+      <summary>{{ family_name }}</summary>
+        {% for need in needs %}
+          <label>
+            <input 
+            type="checkbox" 
+            name="needs" 
+            value="{{ need.id }}"
+            {% if need.id in selected_needs %}checked{% endif %}>
+            {{ need.name }}
+          </label>
+        {% endfor %}
+    </details>
+  {% endfor %}
+
+  <button type="submit">Valider</button>
+
+</form>
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'js/keep-toggle-open.js' %}"></script>
+{% endblock js %}

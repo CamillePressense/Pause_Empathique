@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h2>Je me sens...</h2>
+
+<form method="post">
+  {% csrf_token %}
+
+  {% if error_message %}
+    <p style="color:red;">{{ error_message }}</p>
+  {% endif %}
+
+  {% for family_name, feelings in grouped_feelings.items %}
+    <details>
+          <summary>{{ family_name }}</summary>
+            {% for feeling in feelings %}
+              <label>
+                  <input type="checkbox" 
+                  name="feelings" 
+                  value="{{ feeling.id }}"
+                  {% if feeling.id in selected_feelings %}checked{% endif %}>
+                  {{ feeling.label }}
+              </label>
+            {% endfor %}
+    </details>
+  {% endfor %}
+
+  <button type="submit">Etape suivante</button>
+
+</form>
+{% endblock content %}
+
+
+{% block js %}
+<script src="{% static 'js/keep-toggle-open.js' %}"></script>
+{% endblock js %}

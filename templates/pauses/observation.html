@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<main>
+    <form method="POST">
+        {% csrf_token %} 
+        {% include 'partials/non_field_errors.html' %}
+        <div>
+            {% include 'partials/field_errors.html' with field=form.title %}        
+            <h2><label for="{{ form.title.id_for_label }}">{{ form.title.label}} </label></h2>
+            {{ form.title}}
+        </div>
+        <div>
+            {% include 'partials/field_errors.html' with field=form.empty_your_bag %}        
+            <h2><label for="{{ form.empty_your_bag.id_for_label }}">{{ form.empty_your_bag.label}} </label></h2>
+            <p>La coupe est pleine, tout s'agite ? Si besoin, cet espace est pour ton chacal, lâche tout 🐺 </p>
+            {{ form.empty_your_bag }}
+        </div>
+        <div>
+            {% include 'partials/field_errors.html' with field=form.observation %}        
+            <h2><label for="{{ form.observation.id_for_label }}">{{ form.observation.label }}</label></h2>
+            <p>Maintenant, recule un peu et raconte ce que tu vis de manière la plus factuelle 🔭 </p>
+            {{ form.observation }}
+        </div>
+    
+        <input type="submit" value="Etape suivante"/>
+    </form>
+</main>
+
+{% endblock content %}

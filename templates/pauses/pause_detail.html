@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<main>
+    <h1>{{ pause.title }}</h1>
+
+    {% if pause.empty_your_bag %}
+        <h3>Vide ton sac 🐺:</h3>
+        <p>{{ pause.empty_your_bag }}</p>
+    {% endif %}
+
+    <h3>Observation 👀:</h3>
+    <p>{{ pause.observation }}</p>
+
+    <h3>Sentiments 🦒:</h3>
+    {% if pause.feelings_with_labels %}
+        <ul>
+        {% for feeling in pause.feelings_with_labels %}
+            <li>{{ feeling }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun sentiment enregistré pour cette pause empathique.</p>
+    {% endif %}
+
+    <h3>Besoins 💌:</h3>
+    {% if pause.needs %}
+        <ul>
+        {% for need in pause.needs.all %}
+            <li>{{ need.name }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun besoin enregistré pour cette pause empathique.</p>
+    {% endif %}
+
+
+    <h3>Créé le 📆:</h3>
+    <p>{{ pause.created_at|date:"d/m/Y H:i" }}</p>
+
+    <h3>Modifié le ✍️:</h3>
+    <p>{{ pause.updated_at|date:"d/m/Y H:i" }}</p>
+
+    <a href="{% url 'update_pause' pause.id %}">Modifier ✏️</a>
+
+    <form 
+        action="{% url 'delete_pause' pause.id %}" 
+        method="post" 
+        onsubmit="return confirm('Es-tu sûr.e de vouloir supprimer cette pause? C\'est irréversible.')">                   
+            {% csrf_token %}
+            <button type="submit">Supprimer ❌</button>
+     </form>
+
+     <a href="{% url 'diary' %}">Retour à mon journal 📒</a>
+
+</main>
+{% endblock content %}

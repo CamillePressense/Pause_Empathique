@@ -1,23 +1,25 @@
 {% block header %} 
 <header>
-    <h1>Observer, Ressentir, Comprendre, Agir</h1>
-    <nav>
-        <ul>
-          <li><a href="/">Accueil</a></li>
-          {% if user.is_authenticated %}
-            <li><a href=>Mon Compte</a></li>
-            <li><a href=>Mon Journal</a></li>
-            <li>
-                <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <button type="submit">Déconnexion</button>
-                </form>
-            </li>
-          {% else %}
-            <li><a href="{% url 'login' %}">Connexion</a></li>
-            <li><a href="{% url 'register' %}">Inscription</a></li>
-          {% endif %}
-        </ul>
-    </nav>
+  <h1>Pause Empathique</h1>
+  <h3>Observer, Ressentir, Comprendre, Agir</h3>
+  <nav>
+      <ul>
+        <li><a href="/">Accueil</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'observation' %}">Pratiquer</a></li>
+          <li><a href="{% url 'dashboard' %}">Chez moi</a></li>
+          <li><a href="{% url 'diary' %}">Mon Journal</a></li>
+          <li>
+              <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit">Déconnexion</button>
+              </form>
+          </li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Connexion</a></li>
+          <li><a href="{% url 'register' %}">Inscription</a></li>
+        {% endif %}
+      </ul>
+  </nav>
 </header>
 {% endblock header %}
