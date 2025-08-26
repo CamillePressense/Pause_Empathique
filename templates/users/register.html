@@ -1,37 +1,55 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<section>
-    <h1>Inscription</h1>  
-    <form method="post" novalidate>        
+<main>
+    <h1>Inscription</h1>
+
+    <form method="post">        
         {% csrf_token %}
 
         {% include 'partials/non_field_errors.html' %}
-        
-        <label for="{{ form.firstname.id_for_label }}">{{ form.firstname.label }}</label>
-        {{ form.firstname }}
-        {% include 'partials/field_errors.html' with field=form.firstname %}
-
-        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
-        {{ form.email }}
-        {% include 'partials/field_errors.html' with field=form.email %}
-
-        <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
-        {{ form.gender }}
-        {% include 'partials/field_errors.html' with field=form.gender %}
-
+        <div>
+            <label for="{{ form.firstname.id_for_label }}">{{ form.firstname.label }}</label>
+            {{ form.firstname }}
+            {% include 'partials/field_errors.html' with field=form.firstname %}
+        </div>
+        <div>
+            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            {{ form.email }}
+            {% include 'partials/field_errors.html' with field=form.email %}
+        </div>
+        <div>
+            <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
+            {{ form.gender }}
+            {% include 'partials/field_errors.html' with field=form.gender %}
+        </div>
+        <div>
         <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
-        {{ form.password1 }}
+        <div class="password-input-container">
+            {{ form.password1 }}
+            <button type="button" class="toggle-password" aria-label="Afficher/masquer le mot de passe">
+                <span class="eye-icon">👁️</span>
+            </button>
+        </div>
         {% include 'partials/field_errors.html' with field=form.password1 %}
+        </div>
 
         <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
-        {{ form.password2 }}
+        <div class="password-input-container">
+            {{ form.password2 }}
+           <button type="button" class="toggle-password" aria-label="Afficher/masquer le mot de passe">
+                <span class="eye-icon">👁️</span>
+            </button> 
+        </div>
         {% include 'partials/field_errors.html' with field=form.password2 %}
 
         <button type="submit">M'inscrire</button>
     </form>
     <p>Déjà inscrit.e? <a href="{% url 'login' %}">Me Connecter</a></p>
-</section>
-
+</main>
 {% endblock content %}
- 
+
+{% block js %}
+<script src="{% static 'js/show-and-hide-password.js' %}"></script>
+{% endblock js %}

@@ -1,28 +1,36 @@
 {% extends 'base.html' %}
+{% load static %}
 
- {% block content %}
-
-<section>
+{% block content %}
+<main>
     <h1>Connexion</h1>
-
-    
+ 
     <form method="POST">
         {% csrf_token %}
 
         {% include 'partials/non_field_errors.html' %}       
-        
-        {% include 'partials/field_errors.html' with field=form.email %}        
-        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
-        {{ form.email }}
-        
-        {% include 'partials/field_errors.html' with field=form.password %} 
-        <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
-        {{ form.password }}
-
+        <div>
+            {% include 'partials/field_errors.html' with field=form.email %}        
+            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            {{ form.email }}
+        </div>
+        <div>
+            {% include 'partials/field_errors.html' with field=form.password %} 
+            <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+            <div class="password-input-container">
+                {{ form.password }}
+                <button type="button" class="toggle-password" aria-label="Afficher/masquer le mot de passe">
+                    <span class="eye-icon">👁️</span>
+                </button>
+            </div>
+        </div>
         <button type="submit">Me Connecter</button>
     </form>
 
     <p>Pas encore de compte ? <a href="{% url 'register' %}">M'inscrire</a></p>    
-</section>
+</main>
+{% endblock content %}
 
- {% endblock content %}
+{% block js %}
+<script src="{% static 'js/show-and-hide-password.js' %}"></script>
+{% endblock js %}
