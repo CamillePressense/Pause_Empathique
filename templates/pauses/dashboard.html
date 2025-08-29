@@ -3,7 +3,7 @@
 {% block content %}
 
 <main>
-    <h1>Bienvenue dans ton jardin d'auto-empathie {{ user.firstname }}</h1>
+    <h1>Bonjour {{ user.firstname }} !</h1>
     <a href="{% url 'observation' %}">Pratiquer</a>
     {% if user.pauses.exists %}
         <a href="{% url 'diary' %}">Mon Journal</a>

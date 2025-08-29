@@ -1,25 +1,35 @@
-{% block header %} 
-<header>
-  <h1>Pause Empathique</h1>
-  <h3>Observer, Ressentir, Comprendre, Agir</h3>
-  <nav>
-      <ul>
-        <li><a href="/">Accueil</a></li>
-        {% if user.is_authenticated %}
-          <li><a href="{% url 'observation' %}">Pratiquer</a></li>
-          <li><a href="{% url 'dashboard' %}">Chez moi</a></li>
-          <li><a href="{% url 'diary' %}">Mon Journal</a></li>
-          <li>
-              <form action="{% url 'logout' %}" method="post">
-              {% csrf_token %}
-              <button type="submit">Déconnexion</button>
-              </form>
-          </li>
-        {% else %}
-          <li><a href="{% url 'login' %}">Connexion</a></li>
-          <li><a href="{% url 'register' %}">Inscription</a></li>
-        {% endif %}
-      </ul>
+{% load static %} 
+{% block header %}
+
+<header class="flex justify-between items-end bg-header h-16 px-4 md:px-6 lg:px-8 shadow-sm p">
+  <h1 class="text-3xl text-white self-center">Pause E<span class="text-otherpink">m</span>pathique</h1>
+  
+  {% if user.is_authenticated %}
+  <nav class="flex items-center space-x-7 text-white py-2">
+    <a href="" class="flex flex-col items-center text-white text-l">
+      <img src="{% static '/icons/user-round-white.svg' %}" class="w-5 h-5">
+      Mon compte
+    </a>
+    <a href="{% url 'diary' %}" class="flex flex-col items-center text-white">
+      <img src="{% static '/icons/house-white.svg' %}" class="w-5 h-5">
+      Mon espace
+    </a>
+    <a href="{% url 'observation' %}" class="flex flex-col items-center text-white">
+      <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-5 h-5">
+      Pratiquer
+    </a>
+    <form action="{% url 'logout' %}" method="post" >
+        {% csrf_token %}
+        <button type="submit" class="flex flex-col items-center text-white cursor-pointer">
+          <img src="{% static '/icons/log-out-white.svg' %}" class="w-5 h-5">
+          <span>Quitter</span>
+        </button>
+      </form>
   </nav>
+  {% else %}
+  <h3 class="text-l text-white">Observer, Ressentir, Comprendre, Agir</h3>  
+{% endif %}
+
 </header>
+
 {% endblock header %}

@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+    --color-header:#1a2628;
+    --color-black: #1f1e1e;
+    --color-white: #ffffff;
+    --color-background: #ebf7f9;
+    --color-background-button: #d0ecf1;
+    --color-sweetpink: #ef8699;
+    --color-brightpink: #ec1f45;
+    --color-otherpink: #ff8080;
+}
