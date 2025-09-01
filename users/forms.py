@@ -9,12 +9,19 @@ logger = logging.getLogger(__name__)
 class CustomAuthenticationForm(forms.Form):
     email = forms.EmailField(
         label="E-mail",
-        widget=forms.EmailInput(attrs={'autocomplete': 'email'}),
+        widget=forms.EmailInput(attrs={
+            'autocomplete': 'email',
+            'class': 'w-full my-2 border-b border-gray-400 mb-3',
+            'placeholder': 'mon_adresse@email.com',
+        }),
     )
     password = forms.CharField(
         label="Mot de passe",
         strip=False,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password'}),
+        widget=forms.PasswordInput(attrs={
+            'autocomplete': 'current-password',
+            'class': 'w-full my-2 border-b border-gray-400',
+        }),
     )
     
     def __init__(self, request=None, *args, **kwargs):

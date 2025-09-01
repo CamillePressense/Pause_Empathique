@@ -2,32 +2,40 @@
 {% load static %}
 
 {% block content %}
-<main>
-    <h1>Connexion</h1>
- 
-    <form method="POST">
-        {% csrf_token %}
+<main class="min-h-full flex flex-col justify-center items-center px-5 py-0">
+    <section class="flex flex-col text-left mt-1 mb-4 p-2">
+        <p class="text-3xl mb-1 text-left">Bienvenue</p>
+        <p class="text-lg text-gray-600 mb-1">sur</p>
+        <p class="text-xl italic mb-6">Pause Empathique</p>
+        <img src="{% static '/icons/diary-background-free.png' %}" class="w-10 h-12/14 mb-6 md:w-16 md:h-18 self-center object-cover">
+        <p class="text-sm text-gray-600 mb-1 max-w-xs">Un outil gratuit pour pratiquer l'auto-empathie de façon guidée.</p>
+        <a href="" class="text-gray-600 text-sm underline">En savoir plus </a>    
+    </section>
 
-        {% include 'partials/non_field_errors.html' %}       
-        <div>
+    <section class="w-full max-w-sm">
+        <form method="POST" class="flex flex-col space-y-2 mb-1 bg-white border border-white rounded-4xl p-6">
+            {% csrf_token %}
+            <h2 class="text-2xl font-semibold text-center mb-4">Connexion</h2>
+            {% include 'partials/non_field_errors.html' %}       
+            
             {% include 'partials/field_errors.html' with field=form.email %}        
-            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            <label for="{{ form.email.id_for_label }}" class="text-sm text-gray-700">{{ form.email.label }}</label>
             {{ form.email }}
-        </div>
-        <div>
+            
             {% include 'partials/field_errors.html' with field=form.password %} 
-            <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
-            <div class="password-input-container">
+            <label for="{{ form.password.id_for_label }}" class="text-sm text-gray-700">{{ form.password.label }}</label>
+            <div class="password-input-container relative">
                 {{ form.password }}
-                <button type="button" class="toggle-password" aria-label="Afficher/masquer le mot de passe">
+                <button type="button" class="absolute right-2 top-2 toggle-password" aria-label="Afficher/masquer le mot de passe">
                     <span class="eye-icon">👁️</span>
                 </button>
-            </div>
-        </div>
-        <button type="submit">Me Connecter</button>
-    </form>
-
-    <p>Pas encore de compte ? <a href="{% url 'register' %}">M'inscrire</a></p>    
+            </div>  
+            <button type="submit" class="bg-background-button self-center text-center text-black py-3 px-6 rounded-md mt-6 w-40">Me Connecter</button>
+            <p class="text-center text-sm mt-4">Pas encore de compte ?</p>
+            <a href="{% url 'register' %}" class="bg-background-button self-center text-center text-black px-6 py-2 rounded-md mt-2 w-40">M'inscrire</a>  
+        </form>
+    
+    </section>
 </main>
 {% endblock content %}
 

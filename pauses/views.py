@@ -14,9 +14,6 @@ from django.views.generic import (
     DetailView
 )
 
-def home(request):
-    return render(request, 'home.html')
-
 @login_required
 def dashboard(request):
     return render(request, 'pauses/dashboard.html', {'user': request.user} )
