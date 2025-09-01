@@ -2,15 +2,16 @@
 {% block header %}
 
 <header class="flex justify-between items-end bg-header h-16 px-4 md:px-6 lg:px-8 shadow-sm p">
-  <h1 class="text-3xl text-white self-center">Pause E<span class="text-otherpink">m</span>pathique</h1>
-  
+
   {% if user.is_authenticated %}
-  <nav class="flex items-center space-x-7 text-white py-2">
-    <a href="" class="flex flex-col items-center text-white text-l">
+  <!-- Navigation desktop -->
+  <h1 class="hidden md:block text-3xl text-white self-center">Pause E<span class="text-otherpink">m</span>pathique</h1>
+  <nav class="hidden md:flex items-center space-x-7 text-white py-2">
+    <a href="" class="flex flex-col items-center text-white text-l {% if request.path == your_articles_url %} font-semibold {% endif %}">
       <img src="{% static '/icons/user-round-white.svg' %}" class="w-5 h-5">
       Mon compte
     </a>
-    <a href="{% url 'diary' %}" class="flex flex-col items-center text-white">
+    <a href="{% url 'diary' %}" class="flex flex-col items-center text-white {% if request.path == diary %} font-semibold {% endif %}">
       <img src="{% static '/icons/house-white.svg' %}" class="w-5 h-5">
       Mon espace
     </a>
@@ -18,15 +19,44 @@
       <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-5 h-5">
       Pratiquer
     </a>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" class="flex-col items-center text-white cursor-pointer">
+        <img src="{% static '/icons/log-out-white.svg' %}" class="w-5 h-5">
+        <span>Quitter</span>
+      </button>
+    </form>
+  </nav>
+  
+  <!-- Navigation mobile -->
+  <h3 class="md:hidden flex-1 text-2l self-center text-center text-white">❤️ Observer, Ressentir, Comprendre, Agir</h3>
+  <nav class="md:hidden flex justify-between fixed bottom-0 left-0 right-0 text-white py-2 bg-header px-3">
+    <a href="" class="flex flex-col items-center text-white text-sm">
+      <img src="{% static '/icons/user-round-white.svg' %}" class="w-5 h-5">
+      Mon compte
+    </a>
+    <a href="{% url 'diary' %}" class="flex flex-col items-center text-white text-sm">
+      <img src="{% static '/icons/house-white.svg' %}" class="w-5 h-5">
+      Mon espace
+    </a>
+    <a href="{% url 'diary' %}" class="flex flex-col items-center text-white text-sm">
+      <img src="{% static '/icons/book-heart-white.svg' %}" class="w-5 h-5">
+      Mon journal
+    </a>
+    <a href="{% url 'observation' %}" class="flex flex-col items-center text-white text-sm">
+      <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-5 h-5">
+      Pratiquer
+    </a>
     <form action="{% url 'logout' %}" method="post" >
         {% csrf_token %}
         <button type="submit" class="flex flex-col items-center text-white cursor-pointer">
           <img src="{% static '/icons/log-out-white.svg' %}" class="w-5 h-5">
-          <span>Quitter</span>
+          <span class="text-sm">Quitter</span>
         </button>
-      </form>
+    </form>
   </nav>
   {% else %}
+  <h1 class="text-2xl md:text-3xl text-white self-center">Pause E<span class="text-otherpink">m</span>pathique</h1>
   <h3 class="text-l text-white">Observer, Ressentir, Comprendre, Agir</h3>  
 {% endif %}
 
