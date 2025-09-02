@@ -2,51 +2,64 @@
 {% load static %}
 
 {% block content %}
-<main>
-    <h1>Inscription</h1>
+<main class="min-h-screen flex flex-col items-center px-5 py-0 md:flex-row md:justify-evenly md:px-0">
 
-    <form method="post">        
-        {% csrf_token %}
+    <section class="flex flex-col self-baseline text-left mb-4 p-2 md:self-center">
+        <p class="text-3xl mb-1 text-left md:text-4xl">Bienvenue</p>
+        <p class="text-lg text-gray-600 mb-1 md:text-2xl">sur</p>
+        <p class="text-xl italic mb-4 md:text-3xl md:mb-10">Pause Empathique</p>
+        <img src="{% static '/icons/diary-background-free.png' %}" class="hidden md:block w-10 h-12/14 mb-6 md:w-16 md:h-24 self-center object-cover">
+        <p class="hidden md:block text-base text-justify text-gray-600 mb-4 max-w-xs">Un outil gratuit pour pratiquer l'auto-empathie de façon guidée, en suivant le protocole de la Communication Non Violente (CNV).</p>
+        <a href="" class="text-gray-600 text-sm underline">En savoir plus </a>    
+    </section>
 
-        {% include 'partials/non_field_errors.html' %}
-        <div>
-            <label for="{{ form.firstname.id_for_label }}">{{ form.firstname.label }}</label>
+    <section class="w-full max-w-sm">
+        
+        <form method="post" class="flex flex-col space-y-2 mb-1 mt-2 p-5 bg-white border border-white rounded-4xl shadow-sm md:px-8 md:py-6">        
+            {% csrf_token %}
+
+            <h2 class="text-2xl font-semibold text-center mb-4 md:mb-8">Inscription</h2>
+            {% include 'partials/non_field_errors.html' %}
+         
+            <label for="{{ form.firstname.id_for_label }}" class="text-sm text-gray-900 md:text-lg">{{ form.firstname.label }}</label>
             {{ form.firstname }}
             {% include 'partials/field_errors.html' with field=form.firstname %}
-        </div>
-        <div>
-            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+        
+    
+            <label for="{{ form.email.id_for_label }}" class="text-sm text-gray-900 md:text-lg">{{ form.email.label }}</label>
             {{ form.email }}
             {% include 'partials/field_errors.html' with field=form.email %}
-        </div>
-        <div>
-            <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
+        
+    
+            <label for="{{ form.gender.id_for_label }}" class="text-sm text-gray-900 md:text-lg">{{ form.gender.label }}</label>
             {{ form.gender }}
             {% include 'partials/field_errors.html' with field=form.gender %}
-        </div>
-        <div>
-        <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
-        <div class="password-input-container">
-            {{ form.password1 }}
-            <button type="button" class="toggle-password" aria-label="Afficher/masquer le mot de passe">
-                <span class="eye-icon">👁️</span>
-            </button>
-        </div>
-        {% include 'partials/field_errors.html' with field=form.password1 %}
-        </div>
+       
+    
+            <label for="{{ form.password1.id_for_label }}" class="text-sm text-gray-900 md:text-lg">{{ form.password1.label }}</label>
+            <div class="password-input-container relative">
+                {{ form.password1 }}
+                <button type="button" class="absolute right-2 top-2 toggle-password" aria-label="Afficher/masquer le mot de passe">
+                    <span class="eye-icon">👁️</span>
+                </button>
+            </div>
+            {% include 'partials/field_errors.html' with field=form.password1 %}
+    
+            <label for="{{ form.password2.id_for_label }}" class="text-sm text-gray-900 md:text-lg">{{ form.password2.label }}</label>
+            <div class="password-input-container relative">
+                {{ form.password2 }}
+               <button type="button" class="absolute right-2 top-2 toggle-password" aria-label="Afficher/masquer le mot de passe">
+                    <span class="eye-icon">👁️</span>
+                </button> 
+                {% include 'partials/field_errors.html' with field=form.password2 %}
+            </div>
+    
+            <button type="submit" class="bg-background-button self-center text-center text-black py-3 px-6 rounded-md mt-6 w-40 cursor-pointer hover:scale-105 hover:shadow-md md:mt-5 md:font-semibold">M'inscrire</button>
+            <p class="text-center text-sm mt-4">Déjà inscrit.e? <a href="{% url 'login' %}" class="self-center text-sm text-center text-black py-2 px-4 rounded-md mt-2 w-40 cursor-pointer hover:underline md:font-semibold">Me Connecter</a></p>
+        </form>
 
-        <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
-        <div class="password-input-container">
-            {{ form.password2 }}
-           <button type="button" class="toggle-password" aria-label="Afficher/masquer le mot de passe">
-                <span class="eye-icon">👁️</span>
-            </button> 
-        </div>
-        {% include 'partials/field_errors.html' with field=form.password2 %}
 
-        <button type="submit">M'inscrire</button>
-    </form>
-    <p>Déjà inscrit.e? <a href="{% url 'login' %}">Me Connecter</a></p>
+    </section>
 </main>
 {% endblock content %}
 

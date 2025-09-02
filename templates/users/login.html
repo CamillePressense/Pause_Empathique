@@ -17,6 +17,7 @@
     <section class="w-full max-w-sm">
         <form method="POST" class="flex flex-col space-y-2 mb-1 p-5 bg-white border border-white rounded-4xl shadow-sm md:p-10">
             {% csrf_token %}
+            
             <h2 class="text-2xl font-semibold text-center mb-4 md:mb-8">Connexion</h2>
             {% include 'partials/non_field_errors.html' %}       
             
@@ -31,8 +32,10 @@
                 <button type="button" class="absolute right-2 top-2 toggle-password" aria-label="Afficher/masquer le mot de passe">
                     <span class="eye-icon">👁️</span>
                 </button>
-            </div>  
+            </div>
+
             <button type="submit" class="bg-background-button self-center text-center text-black py-3 px-6 rounded-md mt-6 w-40 cursor-pointer hover:scale-105 hover:shadow-md md:mt-10 md:font-semibold">Me Connecter</button>
+
             <p class="text-center text-sm mt-4">Pas encore de compte ?</p>
             <a href="{% url 'register' %}" class="bg-background-button self-center text-center text-black px-6 py-2 rounded-md mt-2 w-40 hover:scale-105 hover:shadow-md md:font-semibold">M'inscrire</a>  
         </form>

@@ -63,10 +63,13 @@ class RegisterForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['email'].widget.attrs.update({'autocomplete': 'email', 'placeholder': 'Mon email'})
-        self.fields['firstname'].widget.attrs.update({'placeholder': 'Mon prénom'})
+        self.fields['email'].widget.attrs.update({'autocomplete': 'email', 'placeholder': 'Mon email', 'class': 'w-full my-2 border-b border-gray-400 mb-3',})
+        self.fields['firstname'].widget.attrs.update({'placeholder': 'Mon prénom', 'class': 'w-full my-2 border-b border-gray-400 mb-3',})
         self.fields['gender'].widget.attrs.update({'placeholder': 'Je préfère lire les textes au:'})
-            
+        self.fields['password1'].widget.attrs.update({'class': 'w-full my-2 border-b border-gray-400 mb-3',})
+        self.fields['password2'].widget.attrs.update({'class': 'w-full my-2 border-b border-gray-400 mb-3',})
+
+
     def clean_firstname(self):
         firstname = self.cleaned_data.get('firstname')        
         if firstname:
