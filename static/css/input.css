@@ -4,9 +4,28 @@
     --color-header:#1a2628;
     --color-black: #1f1e1e;
     --color-white: #ffffff;
+    --color-table-title: #81ccd9;
     --color-background: #ebf7f9;
     --color-background-button: #d0ecf1;
-    --color-sweetpink: #ef8699;
+    --color-sweetpink: #faf2f2;
     --color-brightpink: #ec1f45;
     --color-otherpink: #ff8080;
+}
+
+@layer components{
+    .table-title{
+        @apply bg-table-title text-header border-white border-2 p-1
+    }
+
+    .table-cell{
+        @apply bg-background border-white border-2 p-2 text-center
+    }
+
+    .delete-cell{
+        @apply bg-sweetpink border-white border-2 text-center
+    }
+
+    .icons-pagination{
+        @apply w-4 h-5 mt-1 cursor-pointer hover:scale-105
+    }
 }

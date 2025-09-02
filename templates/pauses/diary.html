@@ -1,89 +1,108 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <main>
-    <h1>Mon journal d'auto-empathie 📒</h1>
-
-    {% if messages %}
-        <ul>
-        {% for message in messages %}
-            <li class="{{ message.tags }}">{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-
-    <table style="border: 1px solid black">
-        <thead>
-            <tr>
-                <th id="Titre de la pause">Titre</th> 
-                <th id="Date de la dernière modification">Date de création/modification</th>
-                <th id="Contenu étape vide ton sac">Vide ton sac</th>
-                <th id="Contenu étape Observation">Observation</th>
-                <th id="Contenu étape Sentiments">Sentiments</th>
-                <th id="Contenu étape Besoins">Besoins</th>
-                <th id="Modifier la pause">Modifier</th>
-                <th id="Supprimer la pause">Supprimer</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for pause in pauses %}
-            <tr>
-                <td headers="Titre de la pause"><a href="{% url 'pause_details' pause.id %}">{{ pause.title }}</td>
-                <td headers="Date de création de la pause">{{ pause.updated_at|date:"d/m/Y H:i" }}</td>
-                <td headers="Contenu étape vide ton sac">{{ pause.empty_your_bag|truncatewords:10 }}</td>
-                <td headers="Contenu étape Observation">"{{ pause.observation|truncatewords:10 }}"</td>
-                <td headers="Contenu étape Sentiments">
-                    <ul>
-                        {% for feeling in pause.feelings_with_labels|slice:":3" %}
-                            <li>{{ feeling }}</li>
-                        {% endfor %}
-                        {% if pause.feelings_with_labels|length > 3 %}
-                        ...
-                        {% endif %}
-                    </ul>
-                </td>
-                <td headers="Contenu étape Besoins">
-                    <ul>
-                        {% for need in pause.needs.all|slice:":3" %}
-                            <li>{{ need.name }}</li>
-                        {% endfor %}
-                        {% if pause.needs.all|length > 3 %}
-                        ...
-                        {% endif %}
-                    </ul>
-                </td>
-                <td headers="Modifier la pause">
-                    <a href="{% url 'update_pause' pause.id %}">✏️</a>
-                </td>
-                <td headers="Supprimer la pause">
-                    <form 
-                    action="{% url 'delete_pause' pause.id %}?page={{ page_obj.number }}" 
-                    method="post" 
-                    onsubmit="return confirm('Es-tu sûr.e de vouloir supprimer cette pause? C\'est irréversible.')">                   
-                    {% csrf_token %}
-                    <button type="submit">❌</button>
-                    </form></td>
-            </tr>
+    <section class="space-y-2 m-6 p-4 bg-white border border-white rounded-4xl shadow-sm">
+        <div class="flex items-center mt-2 gap-2 mb-4">
+            <img src="{% static '/icons/chevron-right-black.svg' %}" class="w-6 h-6">
+            <h1 class="text-2xl">Mon journal</h1>
+            <img src="{% static '/icons/diary-background-free.png' %}" class="w-8 h-12">
+        </div>
+        
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
             {% endfor %}
-        </tbody>       
-    </table>
-
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; Début</a>
-                <a href="?page={{ page_obj.previous_page_number }}">Préc.</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
-            </span>
-
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Suivante</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">Fin &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
+            </ul>
+        {% endif %}
+        
+        <table class="table-fixed border-2 border-white">
+            <thead>
+                <tr>
+                    <th id="Titre de la pause" class="table-title w-40">Titre</th> 
+                    <th id="Date de la dernière modification" class="table-title w-40">Date</th>
+                    <th id="Contenu étape vide ton sac" class="table-title w-60">Vide ton sac</th>
+                    <th id="Contenu étape Observation" class="table-title w-60">Observation</th>
+                    <th id="Contenu étape Sentiments" class="table-title w-40">Sentiments</th>
+                    <th id="Contenu étape Besoins" class="table-title w-40">Besoins</th>
+                    <th id="Modifier la pause" class="table-title w-30">Modifier</th>
+                    <th id="Supprimer la pause" class="bg-otherpink border-white border-2 w-28">Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pause in pauses %}
+                <tr>
+                    <td headers="Titre de la pause" class="table-cell hover:bg-gray-50"><a href="{% url 'pause_details' pause.id %}">{{ pause.title }}</td>
+                    <td headers="Date de création de la pause" class="table-cell">{{ pause.updated_at|date:"d/m/Y H:i" }}</td>
+                    <td headers="Contenu étape vide ton sac" class="table-cell">{{ pause.empty_your_bag|truncatewords:10 }}</td>
+                    <td headers="Contenu étape Observation" class="table-cell">"{{ pause.observation|truncatewords:10 }}"</td>
+                    <td headers="Contenu étape Sentiments" class="table-cell">
+                        <ul>
+                            {% for feeling in pause.feelings_with_labels|slice:":3" %}
+                                <li>{{ feeling }}</li>
+                            {% endfor %}
+                            {% if pause.feelings_with_labels|length > 3 %}
+                            ...
+                            {% endif %}
+                        </ul>
+                    </td>
+                    <td headers="Contenu étape Besoins" class="table-cell">
+                        <ul>
+                            {% for need in pause.needs.all|slice:":3" %}
+                                <li>{{ need.name }}</li>
+                            {% endfor %}
+                            {% if pause.needs.all|length > 3 %}
+                            ...
+                            {% endif %}
+                        </ul>
+                    </td>
+                    <td headers="Modifier la pause" class="table-cell text-center">
+                        <a href="{% url 'update_pause' pause.id %}" class="inline-block">
+                          <img src="{% static '/icons/square-pen-header.svg' %}" class="w-6 h-6 cursor-pointer hover:scale-105">  
+                        </a>
+                    </td>
+                    <td headers="Supprimer la pause" class="delete-cell">
+                        <form 
+                        action="{% url 'delete_pause' pause.id %}?page={{ page_obj.number }}" 
+                        method="post" 
+                        onsubmit="return confirm('Es-tu sûr.e de vouloir supprimer cette pause? C\'est irréversible.')">                   
+                        {% csrf_token %}
+                        <button type="submit">
+                            <img src="{% static '/icons/trash-2-otherpink.svg' %}" class="w-6 h-6 cursor-pointer hover:scale-105">
+                        </button>
+                        </form></td>
+                </tr>
+                {% endfor %}
+            </tbody>       
+        </table>
+        
+        <div class="pagination flex justify-center">
+            <div class="step-links flex items-center">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">
+                      <img src="{% static '/icons/chevron-first-black.svg' %}" class="icons-pagination">  
+                    </a>
+                    <a href="?page={{ page_obj.previous_page_number }}">
+                        <img src="{% static '/icons/chevron-left-black.svg' %}" class="icons-pagination">
+                    </a>
+                {% endif %}
+        
+                <span class="current mx-3">
+                    Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">
+                        <img src="{% static '/icons/chevron-right-black.svg' %}" class="icons-pagination">
+                    </a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">
+                        <img src="{% static '/icons/chevron-last-black.svg' %}" class="icons-pagination">
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
 
 </main>
 
