@@ -3,54 +3,62 @@
 {% block header %}
 
 <header class="flex justify-between items-end bg-header h-12 px-4 md:px-6 lg:px-8 shadow-sm">
+{% url 'diary' as my_diary_url %}
+{% url 'observation' as practice_url %}
+
   <h3 class="md:hidden flex-1 text-2l self-center text-center text-white">❤️ Observer, Ressentir, Comprendre, Agir</h3>
 
   {% if user.is_authenticated %}
   <!-- Navigation desktop -->
   <h1 class="hidden md:block text-3xl text-white self-center">Pause {{"Empathique"|highlight_second_letter }}</h1>
-  <nav class="hidden md:flex items-center space-x-7 text-white">
-    <a href="" class="flex flex-col items-center text-white text-l {% if request.path == your_articles_url %} font-semibold {% endif %}">
+  <nav class="hidden md:flex items-center space-x-7 text-white mb-0.5">
+
+    <a href="" class="nav-text-desktop">
       <img src="{% static '/icons/user-round-white.svg' %}" class="w-5 h-5">
       Mon compte
     </a>
-    <a href="{% url 'diary' %}" class="flex flex-col items-center text-white {% if request.path == diary %} font-semibold {% endif %}">
+
+    <a href="{{ my_diary_url }}" class="nav-text-desktop {% if request.path == my_diary_url %} text-otherpink {% endif %}">
       <img src="{% static '/icons/house-white.svg' %}" class="w-5 h-5">
       Mon espace
     </a>
-    <a href="{% url 'observation' %}" class="flex flex-col items-center text-white">
-      <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-5 h-5">
+
+    <a href="{{ practice_url }}" class="nav-text-desktop {% if request.path == practice_url %} text-otherpink {% endif %}">
+      <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-5 h-5 ">
       Pratiquer
     </a>
+
     <form action="{% url 'logout' %}" method="post">
       {% csrf_token %}
-      <button type="submit" class="flex-col items-center text-white cursor-pointer">
+      <button type="submit" class="nav-text-desktop cursor-pointer">
         <img src="{% static '/icons/log-out-white.svg' %}" class="w-5 h-5">
         <span>Quitter</span>
       </button>
     </form>
+
   </nav>
   
   <!-- Navigation mobile -->
   <nav class="md:hidden flex justify-between fixed bottom-0 left-0 right-0 text-white py-2 bg-header px-3">
-    <a href="" class="flex flex-col items-center text-white text-sm">
+    <a href="" class="nav-text-mobile">
       <img src="{% static '/icons/user-round-white.svg' %}" class="w-5 h-5">
       Mon compte
     </a>
-    <a href="{% url 'diary' %}" class="flex flex-col items-center text-white text-sm">
+    <a href="{{ my_diary_url }}" class="nav-text-mobile {% if request.path == my_diary_url %} text-otherpink {% endif %}">
       <img src="{% static '/icons/house-white.svg' %}" class="w-5 h-5">
       Mon espace
     </a>
-    <a href="{% url 'diary' %}" class="flex flex-col items-center text-white text-sm">
+    <a href="{{ my_diary_url }}" class="nav-text-mobile {% if request.path == my_diary_url %} text-otherpink {% endif %}">
       <img src="{% static '/icons/book-heart-white.svg' %}" class="w-5 h-5">
       Mon journal
     </a>
-    <a href="{% url 'observation' %}" class="flex flex-col items-center text-white text-sm">
+    <a href="{{ practice_url }}" class="nav-text-mobile {% if request.path == practice_url %} text-otherpink {% endif %}">
       <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-5 h-5">
       Pratiquer
     </a>
     <form action="{% url 'logout' %}" method="post" >
         {% csrf_token %}
-        <button type="submit" class="flex flex-col items-center text-white cursor-pointer">
+        <button type="submit" class="nav-text-mobile cursor-pointer">
           <img src="{% static '/icons/log-out-white.svg' %}" class="w-5 h-5">
           <span class="text-sm">Quitter</span>
         </button>

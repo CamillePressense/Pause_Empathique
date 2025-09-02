@@ -13,18 +13,21 @@
 }
 
 @layer components{
+    .nav-text-desktop{
+        @apply flex flex-col items-center
+    }
+    .nav-text-mobile{
+        @apply flex flex-col items-center text-white text-sm
+    }
     .table-title{
         @apply bg-table-title text-header border-white border-2 p-1
     }
-
     .table-cell{
         @apply bg-background border-white border-2 p-2 text-center
     }
-
     .delete-cell{
         @apply bg-sweetpink border-white border-2 text-center
     }
-
     .icons-pagination{
         @apply w-4 h-5 mt-1 cursor-pointer hover:scale-105
     }
