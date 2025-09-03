@@ -13,6 +13,9 @@
 }
 
 @layer components{
+    .next-button{
+        @apply bg-background-button self-center text-center text-black py-3 px-6 rounded-md mt-6 w-40 cursor-pointer hover:scale-105 hover:shadow-md
+    }
     .nav-text-desktop{
         @apply flex flex-col items-center
     }
