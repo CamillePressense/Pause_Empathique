@@ -1,0 +1,218 @@
+[
+{
+  "model": "pauses.feeling",
+  "pk": 1,
+  "fields": {
+    "feeling_family": "AF",
+    "feminine_name": "amoureuse",
+    "masculine_name": "amoureux"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 2,
+  "fields": {
+    "feeling_family": "AF",
+    "feminine_name": "attendrie",
+    "masculine_name": "attendri"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 3,
+  "fields": {
+    "feeling_family": "SE",
+    "feminine_name": "apaisée",
+    "masculine_name": "apaisé"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 4,
+  "fields": {
+    "feeling_family": "JO",
+    "feminine_name": "amusée",
+    "masculine_name": "amusé"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 5,
+  "fields": {
+    "feeling_family": "JO",
+    "feminine_name": "contente",
+    "masculine_name": "content"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 6,
+  "fields": {
+    "feeling_family": "SE",
+    "feminine_name": "calme",
+    "masculine_name": "calme"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 7,
+  "fields": {
+    "feeling_family": "IN",
+    "feminine_name": "admirative",
+    "masculine_name": "admiratif"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 8,
+  "fields": {
+    "feeling_family": "IN",
+    "feminine_name": "attentive",
+    "masculine_name": "attentif"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 9,
+  "fields": {
+    "feeling_family": "EN",
+    "feminine_name": "électrisée",
+    "masculine_name": "électrisé"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 10,
+  "fields": {
+    "feeling_family": "EN",
+    "feminine_name": "excitée",
+    "masculine_name": "excité"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 11,
+  "fields": {
+    "feeling_family": "PE",
+    "feminine_name": "angoissée",
+    "masculine_name": "angoissé"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 12,
+  "fields": {
+    "feeling_family": "PE",
+    "feminine_name": "anxieuse",
+    "masculine_name": "anxieux"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 13,
+  "fields": {
+    "feeling_family": "CO",
+    "feminine_name": "agacée",
+    "masculine_name": "agacé"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 14,
+  "fields": {
+    "feeling_family": "CO",
+    "feminine_name": "contrariée",
+    "masculine_name": "contrarié"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 15,
+  "fields": {
+    "feeling_family": "TR",
+    "feminine_name": "accablée",
+    "masculine_name": "accablé"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 16,
+  "fields": {
+    "feeling_family": "TR",
+    "feminine_name": "blessée",
+    "masculine_name": "blessé"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 17,
+  "fields": {
+    "feeling_family": "CF",
+    "feminine_name": "bouleversée",
+    "masculine_name": "bouleversé"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 18,
+  "fields": {
+    "feeling_family": "CF",
+    "feminine_name": "confuse",
+    "masculine_name": "confus"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 19,
+  "fields": {
+    "feeling_family": "FA",
+    "feminine_name": "abattue",
+    "masculine_name": "abattu"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 20,
+  "fields": {
+    "feeling_family": "FA",
+    "feminine_name": "affaiblie",
+    "masculine_name": "affaibli"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 21,
+  "fields": {
+    "feeling_family": "SI",
+    "feminine_name": "abasourdie",
+    "masculine_name": "abasourdi"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 22,
+  "fields": {
+    "feeling_family": "SI",
+    "feminine_name": "choquée",
+    "masculine_name": "choqué"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 23,
+  "fields": {
+    "feeling_family": "TE",
+    "feminine_name": "agitée",
+    "masculine_name": "agité"
+  }
+},
+{
+  "model": "pauses.feeling",
+  "pk": 24,
+  "fields": {
+    "feeling_family": "TE",
+    "feminine_name": "impatiente",
+    "masculine_name": "impatient"
+  }
+}
+]

@@ -1,0 +1,170 @@
+[
+{
+  "model": "pauses.need",
+  "pk": 1,
+  "fields": {
+    "need_family": "SU",
+    "name": "Abri"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 2,
+  "fields": {
+    "need_family": "SU",
+    "name": "Air"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 3,
+  "fields": {
+    "need_family": "SU",
+    "name": "Alimentation"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 4,
+  "fields": {
+    "need_family": "IN",
+    "name": "Authenticité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 5,
+  "fields": {
+    "need_family": "IN",
+    "name": "Autonomie"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 6,
+  "fields": {
+    "need_family": "IN",
+    "name": "Choix"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 7,
+  "fields": {
+    "need_family": "RE",
+    "name": "Accomplissement"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 8,
+  "fields": {
+    "need_family": "RE",
+    "name": "Apprentissage"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 9,
+  "fields": {
+    "need_family": "RE",
+    "name": "Créativité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 10,
+  "fields": {
+    "need_family": "HA",
+    "name": "Beauté"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 11,
+  "fields": {
+    "need_family": "HA",
+    "name": "Calme"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 12,
+  "fields": {
+    "need_family": "HA",
+    "name": "Détente"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 13,
+  "fields": {
+    "need_family": "RL",
+    "name": "Accueil"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 14,
+  "fields": {
+    "need_family": "RL",
+    "name": "Amour"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 15,
+  "fields": {
+    "need_family": "RL",
+    "name": "Apprivoisement"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 16,
+  "fields": {
+    "need_family": "CO",
+    "name": "Appartenance"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 17,
+  "fields": {
+    "need_family": "CO",
+    "name": "Appréciation"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 18,
+  "fields": {
+    "need_family": "CO",
+    "name": "Attention"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 19,
+  "fields": {
+    "need_family": "CE",
+    "name": "Célébration"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 20,
+  "fields": {
+    "need_family": "CE",
+    "name": "Communion"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 21,
+  "fields": {
+    "need_family": "CE",
+    "name": "Faire le deuil"
+  }
+}
+]
