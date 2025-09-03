@@ -1,35 +1,53 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
+<main>
+  <form method="post" class="flex flex-col md:flex-row gap-3">
 
-<h2>Je me sens...</h2>
+    {% csrf_token %}
 
-<form method="post">
-  {% csrf_token %}
+    <section class="md:mt-4 w-1/4 ml-4 flex flex-col items-center">
+      <h2 class="mb-4 text-2xl">Je me sens...</h2>
+      <ul class="mb-5 list-disc">
+        <li>Contrariée</li>
+        <li>Abattue</li>
+      </ul>
 
-  {% if error_message %}
-    <p style="color:red;">{{ error_message }}</p>
-  {% endif %}
+      {% if error_message %}
+        <p style="color:red;">{{ error_message }}</p>
+      {% endif %}
 
-  {% for family_name, feelings in grouped_feelings.items %}
-    <details>
-          <summary>{{ family_name }}</summary>
-            {% for feeling in feelings %}
-              <label>
-                  <input type="checkbox" 
-                  name="feelings" 
-                  value="{{ feeling.id }}"
-                  {% if feeling.id in selected_feelings %}checked{% endif %}>
-                  {{ feeling.label }}
-              </label>
-            {% endfor %}
-    </details>
-  {% endfor %}
+      <button type="submit" class="next-button">Etape suivante</button>
+            <div class="flex mb-6 mt-4 gap-1">
+              <span class="bg-white border-1 border-gray-500 rounded-full w-3 h-3 p-1"></span>
+              <span class="bg-otherpink border-1 border-gray-400 rounded-full w-3 h-3 p-1"></span>
+              <span class="bg-white border-1 border-gray-400 rounded-full w-3 h-3 p-1"></span>
+          </div>
+    </section>
+    
+    
+    <section class="flex flex-row flex-wrap gap-1 mr-2 p-5 bg-white border border-white rounded-4xl shadow-sm md:mt-4">
+      {% for family_name, feelings in grouped_feelings.items %}
+        <details class="w-1/4 flex flex-col items-center bg-amber-100 p-1 rounded-2xl">
+              <summary class="md:list-none ">{{ family_name }}</summary>
+                {% for feeling in feelings %}
+                  <label>
+                      <input type="checkbox" 
+                      name="feelings" 
+                      value="{{ feeling.id }}"
+                      {% if feeling.id in selected_feelings %}checked{% endif %}>
+                      {{ feeling.label }}
+                  </label>
+                {% endfor %}
+        </details>
+      {% endfor %}
+    </section>
+    
+  </form>
 
-  <button type="submit">Etape suivante</button>
-
-</form>
+</main>
 {% endblock content %}
 
 

@@ -34,4 +34,6 @@
     .icons-pagination{
         @apply w-4 h-5 mt-1 cursor-pointer hover:scale-105
     }
+
+    
 }

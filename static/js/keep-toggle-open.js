@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
     let families = document.querySelectorAll("details");
 
+    function isDesktop() {
+        return window.innerWidth >= 768;
+    }
+
     families.forEach((family) => {
         let boxes = family.querySelectorAll("input[type=checkbox]");
 
@@ -8,7 +12,8 @@ document.addEventListener("DOMContentLoaded", function() {
             return Array.from(boxes).some(b => b.checked);
         }
         
-        if (hasCheckedBox()) {
+        // Ouvrir automatiquement sur desktop ou si des cases sont cochées
+        if (isDesktop() || hasCheckedBox()) {
             family.setAttribute("open", "");
         }
 
@@ -20,10 +25,24 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
 
-        family.addEventListener("toggle", () => {
-            if (hasCheckedBox()) {
+        family.addEventListener("toggle", (e) => {
+            // Empêcher la fermeture sur desktop
+            if (isDesktop()) {
+                e.preventDefault();
+                family.setAttribute("open", "");
+            } else if (hasCheckedBox()) {
+                // Sur mobile, garder ouvert si des cases sont cochées
                 family.setAttribute("open", "");
             }
         });
+    });
+
+    // Réouvrir sur changement de taille d'écran
+    window.addEventListener("resize", () => {
+        if (isDesktop()) {
+            families.forEach(family => {
+                family.setAttribute("open", "");
+            });
+        }
     });
 });
