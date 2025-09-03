@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 
 THIRD_PARTY_APPS = [
     'django_browser_reload',
+    'widget_tweaks',
 ]
 
 DJANGO_APPS = [
