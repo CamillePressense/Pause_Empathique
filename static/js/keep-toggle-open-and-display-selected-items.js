@@ -1,8 +1,23 @@
 document.addEventListener("DOMContentLoaded", function() {
     let families = document.querySelectorAll("details");
+    let listOfItems = document.querySelector("#list-of-items");
 
     function isDesktop() {
         return window.innerWidth >= 768;
+    }
+
+    function updateSelectedList() {
+        listOfItems.innerHTML = "";
+        
+        const checkedBoxes = document.querySelectorAll("input[type=checkbox]:checked");
+        
+        checkedBoxes.forEach(box => {
+            const li = document.createElement("li");
+            // Récupérer le texte du label parent
+            const label = box.closest("label");
+            li.textContent = label.textContent;
+            listOfItems.appendChild(li);
+        });
     }
 
     families.forEach((family) => {
@@ -22,6 +37,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (hasCheckedBox()) {
                     family.setAttribute("open", "");
                 }
+                // Mettre à jour la liste des éléments sélectionnés
+                updateSelectedList();
             });
         });
 
@@ -45,4 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
     });
+
+    // Initialiser la liste au chargement de la page
+    updateSelectedList();
 });

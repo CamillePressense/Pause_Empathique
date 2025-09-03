@@ -34,6 +34,85 @@
     .icons-pagination{
         @apply w-4 h-5 mt-1 cursor-pointer hover:scale-105
     }
+    .feeling{
+        @apply flex flex-col items-center p-2 cursor-pointer w-44 gap-5 hover:font-semibold rounded-sm my-1
+    }
+    .feeling:has(input:checked){
+        @apply border-1 border-gray-600 font-semibold
+    }    
+}
 
-    
+@layer utilities{
+    .affection{
+        @apply bg-rose-200
+    }
+    .affection-feelings{
+        @apply bg-rose-300 
+    }
+    .serenite{
+        @apply bg-teal-200
+    }
+    .serenite-feelings{
+        @apply bg-teal-300
+    }
+    .joie{
+        @apply bg-yellow-200
+    }
+    .joie-feelings{
+        @apply bg-yellow-300
+    }
+    .interet{
+        @apply bg-purple-200
+    }
+    .interet-feelings{
+        @apply bg-purple-300
+    }
+    .energie{
+        @apply bg-orange-200
+    }
+    .energie-feelings{
+        @apply bg-orange-300
+    }
+    .peur{
+        @apply bg-indigo-200
+    }
+    .peur-feelings{
+        @apply bg-indigo-300
+    }
+    .colere{
+        @apply bg-red-200
+    }
+    .colere-feelings{
+        @apply bg-red-300
+    }
+    .tristesse{
+        @apply bg-slate-200
+    }
+    .tristesse-feelings{
+        @apply bg-slate-300
+    }
+    .confusion{
+        @apply bg-stone-200
+    }
+    .confusion-feelings{
+        @apply bg-stone-300
+    }
+    .fatigue{
+        @apply bg-gray-200
+    }
+    .fatigue-feelings{
+        @apply bg-gray-300
+    }
+    .sideration{
+        @apply bg-slate-200
+    }
+    .sideration-feelings{
+        @apply bg-slate-300
+    }
+    .tension{
+        @apply bg-lime-200
+    }
+    .tension-feelings{
+        @apply bg-lime-300
+    }
 }

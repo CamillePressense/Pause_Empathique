@@ -4,22 +4,20 @@
 
 {% block content %}
 <main>
-  <form method="post" class="flex flex-col md:flex-row gap-3">
+  <form method="post" class="flex flex-col md:flex-row gap-4 m-6">
 
     {% csrf_token %}
 
-    <section class="md:mt-4 w-1/4 ml-4 flex flex-col items-center">
-      <h2 class="mb-4 text-2xl">Je me sens...</h2>
-      <ul class="mb-5 list-disc">
-        <li>Contrariée</li>
-        <li>Abattue</li>
+    <section class="md:mt-8 w-1/4 ml-4 flex flex-col items-center">
+      <h2 class="mb-6 text-2xl self-baseline">Je me sens...</h2>
+      <ul class="mb-5 list-disc flex flex-col gap-3" id="list-of-items">
       </ul>
 
       {% if error_message %}
         <p style="color:red;">{{ error_message }}</p>
       {% endif %}
 
-      <button type="submit" class="next-button">Etape suivante</button>
+      <button type="submit" class="next-button mb-4">Etape suivante</button>
             <div class="flex mb-6 mt-4 gap-1">
               <span class="bg-white border-1 border-gray-500 rounded-full w-3 h-3 p-1"></span>
               <span class="bg-otherpink border-1 border-gray-400 rounded-full w-3 h-3 p-1"></span>
@@ -28,15 +26,16 @@
     </section>
     
     
-    <section class="flex flex-row flex-wrap gap-1 mr-2 p-5 bg-white border border-white rounded-4xl shadow-sm md:mt-4">
+    <section class="flex flex-row flex-wrap justify-center w-3/4 gap-1 p-3 bg-white border border-white rounded-4xl shadow-sm md:mt-4">
       {% for family_name, feelings in grouped_feelings.items %}
-        <details class="w-1/4 flex flex-col items-center bg-amber-100 p-1 rounded-2xl">
-              <summary class="md:list-none ">{{ family_name }}</summary>
+        <details class="w-50 flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2">
+              <summary class="md:list-none flex flex-col items-center p-2">{{ family_name | upper }}</summary>
                 {% for feeling in feelings %}
-                  <label>
+                  <label class="{{ family_name | slugify }}-feelings feeling ">
                       <input type="checkbox" 
                       name="feelings" 
                       value="{{ feeling.id }}"
+                      class="sr-only"
                       {% if feeling.id in selected_feelings %}checked{% endif %}>
                       {{ feeling.label }}
                   </label>
@@ -52,5 +51,5 @@
 
 
 {% block js %}
-<script src="{% static 'js/keep-toggle-open.js' %}"></script>
+<script src="{% static 'js/keep-toggle-open-and-display-selected-items.js' %}"></script>
 {% endblock js %}
