@@ -2,7 +2,7 @@
 {% load text_color_filters %}
 {% block header %}
 
-<header class="flex justify-between items-end bg-header h-12 px-4 md:px-6 lg:px-8 shadow-sm">
+<header class="flex justify-between items-end bg-header fixed top-0 left-0 right-0 h-12 px-4 md:px-6 lg:px-8 shadow-sm">
 {% url 'diary' as my_diary_url %}
 {% url 'observation' as practice_url %}
 
@@ -39,7 +39,7 @@
   </nav>
   
   <!-- Navigation mobile -->
-  <nav class="md:hidden flex justify-between fixed bottom-0 left-0 right-0 text-white py-2 bg-header px-3">
+  <nav class="md:hidden h-15 flex justify-between fixed bottom-0 left-0 right-0 text-white py-2 bg-header px-3">
     <a href="" class="nav-text-mobile">
       <img src="{% static '/icons/user-round-white.svg' %}" class="w-5 h-5">
       Mon compte
