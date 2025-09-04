@@ -18,34 +18,33 @@
       {% endif %}
 
       <button type="submit" class="next-button md:mb-4">Etape suivante</button>
-            <div class="flex mb-3 md:mb-6 mt-4 gap-1">
-              <span class="bg-white border-1 border-gray-500 rounded-full w-3 h-3 p-1"></span>
-              <span class="bg-otherpink border-1 border-gray-400 rounded-full w-3 h-3 p-1"></span>
-              <span class="bg-white border-1 border-gray-400 rounded-full w-3 h-3 p-1"></span>
-          </div>
+
+      <div class="flex mb-3 md:mb-6 mt-4 gap-1">
+        <span class="other-steps-round"></span>
+        <span class="present-step-round"></span>
+        <span class="other-steps-round"></span>
+      </div>
     </section>
     
     
     <section class="flex flex-row flex-wrap justify-center mt-78 mb-15 gap-1 p-3 bg-white border border-white rounded-4xl shadow-sm md:w-3/4 md:mt-4 md:mb-2">
       {% for family_name, feelings in grouped_feelings.items %}
         <details class="md:w-50 w-full md:h-60 flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2 overflow-y-auto overflow-x-hidden">
-              <summary class="md:list-none list-item md:flex flex-col items-center p-2">{{ family_name | upper }}</summary>
-                {% for feeling in feelings %}
-                  <label class="{{ family_name | slugify }}-feelings feeling w-full">
-                      <input type="checkbox" 
-                      name="feelings" 
-                      value="{{ feeling.id }}"
-                      class="sr-only"
-                      {% if feeling.id in selected_feelings %}checked{% endif %}>
-                      {{ feeling.label }}
-                  </label>
-                {% endfor %}
+          <summary class="md:list-none list-item md:flex flex-col items-center p-2">{{ family_name | upper }}</summary>
+            {% for feeling in feelings %}
+              <label class="{{ family_name | slugify }}-feelings feeling w-full">
+                  <input type="checkbox" 
+                  name="feelings" 
+                  value="{{ feeling.id }}"
+                  class="sr-only"
+                  {% if feeling.id in selected_feelings %}checked{% endif %}>
+                  {{ feeling.label }}
+              </label>
+            {% endfor %}
         </details>
       {% endfor %}
-    </section>
-    
+    </section>  
   </form>
-
 </main>
 {% endblock content %}
 

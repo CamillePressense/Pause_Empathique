@@ -5,7 +5,7 @@
 {% block content %}
 
 <main class="h-full flex flex-col items-center">
-  <h1 class="mt-6 mb-2 text-3xl self-start ml-8">Bonjour</h1>
+  <h1 class="mt-20 mb-2 text-3xl self-start ml-8">Bonjour</h1>
   <h2 class="text-2xl self-start ml-14 mb-10">{{ user.firstname|highlight_second_letter }} !</h2>
 
   {% if user.pauses.exists %}

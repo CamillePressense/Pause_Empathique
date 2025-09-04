@@ -4,32 +4,32 @@
 {% block content %}
 
 <main class="w-min-screen p-3 flex flex-col items-center">
-    <form method="POST" class="flex flex-col space-y-2 mb-3 p-5 bg-white border border-white rounded-4xl shadow-sm md:p-10 md:w-2/3">
+    <form method="POST" class="flex flex-col mt-15 space-y-2 mb-15 p-5 bg-white border border-white rounded-4xl shadow-sm md:p-10 md:w-2/3">
         {% csrf_token %} 
         {% include 'partials/non_field_errors.html' %}
 
         {% include 'partials/field_errors.html' with field=form.title %}        
-        <h2><label for="{{ form.title.id_for_label }}" class="font-semibold text-lg">{{ form.title.label}} </label></h2>
+        <h2><label for="{{ form.title.id_for_label }}" class="form-title">{{ form.title.label}} </label></h2>
         {{ form.title | add_class:"w-full mt-2 mb-4 border-b border-gray-400 text-gray-500"}}</div>
     
     
         {% include 'partials/field_errors.html' with field=form.empty_your_bag %}        
-        <h2><label for="{{ form.empty_your_bag.id_for_label }}" class="font-semibold text-lg" >{{ form.empty_your_bag.label}} </label></h2>
+        <h2><label for="{{ form.empty_your_bag.id_for_label }}" class="form-title" >{{ form.empty_your_bag.label}} </label></h2>
         <p class="text-sm text-gray-500 text-center">La coupe est pleine, tout s'agite ? Si besoin, cet espace est pour ton chacal, lâche tout 🐺 </p>
-        {{ form.empty_your_bag | add_class:"bg-background rounded-2xl w-full resize-none"}}
+        {{ form.empty_your_bag | add_class:"bg-background rounded-2xl w-full p-2 resize-none"}}
     
         
         {% include 'partials/field_errors.html' with field=form.observation %}        
-        <h2><label for="{{ form.observation.id_for_label }}" class="font-semibold text-lg">{{ form.observation.label }}</label></h2>
+        <h2><label for="{{ form.observation.id_for_label }}" class="form-title">{{ form.observation.label }}</label></h2>
         <p class="text-sm text-gray-500 text-center">Maintenant, recule un peu et raconte ce que tu vis de manière la plus factuelle 🔭 </p>
-        {{ form.observation | add_class:"bg-background rounded-2xl w-full resize-none mb-3" }}
+        {{ form.observation | add_class:"bg-background rounded-2xl w-full p-2 resize-none mb-3" }}
     
         <input type="submit" value="Etape suivante" class="next-button"/>
 
-        <div class="flex justify-center mb-6 mt-4 gap-1">
-            <span class="bg-otherpink border-1 border-gray-500 rounded-full w-3 h-3 p-1"></span>
-            <span class="bg-white border-1 border-gray-400 rounded-full w-3 h-3 p-1"></span>
-            <span class="bg-white border-1 border-gray-400 rounded-full w-3 h-3 p-1"></span>
+        <div class="flex justify-center mb-4 mt-4 gap-1">
+            <span class="present-step-round"></span>
+            <span class="other-steps-round"></span>
+            <span class="other-steps-round"></span>
         </div>
     </form>
 </main>

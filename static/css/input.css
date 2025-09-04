@@ -23,6 +23,15 @@
     .nav-text-mobile{
         @apply flex flex-col items-center text-white text-sm
     }
+    .form-title{
+        @apply font-semibold text-lg
+    }
+    .present-step-round{
+        @apply bg-otherpink border-1 border-gray-500 rounded-full w-3 h-3 p-1
+    }
+    .other-steps-round{
+        @apply bg-white border-1 border-gray-400 rounded-full w-3 h-3 p-1
+    }
     .table-title{
         @apply bg-table-title text-header border-white border-2 p-1
     }
