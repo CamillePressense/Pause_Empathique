@@ -8,7 +8,7 @@
 
     {% csrf_token %}
 
-    <section class="md:mt-8 w-1/4 ml-4 flex flex-col items-center">
+    <section class="md:mt-8 w-1/4 ml-4 flex flex-col items-center sticky top-20 z-10 self-start">
       <h2 class="mb-6 text-2xl self-baseline">Je me sens...</h2>
       <ul class="mb-5 list-disc flex flex-col gap-3" id="list-of-items">
       </ul>
@@ -28,7 +28,7 @@
     
     <section class="flex flex-row flex-wrap justify-center w-3/4 gap-1 p-3 bg-white border border-white rounded-4xl shadow-sm md:mt-4">
       {% for family_name, feelings in grouped_feelings.items %}
-        <details class="w-50 flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2">
+        <details class="w-50 h-100 flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2 overflow-y-auto overflow-x-hidden scrollbar-thin">
               <summary class="md:list-none flex flex-col items-center p-2">{{ family_name | upper }}</summary>
                 {% for feeling in feelings %}
                   <label class="{{ family_name | slugify }}-feelings feeling ">
