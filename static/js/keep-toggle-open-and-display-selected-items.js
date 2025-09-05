@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let listOfItems = document.querySelector("#list-of-items");
 
     function isDesktop() {
-        return window.innerWidth >= 900;
+        return window.innerWidth >= 768;
     }
 
     function updateSelectedList() {
