@@ -8,7 +8,7 @@
 
     {% csrf_token %}
 
-    <section class="w-full h-70 flex flex-col items-center fixed top-12 bg-background z-10 pt-3 md:sticky md:top-20 md:self-start md:ml-4 md:mt-8 md:w-1/4 md:h-full">
+    <section class="w-full h-60 flex flex-col items-center fixed top-12 bg-background z-10 pt-3 md:sticky md:top-20 md:self-start md:ml-4 md:mt-8 md:w-1/4 md:h-full">
       <h2 class="mb-2 md:mb-6 text-2xl md:self-baseline">Je me sens...</h2>
       <ul class="w-full p-2 list-disc list-inside flex flex-col flex-wrap gap-1 overflow-auto md:flex-nowrap md:mb-5" id="list-of-items">
       </ul>
@@ -29,7 +29,7 @@
     
     <section class="flex flex-row flex-wrap justify-center mt-78 mb-15 gap-1 p-3 bg-white border border-white rounded-4xl shadow-sm md:w-3/4 md:mt-4 md:mb-2 2xl:max-w-5xl">
       {% for family_name, feelings in grouped_feelings.items %}
-        <details class="md:w-50 w-full md:h-60 flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2 overflow-y-auto overflow-x-hidden">
+        <details class="md:w-50 w-full md:h-60 flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2 overflow-y-auto overflow-x-hidden inset-shadow-sm">
           <summary class="md:list-none list-item md:flex flex-col items-center p-2">{{ family_name | upper }}</summary>
             {% for feeling in feelings %}
               <label class="{{ family_name | slugify }}-feelings feeling w-full">

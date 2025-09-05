@@ -1,36 +1,51 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
+<main>
+  <form method="post" class="flex flex-col items-center gap-4 m-6">
 
-<h2>J'ai besoin de...</h2>
+    {% csrf_token %}
 
-<form method="post">
-  {% csrf_token %}
+    <section class="w-full h-60 flex flex-col items-center fixed top-12 bg-background z-10 pt-3 md:sticky md:w-full 2xl:max-w-8xl">    
+      <h2 class="mb-2 md:mb-6 text-2xl md:self-baseline md: pl-4">J'ai besoin de...</h2>
+      <ul class="w-full p-2 pl-6 list-disc list-inside flex flex-col flex-wrap gap:2 md:gap-3 overflow-auto md:text-lg" id="list-of-items"></ul>
+      
+      {% if error_message %}
+        <p class="text-red-700" id="error-message">{{ error_message }}</p>
+      {% endif %}
+    
+      <button type="submit" class="next-button md:mb-4">Valider</button>
 
-  {% if error_message %}
-    <p style="color:red;">{{ error_message }}</p>
-  {% endif %}
+      <div class="flex mb-3 md:mb-6 mt-4 gap-1">
+          <span class="other-steps-round"></span>
+          <span class="other-steps-round"></span>
+          <span class="present-step-round"></span>
+      </div>
+    </section>
 
-  {% for family_name, needs in grouped_needs.items %}
-    <details>
-      <summary>{{ family_name }}</summary>
-        {% for need in needs %}
-          <label>
-            <input 
-            type="checkbox" 
-            name="needs" 
-            value="{{ need.id }}"
-            {% if need.id in selected_needs %}checked{% endif %}>
-            {{ need.name }}
-          </label>
-        {% endfor %}
-    </details>
-  {% endfor %}
+    <section class="flex flex-row flex-wrap justify-center mt-78 mb-15 gap-1 p-3 bg-white border border-white rounded-4xl shadow-sm md:w-full md:mt-4 md:mb-2 2xl:max-w-8xl">
+      {% for family_name, needs in grouped_needs.items %}
+        <details class="w-full md:w-80 md:h-full flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2 overflow-y-auto overflow-x-hidden inset-shadow-sm">
+          <summary class="md:list-none list-item md:flex flex-col items-center p-2">{{ family_name | upper }}</summary>
+            {% for need in needs %}
+              <label class="{{ family_name | slugify }}-needs need w-full">
+                <input 
+                type="checkbox" 
+                name="needs" 
+                value="{{ need.id }}"
+                class="sr-only"
+                {% if need.id in selected_needs %}checked{% endif %}>
+                {{ need.name }}
+              </label>
+            {% endfor %}
+        </details>
+      {% endfor %}
+    </section>
 
-  <button type="submit">Valider</button>
-
-</form>
+  </form>
+</main>
 {% endblock content %}
 
 {% block js %}

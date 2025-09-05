@@ -3,7 +3,7 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<main class="min-h-screen flex flex-col items-center justify-center mt-15 mb-18 px-2 gap-2">
+<main class="min-h-screen flex flex-col items-center justify-center mb-18 px-2 gap-2">
     <section class="flex flex-col items-center space-y-2 md:border border-gray-300 rounded-4xl md:shadow-sm md:p-10 md:w-2/3 2xl:max-w-4xl">
         <div class="flex items-center gap-2 mb-2">
             <h1 class="form-title text-xl md:text-2xl">{{ pause.title }}</h1>
@@ -49,7 +49,7 @@
         </div>
     
         <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-white p-3 text-sm"><h3 class="form-title">Créé le</h3>{{ pause.created_at|date:"l j F Y à H:i" }}</div>
-        <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-white p-3 text-sm mb-2"><h3 class="form-title">Modifié le</h3>{{ pause.updated_at|date:"l j F Y à H:i" }}</div>
+        <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-white p-3 text-sm mb-6"><h3 class="form-title">Modifié le</h3>{{ pause.updated_at|date:"l j F Y à H:i" }}</div>
         
         <div class="flex items-center gap-10 md:mt-5">
             <div class="flex justify-center gap-1 p-2 rounded-2xl shadow-sm hover:scale-105 hover:font-semibold bg-gray-300 w-32 transition-all duration-150">
