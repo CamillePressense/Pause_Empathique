@@ -4,7 +4,7 @@
 {% block content %}
 
 <main class="w-min-screen p-3 flex flex-col items-center">
-    <form method="POST" class="flex flex-col mt-15 space-y-2 mb-15 p-5 bg-white border border-white rounded-4xl shadow-sm md:p-10 md:w-2/3">
+    <form method="POST" class="flex flex-col mt-15 space-y-2 mb-15 p-5 bg-white border border-white rounded-4xl shadow-sm md:p-10 md:w-2/3 2xl:max-w-4xl">
         {% csrf_token %} 
         {% include 'partials/non_field_errors.html' %}
 

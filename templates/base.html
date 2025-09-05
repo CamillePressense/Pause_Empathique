@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
     <title>Pause Empathique</title>
 </head>
-<body class="bg-background">
+<body class="bg-background max-w-screen-2xl mx-auto">
+    
     {% include 'header.html' %}
     {% block content %} {% endblock content %}
     {% block js %} {% endblock js %}
+
 </body>
 </html>
