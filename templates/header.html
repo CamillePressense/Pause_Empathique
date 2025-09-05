@@ -14,24 +14,24 @@
   <nav class="hidden md:flex items-center space-x-7 text-white mb-0.5">
 
     <a href="" class="nav-text-desktop">
-      <img src="{% static '/icons/user-round-white.svg' %}" class="w-5 h-5">
+      <img src="{% static '/icons/user-round-white.svg' %}" class="w-4 h-4">
       Mon compte
     </a>
 
     <a href="{{ my_diary_url }}" class="nav-text-desktop {% if request.path == my_diary_url %} text-otherpink {% endif %}">
-      <img src="{% static '/icons/house-white.svg' %}" class="w-5 h-5">
+      <img src="{% static '/icons/house-white.svg' %}" class="w-4 h-4">
       Mon espace
     </a>
 
     <a href="{{ practice_url }}" class="nav-text-desktop {% if request.path == practice_url %} text-otherpink {% endif %}">
-      <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-5 h-5 ">
+      <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-4 h-4 ">
       Pratiquer
     </a>
 
     <form action="{% url 'logout' %}" method="post">
       {% csrf_token %}
       <button type="submit" class="nav-text-desktop cursor-pointer">
-        <img src="{% static '/icons/log-out-white.svg' %}" class="w-5 h-5">
+        <img src="{% static '/icons/log-out-white.svg' %}" class="w-4 h-4">
         <span>Quitter</span>
       </button>
     </form>
@@ -41,25 +41,25 @@
   <!-- Navigation mobile -->
   <nav class="md:hidden h-15 flex justify-between fixed bottom-0 left-0 right-0 text-white py-2 bg-header px-3">
     <a href="" class="nav-text-mobile">
-      <img src="{% static '/icons/user-round-white.svg' %}" class="w-5 h-5">
+      <img src="{% static '/icons/user-round-white.svg' %}" class="w-4 h-4">
       Mon compte
     </a>
     <a href="{{ my_diary_url }}" class="nav-text-mobile {% if request.path == my_diary_url %} text-otherpink {% endif %}">
-      <img src="{% static '/icons/house-white.svg' %}" class="w-5 h-5">
+      <img src="{% static '/icons/house-white.svg' %}" class="w-4 h-4">
       Mon espace
     </a>
     <a href="{{ my_diary_url }}" class="nav-text-mobile {% if request.path == my_diary_url %} text-otherpink {% endif %}">
-      <img src="{% static '/icons/book-heart-white.svg' %}" class="w-5 h-5">
+      <img src="{% static '/icons/book-heart-white.svg' %}" class="w-4 h-4">
       Mon journal
     </a>
     <a href="{{ practice_url }}" class="nav-text-mobile {% if request.path == practice_url %} text-otherpink {% endif %}">
-      <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-5 h-5">
+      <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-4 h-4">
       Pratiquer
     </a>
     <form action="{% url 'logout' %}" method="post" >
         {% csrf_token %}
         <button type="submit" class="nav-text-mobile cursor-pointer">
-          <img src="{% static '/icons/log-out-white.svg' %}" class="w-5 h-5">
+          <img src="{% static '/icons/log-out-white.svg' %}" class="w-4 h-4">
           <span class="text-sm">Quitter</span>
         </button>
     </form>
