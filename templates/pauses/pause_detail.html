@@ -3,30 +3,30 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<main class="flex flex-col items-center px-2 gap-2">
-    <div class="flex items-center mt-15 gap-2 mb-2">
+<main class="min-h-screen flex flex-col items-center justify-center mt-15 mb-18 px-2 gap-2">
+    <div class="flex items-center gap-2 mb-2">
         <h1 class="form-title text-xl">{{ pause.title }}</h1>
         <img src="{% static '/icons/diary-background-free.png' %}" class="w-8 h-12">
     </div>
 
     {% if pause.empty_your_bag %}
-    <div class="border-2 border-gray-400">
-        <h3 class="">Vide ton sac 🐺</h3>
+    <div class="border-white w-full rounded-2xl shadow-sm bg-white p-3">
+        <h3 class="form-title">Vide ton sac 🐺</h3>
         <p class="text-justify">{{ pause.empty_your_bag }}</p>
     </div>
     {% endif %}
 
     <div class="border-white w-full rounded-2xl shadow-sm bg-white p-3">
-        <h3 class="form-title">Observation</h3>
+        <h3 class="form-title">Observation 🔭</h3>
         <p class="text-justify">{{ pause.observation }}</p>
     </div>
 
     <div class="border-white w-full rounded-2xl shadow-sm bg-white p-3">
-        <h3 class="form-title text-left">Sentiments</h3>
+        <h3 class="form-title text-left">Sentiments 🦒</h3>
             {% if pause.feelings_with_labels %}
-                <ul class="list-disc list-inside text-center">
+                <ul class="list-disc list-outside pl-20 flex flex-col items-start">
                 {% for feeling in pause.feelings_with_labels %}
-                    <li>{{ feeling }}</li>
+                    <li class="">{{ feeling }}</li>
                 {% endfor %}
                 </ul>
             {% else %}
@@ -37,7 +37,7 @@
     <div class="border-white w-full rounded-2xl shadow-sm bg-white p-3">
         <h3 class="form-title text-left">Besoins</h3>
             {% if pause.needs %}
-                <ul class="list-disc list-inside ">
+                <ul class="list-disc list-outside pl-20 flex flex-col items-start">
                 {% for need in pause.needs.all %}
                     <li>{{ need.name }}</li>
                 {% endfor %}
@@ -47,11 +47,11 @@
             {% endif %}
     </div>
 
-    <div class="flex justify-between border-white w-full rounded-2xl shadow-sm bg-white p-3"><h3 class="form-title">Créé le</h3>{{ pause.created_at|date:"l j F Y à H:i" }}</div>
-    <div class="flex justify-between border-white w-full rounded-2xl shadow-sm bg-white p-3 mb-2"><h3 class="form-title">Modifié le</h3>{{ pause.updated_at|date:"l j F Y à H:i" }}</div>
+    <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-white p-3 text-sm"><h3 class="form-title">Créé le</h3>{{ pause.created_at|date:"l j F Y à H:i" }}</div>
+    <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-white p-3 text-sm mb-2"><h3 class="form-title">Modifié le</h3>{{ pause.updated_at|date:"l j F Y à H:i" }}</div>
     
-    <div class="flex items-center gap-20">
-        <div class="flex gap-1 p-2 rounded-2xl">
+    <div class="flex items-center gap-10">
+        <div class="flex justify-center gap-1 p-2 rounded-2xl bg-gray-300 w-32">
             <a href="{% url 'update_pause' pause.id %}" class="cursor-pointer hover:scale-105">Modifier</a>
             <img src="{% static '/icons/square-pen-header.svg' %}" class="w-6 h-6 cursor-pointer hover:scale-105"> 
         </div>
@@ -60,7 +60,7 @@
             action="{% url 'delete_pause' pause.id %}" 
             method="post" 
             onsubmit="return confirm('Es-tu sûr.e de vouloir supprimer cette pause? C\'est irréversible.')"
-            class="flex items-center gap-1 bg-otherpink p-2 rounded-2xl hover:scale-105 hover:font-semibold">                   
+            class="flex items-center justify-center gap-1 bg-otherpink p-2 rounded-2xl w-32 hover:scale-105 hover:font-semibold">                   
                 {% csrf_token %}
             <button type="submit"class="cursor-pointer">Supprimer</button>
             <img src="{% static '/icons/trash-2-black.svg' %}" class="w-6 h-6 cursor-pointer hover:scale-105">
