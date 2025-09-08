@@ -1,5 +1,6 @@
 {% load static %} 
 {% load text_color_filters %}
+{% load navigation_tags %}
 {% block header %}
 
 <header class="bg-header fixed top-0 left-0 right-0 h-12 shadow-sm">
@@ -8,6 +9,7 @@
     {% url 'diary' as my_diary_url %}
     {% url 'observation' as practice_url %}
     {% url 'dashboard' as my_dashboard_url %}
+    {% is_practice_section as is_practice_active %}
 
     <h3 class="md:hidden flex-1 text-2l self-center text-center text-white">❤️ Observer, Ressentir, Comprendre, Agir</h3>
 
@@ -22,12 +24,14 @@
         </a>
 
         <a href="{{ my_dashboard_url }}" class="nav-text-desktop {% if request.path == my_dashboard_url %} text-otherpink {% endif %}">
-          <img src="{% static '/icons/house-white.svg' %}" class="w-4 h-4">
+          <img src="{% static '/icons/house-otherpink.svg' %}" class="w-4 h-4 hidden {% if request.path == my_dashboard_url %} inline {% endif %}">
+          <img src="{% static '/icons/house-white.svg' %}" class="w-4 h-4 {% if request.path == my_dashboard_url %} hidden {% endif %}">
           Mon espace
         </a>
 
-        <a href="{{ practice_url }}" class="nav-text-desktop {% if request.path == practice_url %} text-otherpink {% endif %}">
-          <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-4 h-4 ">
+        <a href="{{ practice_url }}" class="nav-text-desktop {% if is_practice_active %} text-otherpink {% endif %}">
+          <img src="{% static '/icons/heart-plus-otherpink.svg' %}" class="w-4 h-4 hidden {% if is_practice_active %} inline {% endif %}">
+          <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-4 h-4 {% if is_practice_active %} hidden {% endif %}">
           Pratiquer
         </a>
 
@@ -49,17 +53,20 @@
       </a>
       
       <a href="{{ my_dashboard_url }}" class="nav-text-mobile {% if request.path == my_dashboard_url %} text-otherpink {% endif %}">
-        <img src="{% static '/icons/house-white.svg' %}" class="w-4 h-4">
+        <img src="{% static '/icons/house-otherpink.svg' %}" class="w-4 h-4 hidden {% if request.path == my_dashboard_url %} inline {% endif %}">
+        <img src="{% static '/icons/house-white.svg' %}" class="w-4 h-4 {% if request.path == my_dashboard_url %} hidden {% endif %}">
         Mon espace
       </a>
       
       <a href="{{ my_diary_url }}" class="nav-text-mobile {% if request.path == my_diary_url %} text-otherpink {% endif %}">
-        <img src="{% static '/icons/book-heart-white.svg' %}" class="w-4 h-4">
+        <img src="{% static '/icons/book-heart-otherpink.svg' %}" class="w-4 h-4 hidden {% if request.path == my_diary_url %} inline {% endif %}">
+        <img src="{% static '/icons/book-heart-white.svg' %}" class="w-4 h-4 {% if request.path == my_diary_url %} hidden {% endif %}">
         Mon journal
       </a>
       
-      <a href="{{ practice_url }}" class="nav-text-mobile {% if request.path == practice_url %} text-otherpink {% endif %}">
-        <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-4 h-4">
+      <a href="{{ practice_url }}" class="nav-text-mobile {% if is_practice_active %} text-otherpink {% endif %}">
+        <img src="{% static '/icons/heart-plus-otherpink.svg' %}" class="w-4 h-4 hidden {% if is_practice_active %} inline {% endif %}">
+        <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-4 h-4 {% if is_practice_active %} hidden {% endif %}">
         Pratiquer
       </a>
       

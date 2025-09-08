@@ -229,7 +229,6 @@ class PauseNeedCreateView(LoginRequiredMixin, View):
             return redirect('diary')
         else: 
             return redirect('dashboard')
-
           
 class PauseNeedUpdateView(LoginRequiredMixin, View): 
     template_name = "pauses/needs.html"

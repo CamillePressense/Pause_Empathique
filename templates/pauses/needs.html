@@ -27,7 +27,7 @@
 
     <section class="flex flex-row flex-wrap justify-center mt-78 mb-15 gap-1 p-3 bg-white border border-white rounded-4xl shadow-sm md:w-full md:mt-4 md:mb-2 2xl:max-w-8xl">
       {% for family_name, needs in grouped_needs.items %}
-        <details class="w-full md:w-80 md:h-full flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2 overflow-y-auto overflow-x-hidden inset-shadow-sm">
+        <details class="w-full md:w-80 md:h-75 flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2 overflow-y-auto overflow-x-hidden md:my-3">
           <summary class="md:list-none list-item md:flex flex-col items-center p-2">{{ family_name | upper }}</summary>
             {% for need in needs %}
               <label class="{{ family_name | slugify }}-needs need w-full">

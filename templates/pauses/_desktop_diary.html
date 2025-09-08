@@ -1,6 +1,6 @@
 {% load static %}
 <!-- version desktop -->
-<section class="hidden space-y-2 mt-25 m-6 p-4 md:flex flex-col bg-white border border-white rounded-4xl shadow-sm md:w-full">
+<section class="hidden space-y-2 mt-25 m-6 p-4 md:flex flex-col bg-white border border-white rounded-4xl shadow-sm md:w-full overflow-x-auto">
     <div class="flex items-center mt-2 gap-2 mb-4">
         <img src="{% static '/icons/chevron-right-black.svg' %}" class="w-6 h-6">
         <h1 class="text-2xl">Mon journal</h1>
@@ -18,13 +18,12 @@
     {% if not pauses %}
         <p class="self-center italic">Aucune pause enregistrée pour le moment.</p>
     {% else %} 
-    
         <table class="table-fixed border-2 border-white">
             <thead>
                 <tr>
                     <th id="Titre de la pause" class="table-title">Titre</th> 
                     <th id="Date de la dernière modification" class="table-title">Date</th>
-                    <th id="Contenu étape vide ton sac" class="table-title ">Vide ton sac</th>
+                    <th id="Contenu étape vide ton sac" class="table-title">Vide ton sac</th>
                     <th id="Contenu étape Observation" class="table-title ">Observation</th>
                     <th id="Contenu étape Sentiments" class="table-title">Sentiments</th>
                     <th id="Contenu étape Besoins" class="table-title ">Besoins</th>
@@ -91,19 +90,20 @@
                     <img src="{% static '/icons/chevron-left-black.svg' %}" class="icons-pagination">
                     </a>
                 {% endif %}
-            <span class="current mx-3">
+                <span class="current mx-3">
                 Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
-            </span>
-            {% if page_obj.has_next %}
+                </span>
+
+                {% if page_obj.has_next %}
                 <a href="?page={{ page_obj.next_page_number }}">
                     <img src="{% static '/icons/chevron-right-black.svg' %}" class="icons-pagination">
                 </a>
                 <a href="?page={{ page_obj.paginator.num_pages }}">
                     <img src="{% static '/icons/chevron-last-black.svg' %}" class="icons-pagination">
                 </a>
-            {% endif %}
+                {% endif %}
             </div>
-        {% endif %}
         </div>
+        {% endif %}
     {% endif %}
 </section>

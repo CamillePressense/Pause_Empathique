@@ -61,46 +61,46 @@
 @layer utilities{
     /* Feelings */
     .affection{
-        @apply bg-rose-200
+        @apply bg-[#F0D3DD]
     }
     .affection-feelings{
-        @apply bg-rose-300 
+        @apply bg-[#D585A1] 
     }
     .serenite{
-        @apply bg-teal-200
+        @apply bg-[#d3e6f0]
     }
     .serenite-feelings{
-        @apply bg-teal-300
+        @apply bg-[#85B9D5]
     }
     .joie{
-        @apply bg-yellow-200
+        @apply bg-[#FCEAA2]
     }
     .joie-feelings{
-        @apply bg-yellow-300
+        @apply bg-[#F9D134]
     }
     .interet{
-        @apply bg-purple-200
+        @apply bg-[#F4E6FE]
     }
     .interet-feelings{
-        @apply bg-purple-300
+        @apply bg-[#E0BAFD]
     }
     .energie{
-        @apply bg-orange-200
+        @apply bg-[#FCDABB]
     }
     .energie-feelings{
-        @apply bg-orange-300
+        @apply bg-[#F7A85E]
     }
     .peur{
-        @apply bg-indigo-200
+        @apply bg-[#CDEAD9]
     }
     .peur-feelings{
-        @apply bg-indigo-300
+        @apply bg-[#98D4B2]
     }
     .colere{
-        @apply bg-red-200
+        @apply bg-[#FDC3BA]
     }
     .colere-feelings{
-        @apply bg-red-300
+        @apply bg-[#F97662]
     }
     .tristesse{
         @apply bg-slate-200
@@ -109,70 +109,70 @@
         @apply bg-slate-300
     }
     .confusion{
-        @apply bg-stone-200
+        @apply bg-[#E1F0D3]
     }
     .confusion-feelings{
-        @apply bg-stone-300
+        @apply bg-[#95CA63]
     }
     .fatigue{
-        @apply bg-gray-200
+        @apply bg-[#F0DDD3]
     }
     .fatigue-feelings{
-        @apply bg-gray-300
+        @apply bg-[#D5A185]
     }
     .sideration{
-        @apply bg-slate-200
+        @apply bg-[#D3D8F0]
     }
     .sideration-feelings{
-        @apply bg-slate-300
+        @apply bg-[#8593D5]
     }
     .tension{
-        @apply bg-lime-200
+        @apply bg-[#FFF594]
     }
     .tension-feelings{
-        @apply bg-lime-300
+        @apply bg-[#FFEA2E]
     }
     /* Needs */
     .survie{
-        @apply bg-rose-200
+        @apply bg-[#E8EBFF]
     }
     .survie-needs{
-        @apply bg-rose-300 
+        @apply bg-[#D2D5E4]
     }
     .integrite{
-        @apply bg-teal-200
+        @apply bg-[#FFF0E8]
     }
     .integrite-needs{
-        @apply bg-teal-300
+        @apply bg-[#E4D9D2]
     }
     .realisation{
-        @apply bg-yellow-200
+        @apply bg-[#FFFCE8]
     }
     .realisation-needs{
-        @apply bg-yellow-300
+        @apply bg-[#E4E2D2]
     }
     .harmonie{
-        @apply bg-purple-200
+        @apply bg-[#FBE8FF]
     }
     .harmonie-needs{
-        @apply bg-purple-300
+        @apply bg-[#E1D2E4]
     }
     .relation{
-        @apply bg-orange-200
+        @apply bg-[#EBF7F9]
     }
     .relation-needs{
-        @apply bg-orange-300
+        @apply bg-[#D5DEE0]
     }
     .cooperation{
-        @apply bg-indigo-200
+        @apply bg-[#DFFFD6]
     }
     .cooperation-needs{
-        @apply bg-indigo-300
+        @apply bg-[#CBE4C4]
     }
     .celebration{
-        @apply bg-red-200
+        @apply bg-[#FFE8EB]
     }
     .celebration-needs{
-        @apply bg-red-300
+        @apply bg-[#E4D2D5]
     }
 }
