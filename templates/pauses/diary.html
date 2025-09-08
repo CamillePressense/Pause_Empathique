@@ -2,181 +2,79 @@
 {% load static %}
 {% block content %}
 <main>
-    <!-- version desktop -->
-    <!-- attention soit virer les largeurs de colonne soit virer flex col -->
-    <section class="hidden space-y-2 mt-20 m-6 p-4 md:flex flex-col bg-white border border-white rounded-4xl shadow-sm">
-        <div class="flex items-center mt-2 gap-2 mb-4">
-            <img src="{% static '/icons/chevron-right-black.svg' %}" class="w-6 h-6">
-            <h1 class="text-2xl">Mon journal</h1>
-            <img src="{% static '/icons/diary-background-free.png' %}" class="w-8 h-12">
-        </div>
-        
-        {% if messages %}
-            <ul>
-            {% for message in messages %}
-                <li class="{{ message.tags }}">{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-        
-        <table class="table-fixed border-2 border-white">
-            <thead>
-                <tr>
-                    <th id="Titre de la pause" class="table-title w-40">Titre</th> 
-                    <th id="Date de la dernière modification" class="table-title w-40">Date</th>
-                    <th id="Contenu étape vide ton sac" class="table-title w-60">Vide ton sac</th>
-                    <th id="Contenu étape Observation" class="table-title w-60">Observation</th>
-                    <th id="Contenu étape Sentiments" class="table-title w-40">Sentiments</th>
-                    <th id="Contenu étape Besoins" class="table-title w-40">Besoins</th>
-                    <th id="Modifier la pause" class="table-title w-30">Modifier</th>
-                    <th id="Supprimer la pause" class="bg-otherpink border-white border-2 w-28">Supprimer</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for pause in pauses %}
-                <tr>
-                    <td headers="Titre de la pause" class="table-cell hover:bg-gray-50"><a href="{% url 'pause_details' pause.id %}">{{ pause.title }}</td>
-                    <td headers="Date de création de la pause" class="table-cell">{{ pause.updated_at|date:"d/m/Y H:i" }}</td>
-                    <td headers="Contenu étape vide ton sac" class="table-cell">{{ pause.empty_your_bag|truncatewords:10 }}</td>
-                    <td headers="Contenu étape Observation" class="table-cell">"{{ pause.observation|truncatewords:10 }}"</td>
-                    <td headers="Contenu étape Sentiments" class="table-cell">
-                        <ul>
-                            {% for feeling in pause.feelings_with_labels|slice:":3" %}
-                                <li>{{ feeling }}</li>
-                            {% endfor %}
-                            {% if pause.feelings_with_labels|length > 3 %}
-                            ...
-                            {% endif %}
-                        </ul>
-                    </td>
-                    <td headers="Contenu étape Besoins" class="table-cell">
-                        <ul>
-                            {% for need in pause.needs.all|slice:":3" %}
-                                <li>{{ need.name }}</li>
-                            {% endfor %}
-                            {% if pause.needs.all|length > 3 %}
-                            ...
-                            {% endif %}
-                        </ul>
-                    </td>
-                    <td headers="Modifier la pause" class="table-cell text-center">
-                        <a href="{% url 'update_pause' pause.id %}" class="inline-block">
-                          <img src="{% static '/icons/square-pen-header.svg' %}" class="w-6 h-6 cursor-pointer hover:scale-105">  
-                        </a>
-                    </td>
-                    <td headers="Supprimer la pause" class="delete-cell">
-                        <form 
-                        action="{% url 'delete_pause' pause.id %}?page={{ page_obj.number }}" 
-                        method="post" 
-                        onsubmit="return confirm('Es-tu sûr.e de vouloir supprimer cette pause? C\'est irréversible.')">                   
-                        {% csrf_token %}
-                        <button type="submit">
-                            <img src="{% static '/icons/trash-2-otherpink.svg' %}" class="w-6 h-6 cursor-pointer hover:scale-105">
-                        </button>
-                        </form></td>
-                </tr>
-                {% endfor %}
-            </tbody>       
-        </table>
-        
-        <div class="pagination flex justify-center">
-            <div class="step-links flex items-center">
-                {% if page_obj.has_previous %}
-                    <a href="?page=1">
-                      <img src="{% static '/icons/chevron-first-black.svg' %}" class="icons-pagination">  
-                    </a>
-                    <a href="?page={{ page_obj.previous_page_number }}">
-                        <img src="{% static '/icons/chevron-left-black.svg' %}" class="icons-pagination">
-                    </a>
-                {% endif %}
-        
-                <span class="current mx-3">
-                    Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
-                </span>
-        
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">
-                        <img src="{% static '/icons/chevron-right-black.svg' %}" class="icons-pagination">
-                    </a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">
-                        <img src="{% static '/icons/chevron-last-black.svg' %}" class="icons-pagination">
-                    </a>
-                {% endif %}
-            </div>
-        </div>
-    </section>
-
+    {% include 'pauses/_desktop_diary.html' %}
+    
     <!-- version mobile -->
-     <section class="mt-15 mb-15 p-2 flex flex-col md:hidden">
+    <section class="mt-15 mb-15 p-2 flex flex-col md:hidden">
         <div class="flex self-center items-center gap-2 mb-4">
             <h1 class="text-2xl">Mon journal</h1>
             <img src="{% static '/icons/diary-background-free.png' %}" class="w-8 h-12">
         </div>
-
+        
         {% for pause in pauses %}
             <details class="flex flex-col items-center space-y-2 p-4 mb-3 bg-white border border-white rounded-4xl shadow-sm">
                 <summary class="cursor-pointer form-title">{{ pause.title }}</summary>
-        
-                {% if pause.empty_your_bag %}
+                    
+                    {% if pause.empty_your_bag %}
                     <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
                         <h3 class="form-title">Vide ton sac 🐺</h3>
-                        <p class="text-justify">{{ pause.empty_your_bag }}</p>
+                            <p class="text-justify">{{ pause.empty_your_bag }}</p>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
+                            <h3 class="form-title" >Observation 🔭</h3>
+                        <p class="text-justify">{{ pause.observation }}</p>
                     </div>
-                {% endif %}
-        
-                <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
-                    <h3 class="form-title" >Observation 🔭</h3>
-                    <p class="text-justify">{{ pause.observation }}</p>
-                </div>
-        
-                <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
-                    <h3 class="form-title text-left">Sentiments 🦒</h3>
+                    
+                    <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
+                        <h3 class="form-title text-left">Sentiments 🦒</h3>
                         {% if pause.feelings_with_labels %}
                             <ul class="list-disc list-outside pl-20 flex flex-col items-start">
-                            {% for feeling in pause.feelings_with_labels %}
-                                <li>{{ feeling }}</li>
-                            {% endfor %}
+                                {% for feeling in pause.feelings_with_labels %}
+                                    <li>{{ feeling }}</li>
+                                {% endfor %}
                             </ul>
-                        {% else %}
-                            <p class="text-center">Aucun sentiment enregistré pour cette pause empathique.</p>
+                            {% else %}
+                                <p class="text-center">Aucun sentiment enregistré pour cette pause empathique.</p>
                         {% endif %}
-                </div>
-        
-                <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
-                    <h3 class="form-title text-left">Besoins</h3>
+                    </div>
+                        
+                    <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
+                        <h3 class="form-title text-left">Besoins</h3>
                         {% if pause.needs %}
-                            <ul class="list-disc list-outside pl-20 flex flex-col items-start">
+                        <ul class="list-disc list-outside pl-20 flex flex-col items-start">
                             {% for need in pause.needs.all %}
-                                <li>{{ need.name }}</li>
+                            <li>{{ need.name }}</li>
                             {% endfor %}
                             </ul>
                         {% else %}
                             Aucun besoin enregistré pour cette pause empathique.
                         {% endif %}
-                </div>
-
-                <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-background p-3 text-sm"><h3 class="form-title text-sm md:text-lg">Créé le</h3>{{ pause.created_at|date:"l j F Y à H:i" }}</div>
-                <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-background  p-3 text-sm mb-6"><h3 class="form-title text-sm md:text-lg">Modifié le</h3>{{ pause.updated_at|date:"l j F Y à H:i" }}</div>
-         
-                <div class="flex justify-center gap-2">
-                    <div class="flex justify-center gap-1 p-2 rounded-2xl shadow-sm hover:scale-105 hover:font-semibold bg-gray-300 w-32 transition-all duration-150">
-                        <a href="{% url 'update_pause' pause.id %}" class="cursor-pointer">Modifier</a>
-                        <img src="{% static '/icons/square-pen-header.svg' %}" class="w-6 h-6 cursor-pointer"> 
                     </div>
+                        
+                    <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-background p-3 text-sm"><h3 class="form-title text-sm md:text-lg">Créé le</h3>{{ pause.created_at|date:"l j F Y à H:i" }}</div>
+                    <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-background  p-3 text-sm mb-6"><h3 class="form-title text-sm md:text-lg">Modifié le</h3>{{ pause.updated_at|date:"l j F Y à H:i" }}</div>
         
-                    <form 
+                    <div class="flex justify-center gap-2">
+                        <div class="flex justify-center gap-1 p-2 rounded-2xl shadow-sm hover:scale-105 hover:font-semibold bg-gray-300 w-32 transition-all duration-150">
+                            <a href="{% url 'update_pause' pause.id %}" class="cursor-pointer">Modifier</a>
+                            <img src="{% static '/icons/square-pen-header.svg' %}" class="w-6 h-6 cursor-pointer"> 
+                        </div>
+                        
+                        <form 
                         action="{% url 'delete_pause' pause.id %}" 
                         method="post" 
                         onsubmit="return confirm('Es-tu sûr.e de vouloir supprimer cette pause? C\'est irréversible.')"
                         class="flex items-center justify-center gap-1 bg-otherpink shadow-sm p-2 rounded-2xl w-32 hover:scale-105 hover:font-semibold transition-all duration-150">                   
-                            {% csrf_token %}
-                        <button type="submit"class="cursor-pointer">Supprimer</button>
-                        <img src="{% static '/icons/trash-2-black.svg' %}" class="w-6 h-6 cursor-pointer">
-                    </form>
-                </div>    
+                        {% csrf_token %}
+                            <button type="submit"class="cursor-pointer">Supprimer</button>
+                            <img src="{% static '/icons/trash-2-black.svg' %}" class="w-6 h-6 cursor-pointer">
+                        </form>
+                    </div>    
             </details> 
         {% endfor %}    
-     </section>
+    </section>
 </main>
 
-{% endblock content %}
+{% endblock content %} 
