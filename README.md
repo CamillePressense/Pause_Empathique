@@ -6,6 +6,8 @@
 Une application web qui permet de pratiquer l'auto-empathie de façon guidée, inspirée par la Communication Non Violente (CNV).
 C'est un outil accessible et gratuit, pour affiner son discernement et apprendre à accueillir ses émotions. 
 
+<img width="1252" height="735" alt="image" src="https://github.com/user-attachments/assets/4a22eb61-016d-4037-ae32-7033543c203e" />
+
 
 ## ✨ Fonctionnalités
 
