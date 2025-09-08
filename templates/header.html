@@ -7,6 +7,7 @@
   <div class="flex justify-between items-end h-full md:px-6 lg:px-8 max-w-screen-2xl mx-auto">
     {% url 'diary' as my_diary_url %}
     {% url 'observation' as practice_url %}
+    {% url 'dashboard' as my_dashboard_url %}
 
     <h3 class="md:hidden flex-1 text-2l self-center text-center text-white">❤️ Observer, Ressentir, Comprendre, Agir</h3>
 
@@ -47,7 +48,7 @@
         Mon compte
       </a>
       
-      <a href="{{ my_diary_url }}" class="nav-text-mobile {% if request.path == my_diary_url %} text-otherpink {% endif %}">
+      <a href="{{ my_dashboard_url }}" class="nav-text-mobile {% if request.path == my_dashboard_url %} text-otherpink {% endif %}">
         <img src="{% static '/icons/house-white.svg' %}" class="w-4 h-4">
         Mon espace
       </a>
@@ -72,7 +73,7 @@
     </nav>
 
     {% else %}
-      <h1 class="hidden md:block text-3xl text-white self-center">Pause E<span class="text-otherpink">m</span>pathique</h1>
+      <h1 class="hidden md:block text-3xl text-white self-center">Pause {{"Empathique"|highlight_second_letter }}</h1>
       <h3 class="hidden md:block text-l text-white">Observer, Ressentir, Comprendre, Agir</h3>  
     {% endif %}
   </div>
