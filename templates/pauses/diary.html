@@ -10,70 +10,73 @@
             <h1 class="text-2xl">Mon journal</h1>
             <img src="{% static '/icons/diary-background-free.png' %}" class="w-8 h-12">
         </div>
-        
-        {% for pause in pauses %}
-            <details class="flex flex-col items-center space-y-2 p-4 mb-3 bg-white border border-white rounded-4xl shadow-sm">
-                <summary class="cursor-pointer form-title">{{ pause.title }}</summary>
-                    
-                    {% if pause.empty_your_bag %}
-                    <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
-                        <h3 class="form-title">Vide ton sac 🐺</h3>
-                            <p class="text-justify">{{ pause.empty_your_bag }}</p>
+        {% if not pauses %}
+            <p>Aucune pause enregistrée pour le moment.</p>
+        {% else %}    
+            {% for pause in pauses %}
+                <details class="flex flex-col items-center space-y-2 p-4 mb-3 bg-white border border-white rounded-4xl shadow-sm">
+                    <summary class="cursor-pointer form-title">{{ pause.title }}</summary>
+                        
+                        {% if pause.empty_your_bag %}
+                        <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
+                            <h3 class="form-title">Vide ton sac 🐺</h3>
+                                <p class="text-justify">{{ pause.empty_your_bag }}</p>
+                            </div>
+                            {% endif %}
+                            
+                            <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
+                                <h3 class="form-title" >Observation 🔭</h3>
+                            <p class="text-justify">{{ pause.observation }}</p>
                         </div>
-                        {% endif %}
                         
                         <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
-                            <h3 class="form-title" >Observation 🔭</h3>
-                        <p class="text-justify">{{ pause.observation }}</p>
-                    </div>
-                    
-                    <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
-                        <h3 class="form-title text-left">Sentiments 🦒</h3>
-                        {% if pause.feelings_with_labels %}
-                            <ul class="list-disc list-outside pl-20 flex flex-col items-start">
-                                {% for feeling in pause.feelings_with_labels %}
-                                    <li>{{ feeling }}</li>
-                                {% endfor %}
-                            </ul>
-                            {% else %}
-                                <p class="text-center">Aucun sentiment enregistré pour cette pause empathique.</p>
-                        {% endif %}
-                    </div>
-                        
-                    <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
-                        <h3 class="form-title text-left">Besoins</h3>
-                        {% if pause.needs %}
-                        <ul class="list-disc list-outside pl-20 flex flex-col items-start">
-                            {% for need in pause.needs.all %}
-                            <li>{{ need.name }}</li>
-                            {% endfor %}
-                            </ul>
-                        {% else %}
-                            Aucun besoin enregistré pour cette pause empathique.
-                        {% endif %}
-                    </div>
-                        
-                    <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-background p-3 text-sm"><h3 class="form-title text-sm md:text-lg">Créé le</h3>{{ pause.created_at|date:"l j F Y à H:i" }}</div>
-                    <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-background  p-3 text-sm mb-6"><h3 class="form-title text-sm md:text-lg">Modifié le</h3>{{ pause.updated_at|date:"l j F Y à H:i" }}</div>
-        
-                    <div class="flex justify-center gap-2">
-                        <div class="flex justify-center gap-1 p-2 rounded-2xl shadow-sm hover:scale-105 hover:font-semibold bg-gray-300 w-32 transition-all duration-150">
-                            <a href="{% url 'update_pause' pause.id %}" class="cursor-pointer">Modifier</a>
-                            <img src="{% static '/icons/square-pen-header.svg' %}" class="w-6 h-6 cursor-pointer"> 
+                            <h3 class="form-title text-left">Sentiments 🦒</h3>
+                            {% if pause.feelings_with_labels %}
+                                <ul class="list-disc list-outside pl-20 flex flex-col items-start">
+                                    {% for feeling in pause.feelings_with_labels %}
+                                        <li>{{ feeling }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% else %}
+                                    <p class="text-center">Aucun sentiment enregistré pour cette pause empathique.</p>
+                            {% endif %}
                         </div>
-                        
-                        <form 
-                        action="{% url 'delete_pause' pause.id %}" 
-                        method="post" 
-                        onsubmit="return confirm('Es-tu sûr.e de vouloir supprimer cette pause? C\'est irréversible.')"
-                        class="flex items-center justify-center gap-1 bg-otherpink shadow-sm p-2 rounded-2xl w-32 hover:scale-105 hover:font-semibold transition-all duration-150">                   
-                        {% csrf_token %}
-                            <button type="submit"class="cursor-pointer">Supprimer</button>
-                            <img src="{% static '/icons/trash-2-black.svg' %}" class="w-6 h-6 cursor-pointer">
-                        </form>
-                    </div>    
-            </details> 
-        {% endfor %}    
+                            
+                        <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
+                            <h3 class="form-title text-left">Besoins</h3>
+                            {% if pause.needs %}
+                            <ul class="list-disc list-outside pl-20 flex flex-col items-start">
+                                {% for need in pause.needs.all %}
+                                <li>{{ need.name }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% else %}
+                                Aucun besoin enregistré pour cette pause empathique.
+                            {% endif %}
+                        </div>
+                            
+                        <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-background p-3 text-sm"><h3 class="form-title text-sm md:text-lg">Créé le</h3>{{ pause.created_at|date:"l j F Y à H:i" }}</div>
+                        <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-background  p-3 text-sm mb-6"><h3 class="form-title text-sm md:text-lg">Modifié le</h3>{{ pause.updated_at|date:"l j F Y à H:i" }}</div>
+            
+                        <div class="flex justify-center gap-2">
+                            <div class="flex justify-center gap-1 p-2 rounded-2xl shadow-sm hover:scale-105 hover:font-semibold bg-gray-300 w-32 transition-all duration-150">
+                                <a href="{% url 'update_pause' pause.id %}" class="cursor-pointer">Modifier</a>
+                                <img src="{% static '/icons/square-pen-header.svg' %}" class="w-6 h-6 cursor-pointer"> 
+                            </div>
+                            
+                            <form 
+                            action="{% url 'delete_pause' pause.id %}" 
+                            method="post" 
+                            onsubmit="return confirm('Es-tu sûr.e de vouloir supprimer cette pause? C\'est irréversible.')"
+                            class="flex items-center justify-center gap-1 bg-otherpink shadow-sm p-2 rounded-2xl w-32 hover:scale-105 hover:font-semibold transition-all duration-150">                   
+                            {% csrf_token %}
+                                <button type="submit"class="cursor-pointer">Supprimer</button>
+                                <img src="{% static '/icons/trash-2-black.svg' %}" class="w-6 h-6 cursor-pointer">
+                            </form>
+                        </div>    
+                </details> 
+            {% endfor %}
+        {% endif %}    
     </section>
 </main>
 
