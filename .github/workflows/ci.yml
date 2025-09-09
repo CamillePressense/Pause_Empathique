@@ -12,7 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
+      
+      - name: Copy CI env file
+        run: cp .env.ci .env
+        
       - name: Build Docker image for web
         run: docker compose -p pause_empathique-local build --pull web
 
