@@ -17,7 +17,7 @@ jobs:
         run: docker compose build --pull web
 
       - name: Run Black formatting check
-        run: docker compose run --rm --no-deps web poetry run black --check --diff .
+        run: docker compose -p pause_empathique-local run --rm --no-deps web poetry run black --check --diff .
 
   test:
     name: Django Tests
