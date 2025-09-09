@@ -20,8 +20,8 @@ jobs:
         run: docker compose -p pause_empathique-local build --pull web
 
       - name: Run Black formatting check
-        run: docker compose -p pause_empathique-local run --rm --no-deps web poetry run black --check --diff .
-
+        run: docker compose -p pause_empathique-local run --rm --no-deps --entrypoint="" web poetry run black --check --diff .
+ 
   test:
     name: Django Tests
     runs-on: ubuntu-latest
@@ -36,9 +36,9 @@ jobs:
 
       - name: Start and wait for database
         run: docker compose -p pause_empathique-local up -d --wait db
-
+        
       - name: Run Django tests
-        run: docker compose -p pause_empathique-local run --rm web poetry run python manage.py test
+        run: docker compose -p pause_empathique-local run --rm --entrypoint="" web poetry run python manage.py test
 
       - name: Cleanup
         if: always()
