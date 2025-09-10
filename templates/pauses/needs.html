@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load widget_tweaks %}
+{% load text_color_filters %}
 
 {% block content %}
-<main>
-  <form method="post" class="flex flex-col items-center gap-4 m-6">
+<main class="min-h-screen flex items-center justify-center">
+  <form method="post" class="flex flex-col items-center gap-4 m-6 md:flex-row md:pt-8">
 
     {% csrf_token %}
 
-    <section class="w-full h-60 flex flex-col items-center fixed top-12 bg-background z-10 pt-3 md:sticky md:w-full 2xl:max-w-8xl">    
-      <h2 class="mb-2 md:mb-6 text-2xl md:self-baseline md: pl-4">J'ai besoin de...</h2>
-      <ul class="w-full p-2 pl-6 list-disc list-inside flex flex-col flex-wrap gap:2 md:gap-3 overflow-auto md:text-lg md:w-2/3" id="list-of-items"></ul>
+    <section class="w-full h-60 flex flex-col items-center fixed top-12 bg-background z-10 pt-3 md:sticky md:top-20 md:self-start md:ml-4 md:mt-8 md:w-1/4 md:h-full">    
+      <h2 class="mb-2 md:mb-6 text-2xl md:self-baseline">J'ai besoin de...</h2>
+      <ul class="w-full p-2 list-disc list-inside flex flex-col flex-wrap gap-1 overflow-auto md:flex-nowrap md:mb-5" id="list-of-items"></ul>
       
       {% if error_message %}
         <p class="text-red-700" id="error-message">{{ error_message }}</p>
@@ -25,12 +26,12 @@
       </div>
     </section>
 
-    <section class="flex flex-row flex-wrap justify-center mt-78 mb-15 gap-1 p-3 bg-white border border-white rounded-4xl shadow-sm md:w-full md:mt-4 md:mb-2 2xl:max-w-8xl">
+    <section class="flex flex-row flex-wrap justify-center mt-78 mb-15 gap-1 p-3 bg-white border border-white rounded-4xl shadow-sm md:w-3/4 md:mt-4 md:mb-2 2xl:max-w-6xl">
       {% for family_name, needs in grouped_needs.items %}
-        <details class="w-full md:w-80 md:h-75 flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2 overflow-y-auto overflow-x-hidden md:my-3">
-          <summary class="md:list-none list-item md:flex flex-col items-center p-2">{{ family_name | upper }}</summary>
+        <details class="{{ family_name | slugify }} bg-background w-full flex flex-col items-center  rounded-2xl p-2 overflow-y-auto overflow-x-hidden inset-shadow-sm md:h-60 md:w-50 md:hover:scale-102 2xl:h-70">
+          <summary class="md:list-none list-item md:flex md:flex-col md:items-center p-2"><span class="flex">{{ family_name | upper | highlight_second_letter }}</span></summary>
             {% for need in needs %}
-              <label class="{{ family_name | slugify }}-needs need w-full">
+              <label class="{{ family_name | slugify }}-needs need w-full md:hidden">
                 <input 
                 type="checkbox" 
                 name="needs" 

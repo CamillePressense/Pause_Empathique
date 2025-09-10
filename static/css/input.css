@@ -48,13 +48,13 @@
         @apply flex flex-col items-center p-2 cursor-pointer w-44 gap-5 hover:font-semibold rounded-sm my-1
     }
     .feeling:has(input:checked){
-        @apply border-1 border-gray-600 font-semibold
+        @apply font-semibold
     }    
     .need{
         @apply flex flex-col items-center p-2 cursor-pointer w-44 gap-5 hover:font-semibold rounded-sm my-1
     }
     .need:has(input:checked){
-        @apply border-1 border-gray-600 font-semibold
+        @apply font-semibold bg-background-button
     } 
 }
 
@@ -131,48 +131,5 @@
     }
     .tension-feelings{
         @apply bg-[#FFEA2E]
-    }
-    /* Needs */
-    .survie{
-        @apply bg-[#E8EBFF]
-    }
-    .survie-needs{
-        @apply bg-[#D2D5E4]
-    }
-    .integrite{
-        @apply bg-[#FFF0E8]
-    }
-    .integrite-needs{
-        @apply bg-[#E4D9D2]
-    }
-    .realisation{
-        @apply bg-[#FFFCE8]
-    }
-    .realisation-needs{
-        @apply bg-[#E4E2D2]
-    }
-    .harmonie{
-        @apply bg-[#FBE8FF]
-    }
-    .harmonie-needs{
-        @apply bg-[#E1D2E4]
-    }
-    .relation{
-        @apply bg-[#EBF7F9]
-    }
-    .relation-needs{
-        @apply bg-[#D5DEE0]
-    }
-    .cooperation{
-        @apply bg-[#DFFFD6]
-    }
-    .cooperation-needs{
-        @apply bg-[#CBE4C4]
-    }
-    .celebration{
-        @apply bg-[#FFE8EB]
-    }
-    .celebration-needs{
-        @apply bg-[#E4D2D5]
     }
 }
