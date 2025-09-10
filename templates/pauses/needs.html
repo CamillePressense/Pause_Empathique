@@ -10,7 +10,7 @@
     {% csrf_token %}
 
     <section class="w-full h-60 flex flex-col items-center fixed top-12 bg-background z-10 pt-3 md:sticky md:top-20 md:self-start md:ml-4 md:mt-8 md:w-1/4 md:h-full">    
-      <h2 class="mb-2 md:mb-6 text-2xl md:self-baseline">J'ai besoin de...</h2>
+      <h1 class="mb-2 md:mb-6 text-2xl md:self-baseline">J'ai besoin de...</h1>
       <ul class="w-full p-2 list-disc list-inside flex flex-col flex-wrap gap-1 overflow-auto md:flex-nowrap md:mb-5" id="list-of-items"></ul>
       
       {% if error_message %}
@@ -29,7 +29,7 @@
     <section class="flex flex-row flex-wrap justify-center mt-78 mb-15 gap-1 p-3 bg-white border border-white rounded-4xl shadow-sm md:w-3/4 md:mt-4 md:mb-2 2xl:max-w-6xl">
       {% for family_name, needs in grouped_needs.items %}
         <details class="{{ family_name | slugify }} bg-background w-full flex flex-col items-center  rounded-2xl p-2 overflow-y-auto overflow-x-hidden inset-shadow-sm md:h-60 md:w-50 md:hover:scale-102 2xl:h-70">
-          <summary class="md:list-none list-item md:flex md:flex-col md:items-center p-2"><span class="flex">{{ family_name | upper | highlight_second_letter }}</span></summary>
+          <summary class="md:list-none list-item md:flex md:flex-col md:items-center p-2"><span class="inline-flex md:flex">{{ family_name | upper | highlight_second_letter }}</span></summary>
             {% for need in needs %}
               <label class="{{ family_name | slugify }}-needs need w-full md:hidden">
                 <input 

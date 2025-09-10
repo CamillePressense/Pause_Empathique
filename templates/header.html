@@ -19,26 +19,26 @@
       <nav class="hidden md:flex items-center space-x-7 text-white mb-0.5">
 
         <a href="" class="nav-text-desktop">
-          <img src="{% static '/icons/user-round-white.svg' %}" class="w-4 h-4">
+          <img src="{% static '/icons/user-round-white.svg' %}" aria-hidden="true" class="w-4 h-4">
           Mon compte
         </a>
 
         <a href="{{ my_dashboard_url }}" class="nav-text-desktop {% if request.path == my_dashboard_url %} text-otherpink {% endif %}">
-          <img src="{% static '/icons/house-otherpink.svg' %}" class="w-4 h-4 hidden {% if request.path == my_dashboard_url %} inline {% endif %}">
-          <img src="{% static '/icons/house-white.svg' %}" class="w-4 h-4 {% if request.path == my_dashboard_url %} hidden {% endif %}">
+          <img src="{% static '/icons/house-otherpink.svg' %}" aria-hidden="true" class="w-4 h-4 hidden {% if request.path == my_dashboard_url %} inline {% endif %}">
+          <img src="{% static '/icons/house-white.svg' %}" aria-hidden="true" class="w-4 h-4 {% if request.path == my_dashboard_url %} hidden {% endif %}">
           Mon espace
         </a>
 
         <a href="{{ practice_url }}" class="nav-text-desktop {% if is_practice_active %} text-otherpink {% endif %}">
-          <img src="{% static '/icons/heart-plus-otherpink.svg' %}" class="w-4 h-4 hidden {% if is_practice_active %} inline {% endif %}">
-          <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-4 h-4 {% if is_practice_active %} hidden {% endif %}">
+          <img src="{% static '/icons/heart-plus-otherpink.svg' %}" aria-hidden="true" class="w-4 h-4 hidden {% if is_practice_active %} inline {% endif %}">
+          <img src="{% static '/icons/heart-plus-white.svg' %}" aria-hidden="true" class="w-4 h-4 {% if is_practice_active %} hidden {% endif %}">
           Pratiquer
         </a>
 
         <form action="{% url 'logout' %}" method="post">
           {% csrf_token %}
           <button type="submit" class="nav-text-desktop cursor-pointer">
-            <img src="{% static '/icons/log-out-white.svg' %}" class="w-4 h-4">
+            <img src="{% static '/icons/log-out-white.svg' %}" aria-hidden="true" class="w-4 h-4">
             <span>Quitter</span>
           </button>
         </form>
@@ -48,32 +48,32 @@
     <nav class="md:hidden h-15 flex justify-between fixed bottom-0 text-white py-2 bg-header px-3 max-w-screen-2xl w-full">
       
       <a href="" class="nav-text-mobile">
-        <img src="{% static '/icons/user-round-white.svg' %}" class="w-4 h-4">
+        <img src="{% static '/icons/user-round-white.svg' %}" aria-hidden="true" class="w-4 h-4">
         Mon compte
       </a>
       
       <a href="{{ my_dashboard_url }}" class="nav-text-mobile {% if request.path == my_dashboard_url %} text-otherpink {% endif %}">
-        <img src="{% static '/icons/house-otherpink.svg' %}" class="w-4 h-4 hidden {% if request.path == my_dashboard_url %} inline {% endif %}">
-        <img src="{% static '/icons/house-white.svg' %}" class="w-4 h-4 {% if request.path == my_dashboard_url %} hidden {% endif %}">
+        <img src="{% static '/icons/house-otherpink.svg' %}" aria-hidden="true" class="w-4 h-4 hidden {% if request.path == my_dashboard_url %} inline {% endif %}">
+        <img src="{% static '/icons/house-white.svg' %}" aria-hidden="true" class="w-4 h-4 {% if request.path == my_dashboard_url %} hidden {% endif %}">
         Mon espace
       </a>
       
       <a href="{{ my_diary_url }}" class="nav-text-mobile {% if request.path == my_diary_url %} text-otherpink {% endif %}">
-        <img src="{% static '/icons/book-heart-otherpink.svg' %}" class="w-4 h-4 hidden {% if request.path == my_diary_url %} inline {% endif %}">
-        <img src="{% static '/icons/book-heart-white.svg' %}" class="w-4 h-4 {% if request.path == my_diary_url %} hidden {% endif %}">
+        <img src="{% static '/icons/book-heart-otherpink.svg' %}" aria-hidden="true" class="w-4 h-4 hidden {% if request.path == my_diary_url %} inline {% endif %}">
+        <img src="{% static '/icons/book-heart-white.svg' %}" aria-hidden="true" class="w-4 h-4 {% if request.path == my_diary_url %} hidden {% endif %}">
         Mon journal
       </a>
       
       <a href="{{ practice_url }}" class="nav-text-mobile {% if is_practice_active %} text-otherpink {% endif %}">
-        <img src="{% static '/icons/heart-plus-otherpink.svg' %}" class="w-4 h-4 hidden {% if is_practice_active %} inline {% endif %}">
-        <img src="{% static '/icons/heart-plus-white.svg' %}" class="w-4 h-4 {% if is_practice_active %} hidden {% endif %}">
+        <img src="{% static '/icons/heart-plus-otherpink.svg' %}" aria-hidden="true" class="w-4 h-4 hidden {% if is_practice_active %} inline {% endif %}">
+        <img src="{% static '/icons/heart-plus-white.svg' %}" aria-hidden="true" class="w-4 h-4 {% if is_practice_active %} hidden {% endif %}">
         Pratiquer
       </a>
       
       <form action="{% url 'logout' %}" method="post" >
         {% csrf_token %}
         <button type="submit" class="nav-text-mobile cursor-pointer">
-          <img src="{% static '/icons/log-out-white.svg' %}" class="w-4 h-4">
+          <img src="{% static '/icons/log-out-white.svg' %}" aria-hidden="true" class="w-4 h-4">
           <span class="text-sm">Quitter</span>
         </button>
       </form>
