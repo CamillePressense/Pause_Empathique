@@ -1,0 +1,45 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  lint:
+    name: Code Quality (Black)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy CI env file
+        run: cp .env.ci .env
+
+      - name: Build Docker image for web
+        run: docker compose -p pause_empathique-local build --pull web
+
+      - name: Run Black formatting check
+        run: docker compose -p pause_empathique-local run --rm --no-deps --entrypoint="" web poetry run black --check --diff .
+
+  test:
+    name: Django Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy CI env file
+        run: cp .env.ci .env
+
+      - name: Build Docker images
+        run: docker compose -p pause_empathique-local build  --pull
+
+      - name: Start and wait for database
+        run: docker compose -p pause_empathique-local up -d --wait db
+
+      - name: Run Django tests
+        run: docker compose -p pause_empathique-local run --rm --entrypoint="" web poetry run python manage.py test
+
+      - name: Cleanup
+        if: always()
+        run: docker compose -p pause_empathique-local down -v
