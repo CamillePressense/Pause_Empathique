@@ -32,11 +32,12 @@
         <details class="md:w-50 w-full md:h-60 flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2 overflow-y-auto overflow-x-hidden inset-shadow-sm md:hover:scale-102">
           <summary class="md:list-none list-item md:flex flex-col items-center p-2">{{ family_name | upper }}</summary>
             {% for feeling in feelings %}
-              <label class="{{ family_name | slugify }}-feelings feeling w-full md:hidden">
+              <label class="{{ family_name | slugify }}-feelings feeling w-full md:hidden focus-within:block">
                   <input type="checkbox" 
                   name="feelings" 
                   value="{{ feeling.id }}"
-                  class="sr-only"
+                  class="sr-only focus:not-sr-only focus:z-50"
+                  tabindex="0"
                   {% if feeling.id in selected_feelings %}checked{% endif %}>
                   {{ feeling.label }}
               </label>
