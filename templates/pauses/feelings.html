@@ -29,10 +29,10 @@
     
     <section class="flex flex-row flex-wrap justify-center mt-78 mb-15 gap-1 p-3 bg-white border border-white rounded-4xl shadow-sm md:w-3/4 md:mt-4 md:mb-2 2xl:max-w-5xl">
       {% for family_name, feelings in grouped_feelings.items %}
-        <details class="md:w-50 w-full md:h-60 flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2 overflow-y-auto overflow-x-hidden inset-shadow-sm">
+        <details class="md:w-50 w-full md:h-60 flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2 overflow-y-auto overflow-x-hidden inset-shadow-sm md:hover:scale-102">
           <summary class="md:list-none list-item md:flex flex-col items-center p-2">{{ family_name | upper }}</summary>
             {% for feeling in feelings %}
-              <label class="{{ family_name | slugify }}-feelings feeling w-full">
+              <label class="{{ family_name | slugify }}-feelings feeling w-full md:hidden">
                   <input type="checkbox" 
                   name="feelings" 
                   value="{{ feeling.id }}"
