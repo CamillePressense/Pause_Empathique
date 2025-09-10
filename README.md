@@ -80,7 +80,7 @@ It's an accessible and free tool to refine your discernment and learn to embrace
 ## ⌚ Coming Soon
 - [ ] Alpine JS
 - [ ] Data visualization and statistics
-- [ ] Test implementation
+- [x] Test implementation
 - [ ] Railway deployment
 - [ ] CI/CD setup
 
