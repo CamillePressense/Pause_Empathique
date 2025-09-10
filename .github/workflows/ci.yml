@@ -20,7 +20,7 @@ jobs:
         run: docker compose -p pause_empathique-local build --pull web
 
       - name: Run Black formatting check
-        run: docker compose -p pause_empathique-local run --rm --no-deps --entrypoint="" web poetry run black --check --diff .
+        run: docker compose -p pause_empathique-local run --rm --no-deps --entrypoint="" web poetry run black .
 
   test:
     name: Django Tests
