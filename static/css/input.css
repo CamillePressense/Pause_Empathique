@@ -1,0 +1,135 @@
+@import "tailwindcss";
+@plugin 'tailwind-scrollbar';
+
+@theme {
+    --color-header:#1a2628;
+    --color-black: #1f1e1e;
+    --color-white: #ffffff;
+    --color-table-title: #81ccd9;
+    --color-background: #ebf7f9;
+    --color-background-button: #d0ecf1;
+    --color-sweetpink: #faf2f2;
+    --color-brightpink: #ec1f45;
+    --color-otherpink: #ff8080;
+}
+
+@layer components{
+    .next-button{
+        @apply bg-background-button self-center text-center text-black py-3 px-6 rounded-md mt-6 w-40 cursor-pointer hover:scale-105 hover:shadow-md
+    }
+    .nav-text-desktop{
+        @apply flex flex-col items-center
+    }
+    .nav-text-mobile{
+        @apply flex flex-col items-center text-white text-sm
+    }
+    .form-title{
+        @apply font-semibold text-lg
+    }
+    .present-step-round{
+        @apply bg-otherpink border-1 border-gray-500 rounded-full w-3 h-3 p-1
+    }
+    .other-steps-round{
+        @apply bg-white border-1 border-gray-400 rounded-full w-3 h-3 p-1
+    }
+    .table-title{
+        @apply bg-table-title text-header border-white border-2 p-1
+    }
+    .table-cell{
+        @apply bg-background border-white border-2 p-2 text-center
+    }
+    .delete-cell{
+        @apply bg-sweetpink border-white border-2 text-center
+    }
+    .icons-pagination{
+        @apply w-4 h-5 mt-1 cursor-pointer hover:scale-105
+    }
+    .feeling{
+        @apply flex flex-col items-center p-2 cursor-pointer w-44 gap-5 hover:font-semibold rounded-sm my-1
+    }
+    .feeling:has(input:checked){
+        @apply font-semibold
+    }    
+    .need{
+        @apply flex flex-col items-center p-2 cursor-pointer w-44 gap-5 hover:font-semibold rounded-sm my-1
+    }
+    .need:has(input:checked){
+        @apply font-semibold bg-background-button
+    } 
+}
+
+@layer utilities{
+    /* Feelings */
+    .affection{
+        @apply bg-[#F0D3DD]
+    }
+    .affection-feelings{
+        @apply bg-[#D585A1] 
+    }
+    .serenite{
+        @apply bg-[#d3e6f0]
+    }
+    .serenite-feelings{
+        @apply bg-[#85B9D5]
+    }
+    .joie{
+        @apply bg-[#FCEAA2]
+    }
+    .joie-feelings{
+        @apply bg-[#F9D134]
+    }
+    .interet{
+        @apply bg-[#F4E6FE]
+    }
+    .interet-feelings{
+        @apply bg-[#E0BAFD]
+    }
+    .energie{
+        @apply bg-[#FCDABB]
+    }
+    .energie-feelings{
+        @apply bg-[#F7A85E]
+    }
+    .peur{
+        @apply bg-[#CDEAD9]
+    }
+    .peur-feelings{
+        @apply bg-[#98D4B2]
+    }
+    .colere{
+        @apply bg-[#FDC3BA]
+    }
+    .colere-feelings{
+        @apply bg-[#F97662]
+    }
+    .tristesse{
+        @apply bg-slate-200
+    }
+    .tristesse-feelings{
+        @apply bg-slate-300
+    }
+    .confusion{
+        @apply bg-[#E1F0D3]
+    }
+    .confusion-feelings{
+        @apply bg-[#95CA63]
+    }
+    .fatigue{
+        @apply bg-[#F0DDD3]
+    }
+    .fatigue-feelings{
+        @apply bg-[#D5A185]
+    }
+    .sideration{
+        @apply bg-[#D3D8F0]
+    }
+    .sideration-feelings{
+        @apply bg-[#8593D5]
+    }
+    .tension{
+        @apply bg-[#FFF594]
+    }
+    .tension-feelings{
+        @apply bg-[#FFEA2E]
+    }
+}

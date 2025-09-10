@@ -1,13 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
     <title>Pause Empathique</title>
 </head>
-<body>
+<body class="bg-background max-w-screen-2xl mx-auto">
+    
     {% include 'header.html' %}
     {% block content %} {% endblock content %}
     {% block js %} {% endblock js %}
+
 </body>
 </html>

@@ -1,25 +1,89 @@
-{% block header %} 
-<header>
-  <h1>Pause Empathique</h1>
-  <h3>Observer, Ressentir, Comprendre, Agir</h3>
-  <nav>
-      <ul>
-        <li><a href="/">Accueil</a></li>
-        {% if user.is_authenticated %}
-          <li><a href="{% url 'observation' %}">Pratiquer</a></li>
-          <li><a href="{% url 'dashboard' %}">Chez moi</a></li>
-          <li><a href="{% url 'diary' %}">Mon Journal</a></li>
-          <li>
-              <form action="{% url 'logout' %}" method="post">
-              {% csrf_token %}
-              <button type="submit">Déconnexion</button>
-              </form>
-          </li>
-        {% else %}
-          <li><a href="{% url 'login' %}">Connexion</a></li>
-          <li><a href="{% url 'register' %}">Inscription</a></li>
-        {% endif %}
-      </ul>
-  </nav>
+{% load static %} 
+{% load text_color_filters %}
+{% load navigation_tags %}
+{% block header %}
+
+<header class="bg-header fixed top-0 left-0 right-0 h-12 shadow-sm">
+  <!-- div pour séparer le contenu et permettre une continuité du background sur écran 2xl et + -->
+  <div class="flex justify-between items-end h-full md:px-6 lg:px-8 max-w-screen-2xl mx-auto">
+    {% url 'diary' as my_diary_url %}
+    {% url 'observation' as practice_url %}
+    {% url 'dashboard' as my_dashboard_url %}
+    {% is_practice_section as is_practice_active %}
+
+    <h3 class="md:hidden flex-1 text-2l self-center text-center text-white">❤️ Observer, Ressentir, Comprendre, Agir</h3>
+
+    {% if user.is_authenticated %}
+    <!-- Navigation desktop -->
+      <h1 class="hidden md:block text-3xl text-white self-center">Pause {{"Empathique"|highlight_second_letter }}</h1>
+      <nav class="hidden md:flex items-center space-x-7 text-white mb-0.5">
+
+        <a href="" class="nav-text-desktop">
+          <img src="{% static '/icons/user-round-white.svg' %}" aria-hidden="true" class="w-4 h-4">
+          Mon compte
+        </a>
+
+        <a href="{{ my_dashboard_url }}" class="nav-text-desktop {% if request.path == my_dashboard_url %} text-otherpink {% endif %}">
+          <img src="{% static '/icons/house-otherpink.svg' %}" aria-hidden="true" class="w-4 h-4 hidden {% if request.path == my_dashboard_url %} inline {% endif %}">
+          <img src="{% static '/icons/house-white.svg' %}" aria-hidden="true" class="w-4 h-4 {% if request.path == my_dashboard_url %} hidden {% endif %}">
+          Mon espace
+        </a>
+
+        <a href="{{ practice_url }}" class="nav-text-desktop {% if is_practice_active %} text-otherpink {% endif %}">
+          <img src="{% static '/icons/heart-plus-otherpink.svg' %}" aria-hidden="true" class="w-4 h-4 hidden {% if is_practice_active %} inline {% endif %}">
+          <img src="{% static '/icons/heart-plus-white.svg' %}" aria-hidden="true" class="w-4 h-4 {% if is_practice_active %} hidden {% endif %}">
+          Pratiquer
+        </a>
+
+        <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="nav-text-desktop cursor-pointer">
+            <img src="{% static '/icons/log-out-white.svg' %}" aria-hidden="true" class="w-4 h-4">
+            <span>Quitter</span>
+          </button>
+        </form>
+      </nav>
+      
+    <!-- Navigation mobile -->
+    <nav class="md:hidden h-15 flex justify-between fixed bottom-0 text-white py-2 bg-header px-3 max-w-screen-2xl w-full">
+      
+      <a href="" class="nav-text-mobile">
+        <img src="{% static '/icons/user-round-white.svg' %}" aria-hidden="true" class="w-4 h-4">
+        Mon compte
+      </a>
+      
+      <a href="{{ my_dashboard_url }}" class="nav-text-mobile {% if request.path == my_dashboard_url %} text-otherpink {% endif %}">
+        <img src="{% static '/icons/house-otherpink.svg' %}" aria-hidden="true" class="w-4 h-4 hidden {% if request.path == my_dashboard_url %} inline {% endif %}">
+        <img src="{% static '/icons/house-white.svg' %}" aria-hidden="true" class="w-4 h-4 {% if request.path == my_dashboard_url %} hidden {% endif %}">
+        Mon espace
+      </a>
+      
+      <a href="{{ my_diary_url }}" class="nav-text-mobile {% if request.path == my_diary_url %} text-otherpink {% endif %}">
+        <img src="{% static '/icons/book-heart-otherpink.svg' %}" aria-hidden="true" class="w-4 h-4 hidden {% if request.path == my_diary_url %} inline {% endif %}">
+        <img src="{% static '/icons/book-heart-white.svg' %}" aria-hidden="true" class="w-4 h-4 {% if request.path == my_diary_url %} hidden {% endif %}">
+        Mon journal
+      </a>
+      
+      <a href="{{ practice_url }}" class="nav-text-mobile {% if is_practice_active %} text-otherpink {% endif %}">
+        <img src="{% static '/icons/heart-plus-otherpink.svg' %}" aria-hidden="true" class="w-4 h-4 hidden {% if is_practice_active %} inline {% endif %}">
+        <img src="{% static '/icons/heart-plus-white.svg' %}" aria-hidden="true" class="w-4 h-4 {% if is_practice_active %} hidden {% endif %}">
+        Pratiquer
+      </a>
+      
+      <form action="{% url 'logout' %}" method="post" >
+        {% csrf_token %}
+        <button type="submit" class="nav-text-mobile cursor-pointer">
+          <img src="{% static '/icons/log-out-white.svg' %}" aria-hidden="true" class="w-4 h-4">
+          <span class="text-sm">Quitter</span>
+        </button>
+      </form>
+    </nav>
+
+    {% else %}
+      <h1 class="hidden md:block text-3xl text-white self-center">Pause {{"Empathique"|highlight_second_letter }}</h1>
+      <h3 class="hidden md:block text-l text-white">Observer, Ressentir, Comprendre, Agir</h3>  
+    {% endif %}
+  </div>
 </header>
+
 {% endblock header %}

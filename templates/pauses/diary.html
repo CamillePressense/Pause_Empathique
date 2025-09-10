@@ -1,90 +1,83 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <main>
-    <h1>Mon journal d'auto-empathie 📒</h1>
-
-    {% if messages %}
-        <ul>
-        {% for message in messages %}
-            <li class="{{ message.tags }}">{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-
-    <table style="border: 1px solid black">
-        <thead>
-            <tr>
-                <th id="Titre de la pause">Titre</th> 
-                <th id="Date de la dernière modification">Date de création/modification</th>
-                <th id="Contenu étape vide ton sac">Vide ton sac</th>
-                <th id="Contenu étape Observation">Observation</th>
-                <th id="Contenu étape Sentiments">Sentiments</th>
-                <th id="Contenu étape Besoins">Besoins</th>
-                <th id="Modifier la pause">Modifier</th>
-                <th id="Supprimer la pause">Supprimer</th>
-            </tr>
-        </thead>
-        <tbody>
+    {% include 'pauses/_desktop_diary.html' %}
+    
+    <!-- version mobile -->
+    <section class="mt-15 mb-15 p-2 flex flex-col md:hidden">
+        <div class="flex self-center items-center gap-2 mb-4">
+            <h1 class="text-2xl">Mon journal</h1>
+            <img src="{% static '/icons/diary-background-free.png' %}" alt="" aria-hidden="true" class="w-8 h-12">
+        </div>
+        {% if not pauses %}
+            <p class="self-center italic">Aucune pause enregistrée pour le moment.</p>
+        {% else %}    
             {% for pause in pauses %}
-            <tr>
-                <td headers="Titre de la pause"><a href="{% url 'pause_details' pause.id %}">{{ pause.title }}</td>
-                <td headers="Date de création de la pause">{{ pause.updated_at|date:"d/m/Y H:i" }}</td>
-                <td headers="Contenu étape vide ton sac">{{ pause.empty_your_bag|truncatewords:10 }}</td>
-                <td headers="Contenu étape Observation">"{{ pause.observation|truncatewords:10 }}"</td>
-                <td headers="Contenu étape Sentiments">
-                    <ul>
-                        {% for feeling in pause.feelings_with_labels|slice:":3" %}
-                            <li>{{ feeling }}</li>
-                        {% endfor %}
-                        {% if pause.feelings_with_labels|length > 3 %}
-                        ...
-                        {% endif %}
-                    </ul>
-                </td>
-                <td headers="Contenu étape Besoins">
-                    <ul>
-                        {% for need in pause.needs.all|slice:":3" %}
-                            <li>{{ need.name }}</li>
-                        {% endfor %}
-                        {% if pause.needs.all|length > 3 %}
-                        ...
-                        {% endif %}
-                    </ul>
-                </td>
-                <td headers="Modifier la pause">
-                    <a href="{% url 'update_pause' pause.id %}">✏️</a>
-                </td>
-                <td headers="Supprimer la pause">
-                    <form 
-                    action="{% url 'delete_pause' pause.id %}?page={{ page_obj.number }}" 
-                    method="post" 
-                    onsubmit="return confirm('Es-tu sûr.e de vouloir supprimer cette pause? C\'est irréversible.')">                   
-                    {% csrf_token %}
-                    <button type="submit">❌</button>
-                    </form></td>
-            </tr>
+                <details class="flex flex-col items-center space-y-2 p-4 mb-3 bg-white border border-white rounded-4xl shadow-sm">
+                    <summary class="cursor-pointer form-title">{{ pause.title }}</summary>
+                        
+                        {% if pause.empty_your_bag %}
+                        <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
+                            <h2 class="form-title">Vide ton sac 🐺</h2>
+                                <p class="text-justify">{{ pause.empty_your_bag }}</p>
+                            </div>
+                            {% endif %}
+                            
+                            <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
+                                <h2 class="form-title" >Observation 🔭</h2>
+                            <p class="text-justify">{{ pause.observation }}</p>
+                        </div>
+                        
+                        <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
+                            <h2 class="form-title text-left">Sentiments 🦒</h2>
+                            {% if pause.feelings_with_labels %}
+                                <ul class="list-disc list-outside pl-20 flex flex-col items-start">
+                                    {% for feeling in pause.feelings_with_labels %}
+                                        <li>{{ feeling }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% else %}
+                                    <p class="text-center">Aucun sentiment enregistré pour cette pause empathique.</p>
+                            {% endif %}
+                        </div>
+                            
+                        <div class="border-white w-full rounded-2xl shadow-sm bg-background p-3">
+                            <h2 class="form-title text-left">Besoins</h2>
+                            {% if pause.needs %}
+                            <ul class="list-disc list-outside pl-20 flex flex-col items-start">
+                                {% for need in pause.needs.all %}
+                                <li>{{ need.name }}</li>
+                                {% endfor %}
+                                </ul>
+                            {% else %}
+                                Aucun besoin enregistré pour cette pause empathique.
+                            {% endif %}
+                        </div>
+                            
+                        <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-background p-3 text-sm"><h2 class="form-title text-sm md:text-lg">Créé le</h2>{{ pause.created_at|date:"l j F Y à H:i" }}</div>
+                        <div class="flex justify-between items-center border-white w-full rounded-2xl shadow-sm bg-background  p-3 text-sm mb-6"><h2 class="form-title text-sm md:text-lg">Modifié le</h2>{{ pause.updated_at|date:"l j F Y à H:i" }}</div>
+            
+                        <div class="flex justify-center gap-2">
+                            <div class="flex justify-center gap-1 p-2 rounded-2xl shadow-sm hover:scale-105 hover:font-semibold bg-gray-300 w-32 transition-all duration-150">
+                                <a href="{% url 'update_pause' pause.id %}" aria-label="Modifier cette pause" class="cursor-pointer">Modifier</a>
+                                <img src="{% static '/icons/square-pen-header.svg' %}" alt="" aria-hidden="true" class="w-6 h-6 cursor-pointer"> 
+                            </div>
+                            
+                            <form 
+                            action="{% url 'delete_pause' pause.id %}" 
+                            method="post" 
+                            onsubmit="return confirm('Es-tu sûr.e de vouloir supprimer cette pause? C\'est irréversible.')"
+                            class="flex items-center justify-center gap-1 bg-otherpink shadow-sm p-2 rounded-2xl w-32 hover:scale-105 hover:font-semibold transition-all duration-150">                   
+                            {% csrf_token %}
+                                <button type="submit" aria-label="Supprimer cette pause" class="cursor-pointer">Supprimer</button>
+                                <img src="{% static '/icons/trash-2-black.svg' %}" alt="" aria-hidden="true" class="w-6 h-6 cursor-pointer">
+                            </form>
+                        </div>    
+                </details> 
             {% endfor %}
-        </tbody>       
-    </table>
-
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; Début</a>
-                <a href="?page={{ page_obj.previous_page_number }}">Préc.</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
-            </span>
-
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Suivante</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">Fin &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
-
+        {% endif %}    
+    </section>
 </main>
 
-{% endblock content %}
+{% endblock content %} 

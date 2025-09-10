@@ -43,5 +43,10 @@ docker-compose.override.yml
 # Mac / Linux
 .DS_Store
 
-# Node
+# Node.js
 node_modules/
+package-lock.json
+
+# Tailwind CSS généré
+static/css/output.css
+

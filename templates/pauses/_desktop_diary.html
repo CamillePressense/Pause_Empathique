@@ -1,0 +1,109 @@
+{% load static %}
+<!-- version desktop -->
+<section class="hidden space-y-2 mt-25 p-4 md:flex flex-col bg-white border border-white rounded-4xl shadow-sm md:w-full overflow-x-auto">
+    <div class="flex items-center mt-2 gap-2 mb-4">
+        <img src="{% static '/icons/chevron-right-black.svg' %}" alt="" aria-hidden="true" class="w-6 h-6">
+        <h1 class="text-2xl">Mon journal</h1>
+        <img src="{% static '/icons/diary-background-free.png' %}" alt="dessin d'un livre avec un coeur dessus" class="w-8 h-12">
+    </div>
+    
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if not pauses %}
+        <p class="self-center italic">Aucune pause enregistrée pour le moment.</p>
+    {% else %} 
+        <table class="table-fixed border-2 border-white">
+            <thead>
+                <tr>
+                    <th id="Titre-de-la-pause" class="table-title">Titre</th> 
+                    <th id="Date-de-la-dernière-modification" class="table-title">Date</th>
+                    <th id="Contenu-étape-vide-ton-sac" class="table-title">Vide ton sac</th>
+                    <th id="Contenu-étape-Observation" class="table-title ">Observation</th>
+                    <th id="Contenu-étape-Sentiments" class="table-title">Sentiments</th>
+                    <th id="Contenu-étape-Besoins" class="table-title ">Besoins</th>
+                    <th id="Modifier-la-pause" class="table-title px-2">Modifier</th>
+                    <th id="Supprimer-la-pause" class="bg-otherpink border-white border-2 px-2 ">Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pause in pauses %}
+                <tr>
+                    <td headers="Titre de la pause" class="table-cell hover:bg-gray-50"><a href="{% url 'pause_details' pause.id %}">{{ pause.title }}</a></td>
+                    <td headers="Date-de-la-dernière-modification" class="table-cell">{{ pause.updated_at|date:"d/m/Y H:i" }}</td>
+                    <td headers="Contenu-étape-vide-ton-sac" class="table-cell">{{ pause.empty_your_bag|truncatewords:10 }}</td>
+                    <td headers="Contenu-étape-Observation" class="table-cell">"{{ pause.observation|truncatewords:10 }}"</td>
+                    <td headers="Contenu-étape-Sentiments" class="table-cell">
+                        <ul>
+                            {% for feeling in pause.feelings_with_labels|slice:":3" %}
+                                <li>{{ feeling }}</li>
+                            {% endfor %}
+                            {% if pause.feelings_with_labels|length > 3 %}
+                                <li>...</li>
+                            {% endif %}
+                        </ul>
+                    </td>
+                    <td headers="Contenu-étape-Besoins" class="table-cell">
+                        <ul>
+                            {% for need in pause.needs.all|slice:":3" %}
+                                <li>{{ need.name }}</li>
+                            {% endfor %}
+                            {% if pause.needs.all|length > 3 %}
+                                <li>...</li>
+                            {% endif %}
+                        </ul>
+                    </td>
+                    <td headers="Modifier-la-pause" class="table-cell text-center">
+                        <a href="{% url 'update_pause' pause.id %}" aria-label="Modifier cette pause" class="inline-block">
+                        <img src="{% static '/icons/square-pen-header.svg' %}" alt="" aria-hidden="true" class="w-6 h-6 cursor-pointer hover:scale-105">  
+                        </a>
+                    </td>
+                    <td headers="Supprimer-la-pause" class="delete-cell">
+                        <form 
+                        action="{% url 'delete_pause' pause.id %}{% if page_obj %}?page={{ page_obj.number }}{% endif %}" 
+                        method="post" 
+                        onsubmit="return confirm('Es-tu sûr.e de vouloir supprimer cette pause? C\'est irréversible.')">                   
+                        {% csrf_token %}
+                        <button type="submit" aria-label="Supprimer cette pause">
+                            <img src="{% static '/icons/trash-2-otherpink.svg' %}" alt="" aria-hidden="true" class="w-6 h-6 cursor-pointer hover:scale-105">
+                        </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>       
+        </table>
+    
+        {% if page_obj %}
+        <nav class="pagination flex justify-center" aria-label="Navigation parmi les pages du journal">
+            <div class="step-links flex items-center">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1" aria-label="Aller à la première page">
+                    <img src="{% static '/icons/chevron-first-black.svg' %}" alt="" aria-hidden="true" class="icons-pagination">  
+                    </a>
+                    <a href="?page={{ page_obj.previous_page_number }}" aria-label="Aller à la page précédente">
+                    <img src="{% static '/icons/chevron-left-black.svg' %}" alt="" aria-hidden="true" class="icons-pagination">
+                    </a>
+                {% endif %}
+                <span class="current mx-3" aria-current="page">
+                Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" aria-label="Aller à la page suivante">
+                    <img src="{% static '/icons/chevron-right-black.svg' %}" alt="" aria-hidden="true" class="icons-pagination">
+                </a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" aria-label="Aller à la dernière page">
+                    <img src="{% static '/icons/chevron-last-black.svg' %}" alt="" aria-hidden="true" class="icons-pagination">
+                </a>
+                {% endif %}
+            </div>
+        </nav>
+        {% endif %}
+    {% endif %}
+</section>

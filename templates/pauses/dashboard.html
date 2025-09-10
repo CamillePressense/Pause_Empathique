@@ -1,13 +1,31 @@
 {% extends 'base.html' %}
+{% load text_color_filters %}
+{% load static %}
 
 {% block content %}
 
-<main>
-    <h1>Bienvenue dans ton jardin d'auto-empathie {{ user.firstname }}</h1>
-    <a href="{% url 'observation' %}">Pratiquer</a>
+<main class="h-full flex flex-col items-center md:flex-row">
+  <section class="md:self-baseline md:mt-14 md:p-6 md:sticky md:top-15">
+    <h1 class="mt-20 mb-2 text-3xl self-start ml-8">Bonjour</h1>
+    <h2 class="text-2xl self-start ml-14 mb-10">{{ user.firstname|highlight_second_letter }} !</h2>
+
     {% if user.pauses.exists %}
-        <a href="{% url 'diary' %}">Mon Journal</a>
+      <a href="{% url 'diary' %}"
+         class="bg-white rounded-full w-38 h-38 ml-14 mb-10 border-1 border-white hover:border-otherpink hover:shadow-md hover:scale-105 duration-200 cursor-pointer flex flex-col items-center justify-center md:hidden">
+        Mon Journal
+        <img src="{% static '/icons/diary-background-free.png' %}" aria-hidden="true" class="mt-2 w-8 h-12">
+      </a>
     {% endif %}
+  
+    <a href="{% url 'observation' %}"
+       class="bg-white rounded-full w-64 h-64 border-1 border-white md:hover:shadow-md md:hover:scale-105 duration-100 cursor-pointer flex items-center justify-center text-2xl">
+      Pratiquer
+    </a>
+  </section>
+
+  <!-- version desktop -->
+  {% include 'pauses/_desktop_diary.html'%}
+
 </main>
 
 

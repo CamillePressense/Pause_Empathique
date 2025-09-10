@@ -1,38 +1,55 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
+<main>
+  <form method="post" class="flex flex-col md:flex-row items-center gap-4 m-6 md:pt-8">
 
-<h2>Je me sens...</h2>
+    {% csrf_token %}
 
-<form method="post">
-  {% csrf_token %}
+    <section class="w-full h-60 flex flex-col items-center fixed top-12 bg-background z-10 pt-3 md:sticky md:top-20 md:self-start md:ml-4 md:mt-8 md:w-1/4 md:h-full">
+      <h1 class="mb-2 md:mb-6 text-2xl md:self-baseline">Je me sens...</h1>
+      <ul class="w-full p-2 list-disc list-inside flex flex-col flex-wrap gap-1 overflow-auto md:flex-nowrap md:mb-5" id="list-of-items">
+      </ul>
 
-  {% if error_message %}
-    <p style="color:red;">{{ error_message }}</p>
-  {% endif %}
+      {% if error_message %}
+        <p class="text-red-700" id="error-message">{{ error_message }}</p>
+      {% endif %}
 
-  {% for family_name, feelings in grouped_feelings.items %}
-    <details>
-          <summary>{{ family_name }}</summary>
+      <button type="submit" class="next-button md:mb-4">Etape suivante</button>
+
+      <div class="flex mb-3 md:mb-6 mt-4 gap-1">
+        <span class="other-steps-round"></span>
+        <span class="present-step-round"></span>
+        <span class="other-steps-round"></span>
+      </div>
+    </section>
+    
+    
+    <section class="flex flex-row flex-wrap justify-center mt-78 mb-15 gap-1 p-3 bg-white border border-white rounded-4xl shadow-sm md:w-3/4 md:mt-4 md:mb-2 2xl:max-w-5xl">
+      {% for family_name, feelings in grouped_feelings.items %}
+        <details class="md:w-50 w-full md:h-60 flex flex-col items-center {{ family_name | slugify }} rounded-2xl p-2 overflow-y-auto overflow-x-hidden inset-shadow-sm md:hover:scale-102">
+          <summary class="md:list-none list-item md:flex flex-col items-center p-2">{{ family_name | upper }}</summary>
             {% for feeling in feelings %}
-              <label>
+              <label class="{{ family_name | slugify }}-feelings feeling w-full md:hidden focus-within:block">
                   <input type="checkbox" 
                   name="feelings" 
                   value="{{ feeling.id }}"
+                  class="sr-only focus:not-sr-only focus:z-50"
+                  tabindex="0"
                   {% if feeling.id in selected_feelings %}checked{% endif %}>
                   {{ feeling.label }}
               </label>
             {% endfor %}
-    </details>
-  {% endfor %}
-
-  <button type="submit">Etape suivante</button>
-
-</form>
+        </details>
+      {% endfor %}
+    </section>  
+  </form>
+</main>
 {% endblock content %}
 
 
 {% block js %}
-<script src="{% static 'js/keep-toggle-open.js' %}"></script>
+<script src="{% static 'js/keep-toggle-open-and-display-selected-items.js' %}"></script>
 {% endblock js %}

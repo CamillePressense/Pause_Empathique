@@ -1,0 +1,714 @@
+[
+{
+  "model": "pauses.need",
+  "pk": 1,
+  "fields": {
+    "need_family": "SU",
+    "name": "Abri"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 2,
+  "fields": {
+    "need_family": "SU",
+    "name": "Air"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 3,
+  "fields": {
+    "need_family": "SU",
+    "name": "Alimentation"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 4,
+  "fields": {
+    "need_family": "SU",
+    "name": "Chaleur"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 5,
+  "fields": {
+    "need_family": "SU",
+    "name": "Espace"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 6,
+  "fields": {
+    "need_family": "SU",
+    "name": "Évacuation"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 7,
+  "fields": {
+    "need_family": "SU",
+    "name": "Expression sexuelle"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 8,
+  "fields": {
+    "need_family": "SU",
+    "name": "Hydratation"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 9,
+  "fields": {
+    "need_family": "SU",
+    "name": "Lumière"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 10,
+  "fields": {
+    "need_family": "SU",
+    "name": "Mouvement"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 11,
+  "fields": {
+    "need_family": "SU",
+    "name": "Repos"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 12,
+  "fields": {
+    "need_family": "SU",
+    "name": "Sécurité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 13,
+  "fields": {
+    "need_family": "SU",
+    "name": "Stimulation sensorielle"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 14,
+  "fields": {
+    "need_family": "IN",
+    "name": "Authenticité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 15,
+  "fields": {
+    "need_family": "IN",
+    "name": "Autonomie"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 16,
+  "fields": {
+    "need_family": "IN",
+    "name": "Choix"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 17,
+  "fields": {
+    "need_family": "IN",
+    "name": "Clarté"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 18,
+  "fields": {
+    "need_family": "IN",
+    "name": "Cohérence"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 19,
+  "fields": {
+    "need_family": "IN",
+    "name": "Confiance"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 20,
+  "fields": {
+    "need_family": "IN",
+    "name": "Connexion à soi"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 21,
+  "fields": {
+    "need_family": "IN",
+    "name": "Discernement"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 22,
+  "fields": {
+    "need_family": "IN",
+    "name": "Estime de soi"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 23,
+  "fields": {
+    "need_family": "IN",
+    "name": "Dignité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 24,
+  "fields": {
+    "need_family": "IN",
+    "name": "Intégrité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 25,
+  "fields": {
+    "need_family": "IN",
+    "name": "Liberté"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 26,
+  "fields": {
+    "need_family": "IN",
+    "name": "Préserver son temps et son énergie"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 27,
+  "fields": {
+    "need_family": "IN",
+    "name": "Rythme (aller à son)"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 28,
+  "fields": {
+    "need_family": "IN",
+    "name": "Spontanéité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 29,
+  "fields": {
+    "need_family": "IN",
+    "name": "Souveraineté"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 30,
+  "fields": {
+    "need_family": "IN",
+    "name": "Structure/Ordre"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 31,
+  "fields": {
+    "need_family": "RE",
+    "name": "Accomplissement"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 32,
+  "fields": {
+    "need_family": "RE",
+    "name": "Actualisation de potentialités"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 33,
+  "fields": {
+    "need_family": "RE",
+    "name": "Apprentissage"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 34,
+  "fields": {
+    "need_family": "RE",
+    "name": "Créativité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 35,
+  "fields": {
+    "need_family": "RE",
+    "name": "Exploration"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 36,
+  "fields": {
+    "need_family": "RE",
+    "name": "Épanouissement"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 37,
+  "fields": {
+    "need_family": "RE",
+    "name": "Évolution"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 38,
+  "fields": {
+    "need_family": "RE",
+    "name": "Exploration"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 39,
+  "fields": {
+    "need_family": "RE",
+    "name": "Inspiration"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 40,
+  "fields": {
+    "need_family": "RE",
+    "name": "Réalisation"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 41,
+  "fields": {
+    "need_family": "RE",
+    "name": "Sens"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 42,
+  "fields": {
+    "need_family": "RE",
+    "name": "Unicité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 43,
+  "fields": {
+    "need_family": "HA",
+    "name": "Beauté"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 44,
+  "fields": {
+    "need_family": "HA",
+    "name": "Calme"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 45,
+  "fields": {
+    "need_family": "HA",
+    "name": "Détente"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 46,
+  "fields": {
+    "need_family": "HA",
+    "name": "Fluidité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 47,
+  "fields": {
+    "need_family": "HA",
+    "name": "Harmonie"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 48,
+  "fields": {
+    "need_family": "HA",
+    "name": "Jeu / Rire"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 49,
+  "fields": {
+    "need_family": "HA",
+    "name": "Légèreté"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 50,
+  "fields": {
+    "need_family": "HA",
+    "name": "Récréation"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 51,
+  "fields": {
+    "need_family": "HA",
+    "name": "Ressourcement"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 52,
+  "fields": {
+    "need_family": "HA",
+    "name": "Paix"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 53,
+  "fields": {
+    "need_family": "HA",
+    "name": "Simplicité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 54,
+  "fields": {
+    "need_family": "RL",
+    "name": "Accueil"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 55,
+  "fields": {
+    "need_family": "RL",
+    "name": "Amour"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 56,
+  "fields": {
+    "need_family": "RL",
+    "name": "Apprivoisement"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 57,
+  "fields": {
+    "need_family": "RL",
+    "name": "Bienveillance"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 58,
+  "fields": {
+    "need_family": "RL",
+    "name": "Chaleur humaine"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 59,
+  "fields": {
+    "need_family": "RL",
+    "name": "Connexion"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 60,
+  "fields": {
+    "need_family": "RL",
+    "name": "Délicatesse"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 61,
+  "fields": {
+    "need_family": "RL",
+    "name": "Douceur"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 62,
+  "fields": {
+    "need_family": "RL",
+    "name": "Écoute"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 63,
+  "fields": {
+    "need_family": "RL",
+    "name": "Empathie"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 64,
+  "fields": {
+    "need_family": "RL",
+    "name": "Expression"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 65,
+  "fields": {
+    "need_family": "RL",
+    "name": "Intimité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 66,
+  "fields": {
+    "need_family": "RL",
+    "name": "Partage"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 67,
+  "fields": {
+    "need_family": "RL",
+    "name": "Proximité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 68,
+  "fields": {
+    "need_family": "RL",
+    "name": "Réconfort"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 69,
+  "fields": {
+    "need_family": "RL",
+    "name": "Réciprocité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 70,
+  "fields": {
+    "need_family": "RL",
+    "name": "Tendresse"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 71,
+  "fields": {
+    "need_family": "CO",
+    "name": "Appartenance"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 72,
+  "fields": {
+    "need_family": "CO",
+    "name": "Appréciation"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 73,
+  "fields": {
+    "need_family": "CO",
+    "name": "Attention"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 74,
+  "fields": {
+    "need_family": "CO",
+    "name": "Coopération"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 75,
+  "fields": {
+    "need_family": "CO",
+    "name": "Considération"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 76,
+  "fields": {
+    "need_family": "CO",
+    "name": "Contribution"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 77,
+  "fields": {
+    "need_family": "CO",
+    "name": "Équité/Équivalence"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 78,
+  "fields": {
+    "need_family": "CO",
+    "name": "Préserver la vie"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 79,
+  "fields": {
+    "need_family": "CO",
+    "name": "Partage"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 80,
+  "fields": {
+    "need_family": "CO",
+    "name": "Reconnaissance"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 81,
+  "fields": {
+    "need_family": "CO",
+    "name": "Respect"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 82,
+  "fields": {
+    "need_family": "CO",
+    "name": "Soutien"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 83,
+  "fields": {
+    "need_family": "CE",
+    "name": "Célébration"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 84,
+  "fields": {
+    "need_family": "CE",
+    "name": "Communion"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 85,
+  "fields": {
+    "need_family": "CE",
+    "name": "Faire le deuil"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 86,
+  "fields": {
+    "need_family": "CE",
+    "name": "Honorer"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 87,
+  "fields": {
+    "need_family": "CE",
+    "name": "Intensité"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 88,
+  "fields": {
+    "need_family": "CE",
+    "name": "Se sentir vivant"
+  }
+},
+{
+  "model": "pauses.need",
+  "pk": 89,
+  "fields": {
+    "need_family": "CE",
+    "name": "Spiritualité"
+  }
+}
+]

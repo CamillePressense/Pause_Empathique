@@ -10,12 +10,19 @@ logger = logging.getLogger(__name__)
 class CustomAuthenticationForm(forms.Form):
     email = forms.EmailField(
         label="E-mail",
-        widget=forms.EmailInput(attrs={"autocomplete": "email"}),
+        widget=forms.EmailInput(attrs={
+            'autocomplete': 'email',
+            'class': 'w-full my-2 border-b border-gray-400 mb-3',
+            'placeholder': 'mon_adresse@email.com',
+        }),
     )
     password = forms.CharField(
         label="Mot de passe",
         strip=False,
-        widget=forms.PasswordInput(attrs={"autocomplete": "current-password"}),
+        widget=forms.PasswordInput(attrs={
+            'autocomplete': 'current-password',
+            'class': 'w-full my-2 border-b border-gray-400',
+        }),
     )
 
     def __init__(self, request=None, *args, **kwargs):
@@ -58,13 +65,11 @@ class RegisterForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["email"].widget.attrs.update(
-            {"autocomplete": "email", "placeholder": "Mon email"}
-        )
-        self.fields["firstname"].widget.attrs.update({"placeholder": "Mon prénom"})
-        self.fields["gender"].widget.attrs.update(
-            {"placeholder": "Je préfère lire les textes au:"}
-        )
+        self.fields['email'].widget.attrs.update({'autocomplete': 'email', 'placeholder': 'Mon email', 'class': 'w-full my-2 border-b border-gray-400 mb-3',})
+        self.fields['firstname'].widget.attrs.update({'placeholder': 'Mon prénom', 'class': 'w-full my-2 border-b border-gray-400 mb-3',})
+        self.fields['gender'].widget.attrs.update({'placeholder': 'Je préfère lire les textes au:'})
+        self.fields['password1'].widget.attrs.update({'class': 'w-full my-2 border-b border-gray-400 mb-3',})
+        self.fields['password2'].widget.attrs.update({'class': 'w-full my-2 border-b border-gray-400 mb-3',})
 
     def clean_firstname(self):
         firstname = self.cleaned_data.get("firstname")

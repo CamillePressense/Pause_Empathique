@@ -2,32 +2,45 @@
 {% load static %}
 
 {% block content %}
-<main>
-    <h1>Connexion</h1>
- 
-    <form method="POST">
-        {% csrf_token %}
+<main class="min-h-screen mt-15 flex flex-col items-center px-5 py-0 md:flex-row md:justify-evenly md:px-0">
 
-        {% include 'partials/non_field_errors.html' %}       
-        <div>
+    <section class="flex flex-col text-left mb-4 p-2 mt-1">
+        <h1 class="text-3xl mb-1 text-left md:text-4xl">Bienvenue</h1>
+        <p class="text-lg text-gray-600 mb-1 md:text-2xl">sur</p>
+        <p class="text-xl italic mb-6 md:text-3xl md:mb-10">Pause Empathique</p>
+        <img src="{% static '/icons/diary-background-free.png' %}" alt="dessin d'un livre avec un coeur dessus" class="w-10 h-12/14 mb-6 md:w-16 md:h-24 self-center object-cover">
+        <p class="text-sm text-gray-600 mb-1 max-w-xs md:hidden">Un outil gratuit pour pratiquer l'auto-empathie de façon guidée.</p>
+        <p class="hidden md:block text-base text-justify text-gray-600 mb-4 max-w-xs">Un outil gratuit pour pratiquer l'auto-empathie de façon guidée, en suivant le protocole de la Communication Non Violente (CNV).</p>
+        <a href="" class="text-gray-600 text-sm underline">En savoir plus </a>    
+    </section>
+
+    <section class="w-full max-w-sm">
+        <form method="POST" class="flex flex-col space-y-2 mb-1 p-5 bg-white border border-white rounded-4xl shadow-sm md:p-10">
+            {% csrf_token %}
+            
+            <h2 class="text-2xl font-semibold text-center mb-4 md:mb-8">Connexion</h2>
+            {% include 'partials/non_field_errors.html' %}       
+            
             {% include 'partials/field_errors.html' with field=form.email %}        
-            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            <label for="{{ form.email.id_for_label }}" class="text-sm text-gray-700 md:text-lg">{{ form.email.label }}</label>
             {{ form.email }}
-        </div>
-        <div>
+            
             {% include 'partials/field_errors.html' with field=form.password %} 
-            <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
-            <div class="password-input-container">
+            <label for="{{ form.password.id_for_label }}" class="text-sm text-gray-700 md:text-lg md:mt-6">{{ form.password.label }}</label>
+            <div class="password-input-container relative">
                 {{ form.password }}
-                <button type="button" class="toggle-password" aria-label="Afficher/masquer le mot de passe">
+                <button type="button" class="absolute right-2 top-2 toggle-password" aria-label="Afficher/masquer le mot de passe">
                     <span class="eye-icon">👁️</span>
                 </button>
             </div>
-        </div>
-        <button type="submit">Me Connecter</button>
-    </form>
 
-    <p>Pas encore de compte ? <a href="{% url 'register' %}">M'inscrire</a></p>    
+            <button type="submit" class="bg-background-button self-center text-center text-black py-3 px-6 rounded-md mt-6 w-40 cursor-pointer hover:scale-105 hover:shadow-md md:mt-10 md:font-semibold">Me Connecter</button>
+
+            <p class="text-center text-sm mt-4">Pas encore de compte ?</p>
+            <a href="{% url 'register' %}" class="bg-background-button self-center text-center text-black px-6 py-2 rounded-md mt-2 w-40 hover:scale-105 hover:shadow-md md:font-semibold">M'inscrire</a>  
+        </form>
+    
+    </section>
 </main>
 {% endblock content %}
 
