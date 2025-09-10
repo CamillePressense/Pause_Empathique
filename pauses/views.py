@@ -10,25 +10,27 @@ from django.contrib import messages
 from django.views import View
 from django.views.generic import CreateView, ListView, UpdateView, DetailView
 
+
 @login_required
 def dashboard(request):
-    user_pauses = Pause.objects.filter(user=request.user).order_by('-updated_at')
-    
+    user_pauses = Pause.objects.filter(user=request.user).order_by("-updated_at")
+
     paginator = Paginator(user_pauses, 5)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    
+
     for pause in page_obj:
         pause.feelings_with_labels = [
             f.get_label(request.user) for f in pause.feelings.all()
         ]
-    
+
     context = {
-        'user': request.user,
-        'pauses': page_obj,  
-        'page_obj': page_obj,  
+        "user": request.user,
+        "pauses": page_obj,
+        "page_obj": page_obj,
     }
-    return render(request, 'pauses/dashboard.html', context)
+    return render(request, "pauses/dashboard.html", context)
+
 
 @login_required
 def delete_pause(request, pk):
@@ -38,7 +40,7 @@ def delete_pause(request, pk):
         page = 1
 
     if request.method == "POST":
-        user_agent = parse(request.META.get('HTTP_USER_AGENT', ''))
+        user_agent = parse(request.META.get("HTTP_USER_AGENT", ""))
         try:
             pause = get_object_or_404(Pause, pk=pk, user=request.user)
             pause.delete()
@@ -48,12 +50,12 @@ def delete_pause(request, pk):
             paginator = Paginator(user_pauses, 5)
             if page > paginator.num_pages and paginator.num_pages > 0:
                 page = paginator.num_pages
-                
+
             if user_agent.is_mobile:
-                return redirect('diary')
-            else: 
+                return redirect("diary")
+            else:
                 return redirect(f"{reverse('dashboard')}?page={page}")
-            
+
         except Http404:
             messages.error(
                 request, "Cette pause n'existe pas ou ne vous appartient pas ❌"
@@ -237,19 +239,20 @@ class PauseNeedCreateView(LoginRequiredMixin, View):
         selected_ids = request.POST.getlist("needs")
         if not selected_ids:
             return render(
-                request, 
-                self.template_name, 
-                self.get_context(pause, "Sélectionne au moins un besoin.")
-            ) 
-        pause.needs.set(selected_ids) 
+                request,
+                self.template_name,
+                self.get_context(pause, "Sélectionne au moins un besoin."),
+            )
+        pause.needs.set(selected_ids)
 
-        user_agent = parse(request.META.get('HTTP_USER_AGENT', ''))
+        user_agent = parse(request.META.get("HTTP_USER_AGENT", ""))
         if user_agent.is_mobile:
-            return redirect('diary')
-        else: 
-            return redirect('dashboard')
-          
-class PauseNeedUpdateView(LoginRequiredMixin, View): 
+            return redirect("diary")
+        else:
+            return redirect("dashboard")
+
+
+class PauseNeedUpdateView(LoginRequiredMixin, View):
     template_name = "pauses/needs.html"
 
     def get_grouped_needs(self):
@@ -279,15 +282,14 @@ class PauseNeedUpdateView(LoginRequiredMixin, View):
         selected_ids = request.POST.getlist("needs")
         if not selected_ids:
             return render(
-                request, 
-                self.template_name, 
-                self.get_context(pause, "Sélectionne au moins un besoin.")
-            )  
+                request,
+                self.template_name,
+                self.get_context(pause, "Sélectionne au moins un besoin."),
+            )
         pause.needs.set(selected_ids)
 
-        user_agent = parse(request.META.get('HTTP_USER_AGENT', ''))
+        user_agent = parse(request.META.get("HTTP_USER_AGENT", ""))
         if user_agent.is_mobile:
-            return redirect('diary')
-        else: 
-            return redirect('dashboard')
-
+            return redirect("diary")
+        else:
+            return redirect("dashboard")

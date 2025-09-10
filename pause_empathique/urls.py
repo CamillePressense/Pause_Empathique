@@ -20,9 +20,9 @@ from django.urls import path, include
 from users.views import CustomLoginView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('pauses/', include ('pauses.urls')),
-    path('users/', include('users.urls')),
-    path('', CustomLoginView.as_view(), name='home'),
-    path('__reload__/', include('django_browser_reload.urls')),
+    path("admin/", admin.site.urls),
+    path("pauses/", include("pauses.urls")),
+    path("users/", include("users.urls")),
+    path("", CustomLoginView.as_view(), name="home"),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]

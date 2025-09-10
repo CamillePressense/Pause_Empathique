@@ -3,8 +3,9 @@ from django.utils.safestring import mark_safe
 
 register = template.Library()
 
+
 @register.filter
-def highlight_second_letter(word, css_class='text-otherpink'):
+def highlight_second_letter(word, css_class="text-otherpink"):
     if len(word) < 2:
         return word
     first = word[0]
