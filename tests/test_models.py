@@ -98,70 +98,40 @@ class NeedModelTest(TestCase):
         self.assertEqual(str(need), "Sécurité")
 
 
-""" class PauseModelTest(TestCase):
+class PauseModelTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(
-            email='test@example.com',
-            firstname='Test',
-            gender='F'
+            email="test@example.com", firstname="Test", gender="F"
         )
         self.feeling = Feeling.objects.create(
-            feeling_family='JO',
-            feminine_name='Heureuse',
-            masculine_name='Heureux'
+            feeling_family="JO", feminine_name="Heureuse", masculine_name="Heureux"
         )
-        self.need = Need.objects.create(
-            need_family='SU',
-            name='Sécurité'
-        )
-    
+        self.need = Need.objects.create(need_family="SU", name="Sécurité")
+
     def test_pause_creation(self):
         pause = Pause.objects.create(
-            user=self.user,
-            title="Ma pause test",
-            observation="Observation test"
+            user=self.user, title="Ma pause test", observation="Observation test"
         )
         self.assertEqual(pause.user, self.user)
         self.assertEqual(pause.title, "Ma pause test")
         self.assertIsNotNone(pause.created_at)
-    
-    def test_pause_default_title(self):
-        # Test que le titre par défaut se génère bien
-        pause = Pause(user=self.user)
-        pause.save()
-        self.assertTrue(pause.title.startswith("Pause du"))
-    
+
     def test_pause_feelings_relationship(self):
         pause = Pause.objects.create(
-            user=self.user,
-            title="Test",
-            observation="Test"
+            user=self.user, title="Ma pause test", observation="Observation test"
         )
         pause.feelings.add(self.feeling)
         self.assertEqual(pause.feelings.count(), 1)
         self.assertIn(self.feeling, pause.feelings.all())
-    
+
     def test_pause_needs_relationship(self):
         pause = Pause.objects.create(
-            user=self.user,
-            title="Test",
-            observation="Test"
+            user=self.user, title="Ma pause test", observation="Observation test"
         )
         pause.needs.add(self.need)
         self.assertEqual(pause.needs.count(), 1)
         self.assertIn(self.need, pause.needs.all())
-    
-    def test_pause_get_feelings_for_user(self):
-        # Si vous avez cette méthode dans votre modèle
-        pause = Pause.objects.create(
-            user=self.user,
-            title="Test",
-            observation="Test"
-        )
-        pause.feelings.add(self.feeling)
-        feelings_labels = pause.get_feelings_for_user(self.user)
-        self.assertEqual(feelings_labels[0], 'Heureuse') """
 
 
 class DefaultPauseTitleTest(TestCase):
