@@ -39,7 +39,7 @@ C'est un outil accessible et gratuit, pour affiner son discernement et apprendre
 
 - [ ] Alpine JS
 - [ ] Visualisation de statistiques des données
-- [ ] Mise en place de tests
+- [x] Mise en place de tests
 - [ ] Déploiement avec Railway
 - [ ] Mise en place CI/CD
       
